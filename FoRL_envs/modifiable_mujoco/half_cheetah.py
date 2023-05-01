@@ -1,13 +1,14 @@
 import mujoco
+import os
 import numpy as np
-from xml.etree import ElementTree
 from gymnasium.envs.mujoco.half_cheetah_v4 import HalfCheetahEnv
 from ..utils import uniform_exclude_inner
+from .utils import FoRLXMLModifierMixin
 
 # For mojoco model parameter see https://mujoco.readthedocs.io/en/stable/APIreference/APItypes.html?highlight=mjModel#mjmodel
 
 
-class ModifiableHalfCheetah(HalfCheetahEnv):
+class ModifiableHalfCheetah(HalfCheetahEnv, FoRLXMLModifierMixin):
     """
     ModifiableHalfCheetah builds upon `half_cheetah_v4` and allows the modification of the totalmass and the power of the actuators
 
@@ -18,52 +19,73 @@ class ModifiableHalfCheetah(HalfCheetahEnv):
     Omitted the friction part of the original Env because as far as I can the `self.friction` is not used even by the original roboschool env
     """
 
-    RANDOM_LOWER_MASS = 0.7
-    RANDOM_UPPER_MASS = 1.2
+    # These are scaling factors as opposed to the factors used the original environment
+    RANDOM_LOWER_MASS = 0.75
+    RANDOM_UPPER_MASS = 1.25
     EXTREME_LOWER_MASS = 0.5
-    EXTREME_UPPER_MASS = 1.3
+    EXTREME_UPPER_MASS = 1.5
 
-    RANDOM_LOWER_POWER = 0.7
-    RANDOM_UPPER_POWER = 1.1
+    RANDOM_LOWER_FRICTION = 0.75
+    RANDOM_UPPER_FRICTION = 1.25
+    EXTREME_LOWER_FRICTION = 0.5
+    EXTREME_UPPER_FRICTION = 1.5
+
+    RANDOM_LOWER_POWER = 0.75
+    RANDOM_UPPER_POWER = 1.25
     EXTREME_LOWER_POWER = 0.5
-    EXTREME_UPPER_POWER = 1.3
+    EXTREME_UPPER_POWER = 1.5
 
     def __init__(self, **kwargs):
+        """Render mode currently not supported"""
+        assert "render_mode" not in kwargs.keys()
+
+        if "xml_file" in kwargs.keys():
+            model_path = kwargs["xml_file"]
+        else:
+            model_path = "half_cheetah.xml"
+
+        if model_path.startswith("/"):
+            self.original_fullpath = model_path
+        else:
+            self.original_fullpath = os.path.join(
+                os.path.dirname(__file__), "assets", model_path
+            )
+        print(self.original_fullpath)
+        if not os.path.exists(self.original_fullpath):
+            raise OSError(f"File {self.original_fullpath} does not exist")
+
         super(ModifiableHalfCheetah, self).__init__(**kwargs)
-        tree = ElementTree.parse(self.fullpath)
-        try:
-            str_mass = tree.getroot().find("./compiler").attrib["settotalmass"]
-            self.default_mass = np.float32(str_mass)
-        except (KeyError, AttributeError):
-            self.default_mass = np.float32(14)
 
-    def set_actuator_gear(self, new_actuator_gear):
-        assert new_actuator_gear.shape == self.model.actuator_gear.shape
-        self.model.actuator_gear[:] = np.copy(new_actuator_gear)
-
-    def set_total_mass(self, mass):
-        """
-        This function automatically scales the mass and with that density of the model
-        for more info refer to
-        `https://mujoco.readthedocs.io/en/stable/APIreference/APIfunctions.html?highlight=mj_setTotalmass#mj-settotalmass`
-        """
-        mujoco.mj_setTotalmass(self.model, np.copy(mass))
+    def set_env(self, mass_scaler=None, friction_scaler=None, power_scaler=None):
+        with self.modify_xml(self.original_fullpath) as tree:
+            if mass_scaler:
+                for elem in tree.iterfind("compiler"):
+                    mass = int(elem.attrib["settotalmass"])
+                    elem.set("settotalmass", str(int(mass_scaler * mass)))
+            if friction_scaler:
+                for elem in tree.iterfind("default/geom"):
+                    friction = float(elem.attrib["friction"].split(" ")[0])
+                    elem.set("friction", str(friction_scaler * friction) + " .1 .1")
+            if power_scaler:
+                for elem in tree.iterfind("actuator/motor"):
+                    gear = int(elem.attrib["gear"])
+                    elem.set("gear", str(int(power_scaler * gear)))
+            self._initialize_simulation()
+            # self.mujoco_renderer.model = self.model
+            # self.mujoco_renderer.data = self.data
+            # self.mujoco_renderer.close()
 
 
 class RandomNormalHalfCheetah(ModifiableHalfCheetah):
-    def __init__(self, **kwargs):
-        super(RandomNormalHalfCheetah, self).__init__(**kwargs)
-
     def reset_model(self):
-        obs = HalfCheetahEnv.reset_model(self)
         mass_scaler = self.np_random.uniform(
             self.RANDOM_LOWER_MASS, self.RANDOM_UPPER_MASS
         )
-        force_scaler = self.np_random.uniform(
+        friction_scaler = self.np_random.uniform(
             self.RANDOM_LOWER_POWER, self.RANDOM_UPPER_POWER
         )
-        new_gear = self.model.actuator_gear * force_scaler
-
-        self.set_total_mass(mass_scaler * self.default_mass)
-        self.set_actuator_gear(new_gear)
-        return obs
+        power_scaler = self.np_random.uniform(
+            self.RANDOM_LOWER_POWER, self.RANDOM_UPPER_POWER
+        )
+        self.set_env(mass_scaler, friction_scaler, power_scaler)
+        return HalfCheetahEnv.reset_model(self)
