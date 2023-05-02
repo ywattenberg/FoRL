@@ -18,7 +18,7 @@ class FoRLXMLModifierMixin:
             os.close(fd)
             tree.write(path)
 
-            #self.fullpath = path
+            self.fullpath = path
 
         finally:
             if os.path.exists(path):

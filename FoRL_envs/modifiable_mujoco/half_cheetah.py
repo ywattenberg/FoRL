@@ -3,12 +3,11 @@ import os
 import numpy as np
 from gymnasium.envs.mujoco.half_cheetah_v4 import HalfCheetahEnv
 from ..utils import uniform_exclude_inner
-from .utils import FoRLXMLModifierMixin
 
 # For mojoco model parameter see https://mujoco.readthedocs.io/en/stable/APIreference/APItypes.html?highlight=mjModel#mjmodel
 
 
-class ModifiableHalfCheetah(HalfCheetahEnv, FoRLXMLModifierMixin):
+class ModifiableHalfCheetah(HalfCheetahEnv):
     """
     ModifiableHalfCheetah builds upon `half_cheetah_v4` and allows the modification of the totalmass and the power of the actuators
 
@@ -36,44 +35,18 @@ class ModifiableHalfCheetah(HalfCheetahEnv, FoRLXMLModifierMixin):
     EXTREME_UPPER_POWER = 1.5
 
     def __init__(self, **kwargs):
-        """Render mode currently not supported"""
-        assert "render_mode" not in kwargs.keys()
-
-        if "xml_file" in kwargs.keys():
-            model_path = kwargs["xml_file"]
-        else:
-            model_path = "half_cheetah.xml"
-
-        if model_path.startswith("/"):
-            self.original_fullpath = model_path
-        else:
-            self.original_fullpath = os.path.join(
-                os.path.dirname(__file__), "assets", model_path
-            )
-        print(self.original_fullpath)
-        if not os.path.exists(self.original_fullpath):
-            raise OSError(f"File {self.original_fullpath} does not exist")
-
         super(ModifiableHalfCheetah, self).__init__(**kwargs)
+        self.total_mass = int(np.sum(self.model.body_mass))
 
     def set_env(self, mass_scaler=None, friction_scaler=None, power_scaler=None):
-        with self.modify_xml(self.original_fullpath) as tree:
-            if mass_scaler:
-                for elem in tree.iterfind("compiler"):
-                    mass = int(elem.attrib["settotalmass"])
-                    elem.set("settotalmass", str(int(mass_scaler * mass)))
-            if friction_scaler:
-                for elem in tree.iterfind("default/geom"):
-                    friction = float(elem.attrib["friction"].split(" ")[0])
-                    elem.set("friction", str(friction_scaler * friction) + " .1 .1")
-            if power_scaler:
-                for elem in tree.iterfind("actuator/motor"):
-                    gear = int(elem.attrib["gear"])
-                    elem.set("gear", str(int(power_scaler * gear)))
-            self._initialize_simulation()
-            # self.mujoco_renderer.model = self.model
-            # self.mujoco_renderer.data = self.data
-            # self.mujoco_renderer.close()
+        if mass_scaler:
+            new_mass = int(self.total_mass * mass_scaler)
+            mujoco.mj_setTotalmass(self.model, new_mass)
+        if friction_scaler:
+            friction = np.copy(self.model.geom_friction)
+            self.model.geom_friction[:, 0] = friction[:, 0] * friction_scaler
+        if power_scaler:
+            self.model.actuator_gear = np.copy(self.model.actuator_gear * power_scaler)
 
 
 class RandomNormalHalfCheetah(ModifiableHalfCheetah):
@@ -86,6 +59,33 @@ class RandomNormalHalfCheetah(ModifiableHalfCheetah):
         )
         power_scaler = self.np_random.uniform(
             self.RANDOM_LOWER_POWER, self.RANDOM_UPPER_POWER
+        )
+        self.set_env(mass_scaler, friction_scaler, power_scaler)
+        return HalfCheetahEnv.reset_model(self)
+
+
+class RandomExtremeHalfCheetah(ModifiableHalfCheetah):
+    def reset_model(self):
+        mass_scaler = uniform_exclude_inner(
+            self.np_random.uniform,
+            self.EXTREME_LOWER_MASS,
+            self.EXTREME_UPPER_MASS,
+            self.RANDOM_LOWER_MASS,
+            self.RANDOM_UPPER_MASS,
+        )
+        friction_scaler = uniform_exclude_inner(
+            self.np_random.uniform,
+            self.EXTREME_LOWER_FRICTION,
+            self.EXTREME_UPPER_FRICTION,
+            self.RANDOM_LOWER_FRICTION,
+            self.RANDOM_UPPER_FRICTION,
+        )
+        power_scaler = uniform_exclude_inner(
+            self.np_random.uniform,
+            self.EXTREME_LOWER_POWER,
+            self.EXTREME_UPPER_POWER,
+            self.RANDOM_LOWER_POWER,
+            self.RANDOM_UPPER_POWER,
         )
         self.set_env(mass_scaler, friction_scaler, power_scaler)
         return HalfCheetahEnv.reset_model(self)
