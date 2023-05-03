@@ -46,6 +46,11 @@ class ModifiableAcrobotEnv(AcrobotEnv):
         """
         return self.success
 
+    def step(self, a):
+        state, reward, terminated, _, info = super().step(a)
+        info["is_success"] = self.is_success()
+        return state, reward, terminated, False, info
+
 
 class LightAcrobot(ModifiableAcrobotEnv):
     def __init__(self, *args, **kwargs):

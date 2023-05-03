@@ -3,11 +3,12 @@ import os
 import numpy as np
 from gymnasium.envs.mujoco.half_cheetah_v4 import HalfCheetahEnv
 from ..utils import uniform_exclude_inner
+from .utils import MujocoTrackDistSuccessMixIn
 
 # For mojoco model parameter see https://mujoco.readthedocs.io/en/stable/APIreference/APItypes.html?highlight=mjModel#mjmodel
 
 
-class ModifiableHalfCheetah(HalfCheetahEnv):
+class ModifiableHalfCheetah(HalfCheetahEnv, MujocoTrackDistSuccessMixIn):
     """
     ModifiableHalfCheetah builds upon `half_cheetah_v4` and allows the modification of the totalmass and the power of the actuators
 
@@ -47,6 +48,11 @@ class ModifiableHalfCheetah(HalfCheetahEnv):
             self.model.geom_friction[:, 0] = friction[:, 0] * friction_scaler
         if power_scaler:
             self.model.actuator_gear = np.copy(self.model.actuator_gear * power_scaler)
+
+    def step(self, action):
+        observation, reward, terminated, _, info = super().step(action)
+        info["is_success"] = self.is_success()
+        return observation, reward, terminated, False, info
 
 
 class RandomNormalHalfCheetah(ModifiableHalfCheetah):
