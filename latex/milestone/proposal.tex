@@ -1,0 +1,84 @@
+% This is borrowed from the 2022 LaTeX2e package for submissions to the Conference on Neural Information Processing Systems (NeurIPS). All credits go to the authors of the original package, which was obtained from this website:
+% https://nips.cc/Conferences/2022/PaperInformation/StyleFiles
+
+\documentclass{article}
+\usepackage[final, nonatbib]{neurips_2022}
+\usepackage[numbers]{natbib}
+\usepackage[utf8]{inputenc} % allow utf-8 input
+\usepackage[T1]{fontenc}    % use 8-bit T1 fonts
+\usepackage{hyperref}       % hyperlinks
+\usepackage{url}            % simple URL typesetting
+\usepackage{booktabs}       % professional-quality tables
+\usepackage{amsfonts}       % blackboard math symbols
+\usepackage{nicefrac}       % compact symbols for 1/2, etc.
+\usepackage{microtype}      % microtypography
+\usepackage{graphicx}
+
+
+\title{Generalization in Reinforcement Learning}
+% You should enter the name of your project here.
+
+\author{
+    Yannick Wattenberg \\
+    \texttt{ywattenberg@student.ethz.ch} \\
+    %% examples of more authors
+    \And
+    Thomas Rupf \\
+    \texttt{thrupf@student.ethz.ch} \\
+    \AND
+    Matthias Otth \\
+    \texttt{maotth@student.ethz.ch} \\
+}
+% make sure to include the full names of all the team members
+
+
+\begin{document}
+
+\maketitle
+
+\section{Problem Description}
+% Describe the problem you will be investigating and explain the motivations. Why do you think this is an interesting problem?
+It is a common approach in practical uses of Reinforcement Learning (RL) to train an agent in a simulation and then use it in the real world. For this to work, the model has to generalize well since the simulation is usually an approximation of the real world.
+
+Our project will consist of assessing the generalization performance of commonly used RL algorithms. Further, we will investigate how that performance changes when introducing regularization.
+
+\section{Challenges}
+% What is the related state-of-the-art work on this topic? What are the potential challenges of this project?
+Packer et.\ al.~\cite{packer2019assessing} have created a suite of benchmarks from well-established RL problems where the generalization performance of RL agents is quantified by how well they perform in environments with unseen parameters. They then run their benchmark on PPO and A2C using both feed-forward networks and RNNs for function approximation. 
+
+Independently regularization was shown by Cobbe et.\ al.~\cite{cobbe2019quantifying} to improve generalization performance. They also showed that convolutional architectures can improve generalization. 
+
+However, in both cases, benchmarks were run on only a small selection out of many potentially interesting algorithms. We want to explore the generalization of other commonly used algorithms, to create an insight into how different state-of-art models compare in this regard.
+Further, we want to explore how the different assessment strategies used to asses generalization by Cobbe et. al. translate to our setting. 
+That is we want to explore the impact of regularization on different models to assess the impact of regularization in this different context.
+
+%Controllable Environment Evaluation Protocols
+
+\section{Methods/Algorithms/Implementations}
+% Describe the proposed or tentative method/algorithm/implementation to address the underlying problem. You can divide the section into several parts and design the structure by yourself.
+Firstly, we want to expand upon the implementation of RL algorithms by OpenAI \cite{baselines} and translate them to the environment of Packer et.\ al. We aim to extend the currently tested algorithms in Packer et.\ al.\ by popular algorithms like DQN \cite{dqn_paper}, DDPG \cite{lillicrap2019continuous} or ACER \cite{wang2017sample}.
+
+The benchmark by Packer et.\ al. consists of six different well-known RL environments. These environments are defined by certain parameters. Generalization is then assessed by an algorithm's capability to achieve comparable performance on an unseen parametrization of the environment. 
+
+In the second step, we want to add regularization to these models to evaluate the impact this might have on generalization for the different underlying models.
+For this, we expand the models in \cite{baselines} to for example allow for weight decay and assess how this impacts performance across the different environments.
+\section{Evaluation}
+%Provide related references that you will examine in later stages (if any). Provide evaluation plan of your results (if any). What other algorithms are you going to compare with? How will you evaluate different methods?
+We use the benchmarks implemented by Packer et.\ al.\ to evaluate the generalization performance of the different algorithms. 
+We will compare the generalization performance of the different algorithms with each other as well as with the versions with or without regularization. Our idea is to find new insight into what algorithms perform well in general and how their performance degrades in new settings. We want to evaluate how regularization affects the performance of the algorithms and possibly see which types of regularization improve performance across models and benchmarks.
+
+\medskip
+\bibliographystyle{plainnat}
+\bibliography{ref.bib}
+
+% Please remember to delete this part for instructions on the references.
+%Add references if any. We provide an example using \texttt{natbib} to cite one of the most famous books in reinforcement learning \cite{sutton2018reinforcement}.
+
+\iffalse
+Generalization and Regularization in DQN \url{https://arxiv.org/abs/1810.00123}
+
+In case we want to include a new (2021) RL algo that focuses on generalization: \url{http://proceedings.mlr.press/v139/raileanu21a.html}
+\fi
+
+
+\end{document}
