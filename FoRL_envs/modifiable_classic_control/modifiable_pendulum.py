@@ -73,7 +73,7 @@ class ModifiablePendulumEnv(PendulumEnv):
         if self.render_mode == "human":
             self.render()
 
-        return self._get_obs(), -costs, False, False, {}
+        return self._get_obs(), -costs, False, False, {"is_success": self.is_success()}
 
     def reset(
         self,

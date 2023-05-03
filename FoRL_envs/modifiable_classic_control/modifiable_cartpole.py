@@ -49,7 +49,9 @@ class ModifiableCartPoleEnv(CartPoleEnv, EnvBinarySuccessMixin):
     def step(self, *args, **kwargs):
         """Wrapper to increment new variable nsteps"""
         self.nsteps += 1
-        return super().step(*args, **kwargs)
+        res = super().step(*args, **kwargs)
+        res[-1]["is_success"] = self.is_success()
+        return res
 
     def is_success(self):
         """Returns True is current state indicates success, False otherwise

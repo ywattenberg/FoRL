@@ -38,30 +38,6 @@ class ModifiableAcrobotEnv(AcrobotEnv):
     #         "id": self.spec.id,
     #     }
 
-    def step(self, *args, **kwargs):
-        """Wrapper to increment new variable nsteps"""
-
-        self.nsteps += 1
-        ret = super().step(*args, **kwargs)
-
-        # Moved logic to step wrapper because success triggers done which
-        # triggers reset() in a higher level step wrapper
-        # With logic in is_success(),
-        # we need to cache the 'done' flag ourselves to use in is_success(),
-        # since the wrapper around this wrapper will call reset immediately
-
-        target = 90
-        if self.nsteps <= target and self._terminal():
-            # print("[SUCCESS]: nsteps is {}, reached done in target {}".format(
-            #      self.nsteps, target))
-            self.success = True
-        else:
-            # print("[NO SUCCESS]: nsteps is {}, step limit {}".format(
-            #      self.nsteps, target))
-            self.success = False
-
-        return ret
-
     def is_success(self):
         """Returns True if current state indicates success, False otherwise
 

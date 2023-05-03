@@ -65,7 +65,13 @@ class ModifiableMountainCarEnv(MountainCarEnv):
         if self.render_mode == "human":
             self.render()  # Calling render() will call super().render()
 
-        return np.array(self.state, dtype=np.float32), reward, terminated, False, {}
+        return (
+            np.array(self.state, dtype=np.float32),
+            reward,
+            terminated,
+            False,
+            {"is_success": self.success},
+        )
 
     def reset(
         self,
