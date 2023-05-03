@@ -1,3 +1,4 @@
+import sys
 from typing import Optional
 
 import gymnasium as gym
@@ -34,6 +35,13 @@ try:
     import custom_envs  # pytype: disable=import-error
 except ImportError:
     custom_envs = None
+
+try:
+    import FoRL_envs  # pytype: disable=import-error
+except ImportError:
+    print("FoRL_envs failed not found")
+    sunblaze_envs = None
+    # sys.exit(1)
 
 try:
     import gym_donkeycar  # pytype: disable=import-error
