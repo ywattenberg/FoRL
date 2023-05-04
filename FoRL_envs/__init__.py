@@ -84,26 +84,26 @@ register(
 
 # # Mujoco environments
 
-# register(
-#     id='SunblazeHopper-v0',
-#     entry_point='sunblaze_envs.mujoco:ModifiableRoboschoolHopper',
-#     max_episode_steps=1000,
-#     reward_threshold=3800.0,
-# )
+register(
+    id="FoRLHopper-v0",
+    entry_point="FoRL_envs.modifiable_mujoco.hopper:ModifiableHopper",
+    max_episode_steps=1000,
+    reward_threshold=3800.0,
+)
 
-# register(
-#     id='SunblazeHopperRandomNormal-v0',
-#     entry_point='sunblaze_envs.mujoco:RandomNormalHopper',
-#     max_episode_steps=1000,
-#     reward_threshold=3800.0,
-# )
+register(
+    id="FoRLHopperRandomNormal-v0",
+    entry_point="FoRL_envs.modifiable_mujoco.hopper:RandomNormalHopper",
+    max_episode_steps=1000,
+    reward_threshold=3800.0,
+)
 
-# register(
-#     id='SunblazeHopperRandomExtreme-v0',
-#     entry_point='sunblaze_envs.mujoco:RandomExtremeHopper',
-#     max_episode_steps=1000,
-#     reward_threshold=3800.0,
-# )
+register(
+    id="FoRLHopperRandomExtrem-v0",
+    entry_point="FoRL_envs.modifiable_mujoco.hopper:RandomExtremeHopper",
+    max_episode_steps=1000,
+    reward_threshold=3800.0,
+)
 
 register(
     id="FoRLHalfCheetah-v0",
@@ -119,12 +119,12 @@ register(
     reward_threshold=4800.0,
 )
 
-# register(
-#     id='SunblazeHalfCheetahRandomExtreme-v0',
-#     entry_point='sunblaze_envs.mujoco:RandomExtremeHalfCheetah',
-#     max_episode_steps=1000,
-#     reward_threshold=4800.0,
-# )
+register(
+    id="FoRLHalfCheetahRandomExtreme-v0",
+    entry_point="FoRL_envs.modifiable_mujoco.half_cheetah:RandomExtremeHalfCheetah",
+    max_episode_steps=1000,
+    reward_threshold=4800.0,
+)
 
 # print(registration.registry)
 # print(registration.registry.__dict__)
