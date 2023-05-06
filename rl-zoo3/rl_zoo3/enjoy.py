@@ -21,6 +21,7 @@ def enjoy() -> None:  # noqa: C901
     parser = argparse.ArgumentParser()
     parser.add_argument("--train_env", help="environment ID at train time", type=EnvironmentName, default="CartPole-v1")
     parser.add_argument("--eval_env", help="environment ID for eval time", type=EnvironmentName, default="CartPole-v1")
+    parser.add_argument("--eval_folder", type=str, default="")
     parser.add_argument("-f", "--folder", help="Log folder", type=str, default="rl-trained-agents")
     parser.add_argument("--algo", help="RL Algorithm", default="ppo", type=str, required=False, choices=list(ALGOS.keys()))
     parser.add_argument("-n", "--n-timesteps", help="number of timesteps", default=1000, type=int)
@@ -102,8 +103,8 @@ def enjoy() -> None:  # noqa: C901
         if "rl-trained-agents" not in folder:
             raise e
         elif args.no_hub:
-            print(f"Pretrained model not found at path{model_path}, continue with next model")
-             
+            print(f"Pretrained model {env_name_train} not found, continue with next model")
+            return 
         else:
             print("Pretrained model not found, trying to download it from sb3 Huggingface hub: https://huggingface.co/sb3")
             # Auto-download
@@ -127,7 +128,6 @@ def enjoy() -> None:  # noqa: C901
                 args.load_last_checkpoint,
             )
 
-    print(f"Loading {model_path}")
 
     # Off-policy algorithm only support one env for now
     off_policy_algos = ["qrdqn", "dqn", "ddpg", "sac", "her", "td3", "tqc"]
@@ -269,7 +269,7 @@ def enjoy() -> None:  # noqa: C901
         pass
 
     if args.verbose > 0 and len(successes) > 0:
-        print(f"Success rate: {100 * np.mean(successes):.2f}%")
+        print(f"Success rate: {100 * np.mean(successes):.2f} +/- {np.std(successes):.2f}")
 
     if args.verbose > 0 and len(episode_rewards) > 0:
         print(f"{len(episode_rewards)} Episodes")
@@ -278,7 +278,12 @@ def enjoy() -> None:  # noqa: C901
     if args.verbose > 0 and len(episode_lengths) > 0:
         print(f"Mean episode length: {np.mean(episode_lengths):.2f} +/- {np.std(episode_lengths):.2f}")
 
+    f = open( args.eval_folder, "a")
+    f.write(f"{args.train_env}, {args.eval_env}, {args.algo}, {np.mean(successes)}, {np.std(successes)}\n")
+    f.close()
+    
     env.close()
+    # return np.mean(successes), np.std(successes)
 
 
 if __name__ == "__main__":
