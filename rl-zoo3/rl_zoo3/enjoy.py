@@ -19,7 +19,8 @@ from rl_zoo3.utils import StoreDict, get_model_path
 
 def enjoy() -> None:  # noqa: C901
     parser = argparse.ArgumentParser()
-    parser.add_argument("--env", help="environment ID", type=EnvironmentName, default="CartPole-v1")
+    parser.add_argument("--train_env", help="environment ID at train time", type=EnvironmentName, default="CartPole-v1")
+    parser.add_argument("--eval_env", help="environment ID for eval time", type=EnvironmentName, default="CartPole-v1")
     parser.add_argument("-f", "--folder", help="Log folder", type=str, default="rl-trained-agents")
     parser.add_argument("--algo", help="RL Algorithm", default="ppo", type=str, required=False, choices=list(ALGOS.keys()))
     parser.add_argument("-n", "--n-timesteps", help="number of timesteps", default=1000, type=int)
@@ -73,13 +74,15 @@ def enjoy() -> None:  # noqa: C901
         default=False,
         help="if toggled, display a progress bar using tqdm and rich",
     )
+    parser.add_argument("--no-hub", action="store_true", default=False, help="Do not download models from hub")
     args = parser.parse_args()
 
     # Going through custom gym packages to let them register in the global registory
     for env_module in args.gym_packages:
         importlib.import_module(env_module)
 
-    env_name: EnvironmentName = args.env
+    env_name_train: EnvironmentName = args.train_env
+    env_name_test: EnvironmentName = args.eval_env
     algo = args.algo
     folder = args.folder
 
@@ -88,7 +91,7 @@ def enjoy() -> None:  # noqa: C901
             args.exp_id,
             folder,
             algo,
-            env_name,
+            env_name_train,
             args.load_best,
             args.load_checkpoint,
             args.load_last_checkpoint,
@@ -98,12 +101,15 @@ def enjoy() -> None:  # noqa: C901
         # auto-download from the hub
         if "rl-trained-agents" not in folder:
             raise e
+        elif args.no_hub:
+            print(f"Pretrained model not found at path{model_path}, continue with next model")
+             
         else:
             print("Pretrained model not found, trying to download it from sb3 Huggingface hub: https://huggingface.co/sb3")
             # Auto-download
             download_from_hub(
                 algo=algo,
-                env_name=env_name,
+                env_name=env_name_train,
                 exp_id=args.exp_id,
                 folder=folder,
                 organization="sb3",
@@ -115,7 +121,7 @@ def enjoy() -> None:  # noqa: C901
                 args.exp_id,
                 folder,
                 algo,
-                env_name,
+                env_name_train,
                 args.load_best,
                 args.load_checkpoint,
                 args.load_last_checkpoint,
@@ -136,15 +142,15 @@ def enjoy() -> None:  # noqa: C901
             print(f"Setting torch.num_threads to {args.num_threads}")
         th.set_num_threads(args.num_threads)
 
-    is_atari = ExperimentManager.is_atari(env_name.gym_id)
-    is_minigrid = ExperimentManager.is_minigrid(env_name.gym_id)
+    is_atari = ExperimentManager.is_atari(env_name_train.gym_id)
+    is_minigrid = ExperimentManager.is_minigrid(env_name_train.gym_id)
 
-    stats_path = os.path.join(log_path, env_name)
+    stats_path = os.path.join(log_path, env_name_train)
     hyperparams, maybe_stats_path = get_saved_hyperparams(stats_path, norm_reward=args.norm_reward, test_mode=True)
 
     # load env_kwargs if existing
     env_kwargs = {}
-    args_path = os.path.join(log_path, env_name, "args.yml")
+    args_path = os.path.join(log_path, env_name_train, "args.yml")
     if os.path.isfile(args_path):
         with open(args_path) as f:
             loaded_args = yaml.load(f, Loader=yaml.UnsafeLoader)  # pytype: disable=module-attr
@@ -157,7 +163,7 @@ def enjoy() -> None:  # noqa: C901
     log_dir = args.reward_log if args.reward_log != "" else None
 
     env = create_test_env(
-        env_name.gym_id,
+        env_name_test.gym_id,
         n_envs=args.n_envs,
         stats_path=maybe_stats_path,
         seed=args.seed,
