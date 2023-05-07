@@ -2,7 +2,7 @@
 FoRLPendulumRandomNormal-v0:
   normalize: True
   n_envs: 4
-  n_timesteps: !!float 1e5
+  n_timesteps: !!float 5e5
   policy: "MlpLstmPolicy"
   n_steps: 1024
   gae_lambda: 0.95
@@ -25,7 +25,7 @@ FoRLPendulumRandomNormal-v0:
 FoRLCartPoleRandomNormal-v0:
   normalize: True
   n_envs: 8
-  n_timesteps: !!float 1e5
+  n_timesteps: !!float 5e5
   policy: "MlpLstmPolicy"
   n_steps: 32
   batch_size: 256
@@ -47,7 +47,7 @@ FoRLCartPoleRandomNormal-v0:
 FoRLMountainCarRandomNormal-v0:
   normalize: true
   n_envs: 16
-  n_timesteps: !!float 1e6
+  n_timesteps: !!float 5e5
   policy: "MlpLstmPolicy"
   n_steps: 16
   gae_lambda: 0.98
@@ -58,10 +58,95 @@ FoRLMountainCarRandomNormal-v0:
 FoRLAcrobotRandomNormal-v0:
   normalize: true
   n_envs: 16
-  n_timesteps: !!float 1e6
+  n_timesteps: !!float 5e5
   policy: "MlpLstmPolicy"
   n_steps: 256
   gae_lambda: 0.94
   gamma: 0.99
   n_epochs: 4
   ent_coef: 0.0
+
+#
+FoRLPendulum-v0:
+  normalize: True
+  n_envs: 4
+  n_timesteps: !!float 5e5
+  policy: "MlpLstmPolicy"
+  n_steps: 1024
+  gae_lambda: 0.95
+  gamma: 0.9
+  n_epochs: 10
+  ent_coef: 0.0
+  learning_rate: !!float 1e-3
+  clip_range: 0.2
+  use_sde: True
+  sde_sample_freq: 4
+  policy_kwargs: "dict(
+    ortho_init=False,
+    activation_fn=nn.ReLU,
+    lstm_hidden_size=64,
+    enable_critic_lstm=True,
+    net_arch=dict(pi=[64], vf=[64])
+    )"
+
+# Tuned
+FoRLCartPole-v0:
+  normalize: True
+  n_envs: 8
+  n_timesteps: !!float 5e5
+  policy: "MlpLstmPolicy"
+  n_steps: 32
+  batch_size: 256
+  gae_lambda: 0.8
+  gamma: 0.98
+  n_epochs: 20
+  ent_coef: 0.0
+  learning_rate: lin_0.001
+  clip_range: lin_0.2
+  policy_kwargs: "dict(
+    ortho_init=False,
+    activation_fn=nn.ReLU,
+    lstm_hidden_size=64,
+    enable_critic_lstm=True,
+    net_arch=dict(pi=[64], vf=[64])
+    )"
+
+# TO BE TUNED
+FoRLMountainCar-v0:
+  normalize: true
+  n_envs: 16
+  n_timesteps: !!float 5e5
+  policy: "MlpLstmPolicy"
+  n_steps: 16
+  gae_lambda: 0.98
+  gamma: 0.99
+  n_epochs: 4
+  ent_coef: 0.0
+
+FoRLAcrobot-v0:
+  normalize: true
+  n_envs: 16
+  n_timesteps: !!float 5e5
+  policy: "MlpLstmPolicy"
+  n_steps: 256
+  gae_lambda: 0.94
+  gamma: 0.99
+  n_epochs: 4
+  ent_coef: 0.0
+
+Ant-v3: &mujoco-defaults
+  normalize: true
+  n_timesteps: !!float 5e5
+  policy: "MlpLstmPolicy"
+
+FoRLHalfCheetahRandomNormal-v0:
+  <<: *mujoco-defaults
+
+FoRLHalfCheetah-v0:
+  <<: *mujoco-defaults
+
+FoRLHopper-v0:
+  <<: *mujoco-defaults
+
+FoRLHopperRandomNormal-v0:
+  <<: *mujoco-defaults
