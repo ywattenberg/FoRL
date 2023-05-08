@@ -1,0 +1,38 @@
+# Tuned
+
+Pendulum-v1: &FoRL-defaults
+  n_timesteps: 20000
+  policy: "MlpPolicy"
+  gamma: 0.98
+  buffer_size: 200000
+  learning_starts: 10000
+  noise_type: "normal"
+  noise_std: 0.1
+  gradient_steps: -1
+  train_freq: [1, "episode"]
+  learning_rate: !!float 1e-3
+  policy_kwargs: "dict(net_arch=[400, 300])"
+
+FoRLCartPole-v0:
+  <<: *FoRL-defaults
+
+FoRLMountainCar-v0:
+  <<: *FoRL-defaults
+
+FoRLPendulum-v0:
+  <<: *FoRL-defaults
+
+FoRLAcrobot-v0:
+  <<: *FoRL-defaults
+
+FoRLCartPoleRandomNormal-v0:
+  <<: *FoRL-defaults
+
+FoRLMountainCarRandomNormal-v0:
+  <<: *FoRL-defaults
+
+FoRLPendulumRandomNormal-v0:
+  <<: *FoRL-defaults
+
+FoRLAcrobotRandomNormal-v0:
+  <<: *FoRL-defaults

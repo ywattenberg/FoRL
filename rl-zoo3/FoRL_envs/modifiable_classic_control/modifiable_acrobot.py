@@ -23,6 +23,11 @@ class ModifiableAcrobotEnv(AcrobotEnv):
     EXTREME_LOWER_INERTIA = 0.5
     EXTREME_UPPER_INERTIA = 1.5
 
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self.nsteps = 0
+        self.success = False
+
     def reset(
         self,
         *,
@@ -30,6 +35,7 @@ class ModifiableAcrobotEnv(AcrobotEnv):
         options: Optional[dict] = None,
     ):
         self.nsteps = 0
+        self.success = False
         return super(ModifiableAcrobotEnv, self).reset(seed=seed, options=options)
 
     # @property
@@ -48,6 +54,10 @@ class ModifiableAcrobotEnv(AcrobotEnv):
 
     def step(self, a):
         state, reward, terminated, _, info = super().step(a)
+        if self.nsteps <= 90 and terminated:
+            self.success = True
+        else:
+            self.success = False
         info["is_success"] = self.is_success()
         return state, reward, terminated, False, info
 
@@ -103,9 +113,7 @@ class HeavyAcrobot(ModifiableAcrobotEnv):
 class RandomHeavyAcrobot(ModifiableAcrobotEnv):
     def __init__(self, *args, **kwargs):
         super(RandomHeavyAcrobot, self).__init__(*args, **kwargs)
-        self.mass = self.np_random.uniform(
-            self.RANDOM_LOWER_MASS, self.RANDOM_UPPER_MASS
-        )
+        self.mass = self.np_random.uniform(self.RANDOM_LOWER_MASS, self.RANDOM_UPPER_MASS)
 
     def reset(
         self,
@@ -115,9 +123,7 @@ class RandomHeavyAcrobot(ModifiableAcrobotEnv):
         new: Optional[bool] = True,
     ):
         if new:
-            self.mass = self.np_random.uniform(
-                self.RANDOM_LOWER_MASS, self.RANDOM_UPPER_MASS
-            )
+            self.mass = self.np_random.uniform(self.RANDOM_LOWER_MASS, self.RANDOM_UPPER_MASS)
         return super(RandomHeavyAcrobot, self).reset(seed=seed, options=options)
 
     @property
@@ -237,9 +243,7 @@ class LongAcrobot(ModifiableAcrobotEnv):
 class RandomLongAcrobot(ModifiableAcrobotEnv):
     def __init__(self, *args, **kwargs):
         super(RandomLongAcrobot, self).__init__(*args, **kwargs)
-        self.length = self.np_random.uniform(
-            self.RANDOM_LOWER_LENGTH, self.RANDOM_UPPER_LENGTH
-        )
+        self.length = self.np_random.uniform(self.RANDOM_LOWER_LENGTH, self.RANDOM_UPPER_LENGTH)
 
     def reset(
         self,
@@ -249,9 +253,7 @@ class RandomLongAcrobot(ModifiableAcrobotEnv):
         new: Optional[bool] = True,
     ):
         if new:
-            self.length = self.np_random.uniform(
-                self.RANDOM_LOWER_LENGTH, self.RANDOM_UPPER_LENGTH
-            )
+            self.length = self.np_random.uniform(self.RANDOM_LOWER_LENGTH, self.RANDOM_UPPER_LENGTH)
         return super(RandomLongAcrobot, self).reset(seed=seed, options=options)
 
     @property
@@ -363,9 +365,7 @@ class HighInertiaAcrobot(ModifiableAcrobotEnv):
 class RandomHighInertiaAcrobot(ModifiableAcrobotEnv):
     def __init__(self, *args, **kwargs):
         super(RandomHighInertiaAcrobot, self).__init__(*args, **kwargs)
-        self.inertia = self.np_random.uniform(
-            self.RANDOM_LOWER_INERTIA, self.RANDOM_UPPER_INERTIA
-        )
+        self.inertia = self.np_random.uniform(self.RANDOM_LOWER_INERTIA, self.RANDOM_UPPER_INERTIA)
 
     def reset(
         self,
@@ -375,9 +375,7 @@ class RandomHighInertiaAcrobot(ModifiableAcrobotEnv):
         new: Optional[bool] = True,
     ):
         if new:
-            self.inertia = self.np_random.uniform(
-                self.RANDOM_LOWER_INERTIA, self.RANDOM_UPPER_INERTIA
-            )
+            self.inertia = self.np_random.uniform(self.RANDOM_LOWER_INERTIA, self.RANDOM_UPPER_INERTIA)
         return super(RandomHighInertiaAcrobot, self).reset(seed=seed, options=options)
 
     @property
@@ -461,15 +459,9 @@ class RandomNormalAcrobot(ModifiableAcrobotEnv):
 
     def __init__(self, *args, **kwargs):
         super(RandomNormalAcrobot, self).__init__(*args, **kwargs)
-        self.mass = self.np_random.uniform(
-            self.RANDOM_LOWER_MASS, self.RANDOM_UPPER_MASS
-        )
-        self.length = self.np_random.uniform(
-            self.RANDOM_LOWER_LENGTH, self.RANDOM_UPPER_LENGTH
-        )
-        self.inertia = self.np_random.uniform(
-            self.RANDOM_LOWER_INERTIA, self.RANDOM_UPPER_INERTIA
-        )
+        self.mass = self.np_random.uniform(self.RANDOM_LOWER_MASS, self.RANDOM_UPPER_MASS)
+        self.length = self.np_random.uniform(self.RANDOM_LOWER_LENGTH, self.RANDOM_UPPER_LENGTH)
+        self.inertia = self.np_random.uniform(self.RANDOM_LOWER_INERTIA, self.RANDOM_UPPER_INERTIA)
 
     def reset(
         self,
@@ -479,15 +471,9 @@ class RandomNormalAcrobot(ModifiableAcrobotEnv):
         new: Optional[bool] = True,
     ):
         if new:
-            self.mass = self.np_random.uniform(
-                self.RANDOM_LOWER_MASS, self.RANDOM_UPPER_MASS
-            )
-            self.length = self.np_random.uniform(
-                self.RANDOM_LOWER_LENGTH, self.RANDOM_UPPER_LENGTH
-            )
-            self.inertia = self.np_random.uniform(
-                self.RANDOM_LOWER_INERTIA, self.RANDOM_UPPER_INERTIA
-            )
+            self.mass = self.np_random.uniform(self.RANDOM_LOWER_MASS, self.RANDOM_UPPER_MASS)
+            self.length = self.np_random.uniform(self.RANDOM_LOWER_LENGTH, self.RANDOM_UPPER_LENGTH)
+            self.inertia = self.np_random.uniform(self.RANDOM_LOWER_INERTIA, self.RANDOM_UPPER_INERTIA)
         # reset just resets .state
         return super(RandomNormalAcrobot, self).reset(seed=seed, options=options)
 

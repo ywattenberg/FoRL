@@ -1,0 +1,104 @@
+# Tuned
+
+Pendulum-v1:
+  # callback:
+  #   - rl_zoo3.callbacks.ParallelTrainCallback
+  n_timesteps: 20000
+  policy: 'MlpPolicy'
+  learning_rate: !!float 1e-3
+
+
+
+
+# === Mujoco Envs ===
+
+HalfCheetah-v3: &mujoco-defaults
+  n_timesteps: !!float 1e6
+  policy: 'MlpPolicy'
+  learning_starts: 10000
+
+Ant-v3:
+  <<: *mujoco-defaults
+
+Hopper-v3:
+  <<: *mujoco-defaults
+
+Walker2d-v3:
+  <<: *mujoco-defaults
+
+Humanoid-v3:
+  <<: *mujoco-defaults
+  n_timesteps: !!float 2e6
+
+Swimmer-v3:
+  <<: *mujoco-defaults
+  gamma: 0.9999
+
+# === FoRL Envs ===
+Pendulum-v1:
+  # callback:
+  #   - rl_zoo3.callbacks.ParallelTrainCallback
+  n_timesteps: !!float 5e5
+  policy: 'MlpPolicy'
+  learning_rate: !!float 1e-3
+
+FoRLCartPole-v0:
+  # callback:
+  #   - rl_zoo3.callbacks.ParallelTrainCallback
+  n_timesteps: !!float 5e5
+  policy: 'MlpPolicy'
+  learning_rate: !!float 1e-3
+
+FoRLMountainCar-v0:
+  # callback:
+  #   - rl_zoo3.callbacks.ParallelTrainCallback
+  n_timesteps: !!float 5e5
+  policy: 'MlpPolicy'
+  learning_rate: !!float 1e-3
+
+FoRLPendulum-v0:
+  # callback:
+  #   - rl_zoo3.callbacks.ParallelTrainCallback
+  n_timesteps: !!float 5e5
+  policy: 'MlpPolicy'
+  learning_rate: !!float 1e-3
+
+FoRLAcrobot-v0:
+  # callback:
+  #   - rl_zoo3.callbacks.ParallelTrainCallback
+  n_timesteps: !!float 5e5
+  policy: 'MlpPolicy'
+  learning_rate: !!float 1e-3
+
+FoRLCartPoleRandomNormal-v0:
+  # callback:
+  #   - rl_zoo3.callbacks.ParallelTrainCallback
+  n_timesteps: !!float 5e5
+  policy: 'MlpPolicy'
+  learning_rate: !!float 1e-3
+
+FoRLMountainCarRandomNormal-v0:
+  # callback:
+  #   - rl_zoo3.callbacks.ParallelTrainCallback
+  n_timesteps: !!float 5e5
+  policy: 'MlpPolicy'
+  learning_rate: !!float 1e-3
+
+FoRLPendulumRandomNormal-v0:
+  # callback:
+  #   - rl_zoo3.callbacks.ParallelTrainCallback
+  n_timesteps: !!float 5e5
+  policy: 'MlpPolicy'
+  learning_rate: !!float 1e-3
+
+FoRLAcrobotRandomNormal-v0:
+  # callback:
+  #   - rl_zoo3.callbacks.ParallelTrainCallback
+  n_timesteps: !!float 5e5
+  policy: 'MlpPolicy'
+  learning_rate: !!float 1e-3
+
+
+
+ 
+
