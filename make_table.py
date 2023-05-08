@@ -1,5 +1,6 @@
 import os
 import math
+import numpy as np 
 
 FILE_NAME = 'eval_res.txt'
 LATEX_FILE = 'table.txt'
@@ -50,45 +51,79 @@ def load_data():
     
     return data
 
-def geom_mean(v1, v2, v3):
-    return (v1*v2*v3)**(1./3)
+def geom_mean(values):
+    return math.pow(math.prod(values), 1./len(values))
 
-def geom_std(v1, v2, v3, gm):
-    v1 = gm if v1 == 0 else v1
-    v2 = gm if v2 == 0 else v2
-    v3 = gm if v3 == 0 else v3
-    if gm == 0:
-        return 0
-    sqr_sum = math.log(v1/gm)**2 + math.log(v2/gm)**2 + math.log(v3/gm)**2
-    sqr_sum = sqr_sum/3
-    return math.exp(math.sqrt(sqr_sum))
+def geom_std(values):
+    return np.exp(np.std(np.log(values)))
+
+def table_start(f, header):
+    col_centered = 'l' + (len(header)-1) * 'c'
+    f.write('\\begin{center}\n')
+    f.write('\\begin{tabular}{'+col_centered+'}\n')
+    f.write('\\toprule\n')
+    f.write(header[0])
+    for i in range(len(header)-1):
+        f.write(f'&{header[i+1]}')
+    f.write('\\\\\n')
+
+def table_end(f):
+    f.write('\\bottomrule\n')
+    f.write('\\end{tabular}\n') 
+    f.write('\\end{center}\n')
+
+def table_write_line(f, values):
+    f.write(values[0])
+    for i in range(len(values)-1):
+        f.write(f'&{values[i+1]}')
+    f.write('\\\\\n')
+
+def format_succ(tuple):
+    return f"{100*tuple[0]:.2f}+/-{tuple[1]:.2f}"
 
 def write_latex(data):
     f = open(LATEX_FILE, 'w')
-    f.write('\\begin{center}\n')
-    f.write('\\begin{tabular}{lcccc}\n')
-    f.write('\\toprule\n')
-    f.write('Algorithm&Environment&Default&Interpolation&Extrapolation\\\\\n')
-    
+    table_start(f, ['Algorithm', 'Environment', 'Default', 'Interpolation', 'Extrapolation'])
+ 
     for algo in data.keys():
         f.write('\\midrule\n')
         for env in data[algo].keys():
             
             try:
+                dd = data[algo][env]['DD']
                 dr = data[algo][env]['DR']
+                de = data[algo][env]['DE']
+                rr = data[algo][env]['RR']
+                re = data[algo][env]['RE']
+                gm =  geom_mean([dr[0], de[0], re[0]])
+                gstd = geom_std([dr[0], de[0], re[0]])
+            except:
+                print("Failed for", algo, env, data[algo][env])
+
+            table_write_line(f, [algo, env, format_succ(dd), format_succ(rr), format_succ((gm,gstd))])
+    
+    table_end(f)
+
+def write_latex_full(data):
+    f = open(LATEX_FILE, 'w')
+    table_start(f, ['Algorithm', 'Environment', 'DD', 'DR', 'DE', 'RR', 'RE'])
+ 
+    for algo in data.keys():
+        f.write('\\midrule\n')
+        for env in data[algo].keys():
+            
+            try:
+                dd = data[algo][env]['DD']
+                dr = data[algo][env]['DR']
+                de = data[algo][env]['DE']
                 rr = data[algo][env]['RR']
                 re = data[algo][env]['RE']
             except:
                 print("Failed for", algo, env, data[algo][env])
 
-            gm =  geom_mean(dr[0], rr[0], re[0])
-            gstd = geom_std(dr[1], rr[1], re[1], gm)
-            f.write(f"{algo}&{env}&nan&{rr[0]:.2f}+/-{rr[1]:.2f}&{gm:.2f}+/-{gstd:.2f}\\\\\n")   
+            table_write_line(f, [algo, env, format_succ(dd), format_succ(dr), format_succ(de), format_succ(rr), format_succ(re)])
     
-    
-    f.write('\\bottomrule\n')
-    f.write('\\end{tabular}\n') 
-    f.write('\\end{center}\n')
+    table_end(f)
 
 def main():
     data = load_data()
