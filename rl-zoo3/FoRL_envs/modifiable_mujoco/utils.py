@@ -1,7 +1,7 @@
 class MujocoTrackDistSuccessMixIn:
     """Treat reaching certain distance on track as a success."""
 
-    def is_success():
+    def is_success(self):
         """Returns True is current state indicates success, False otherwise
 
         x=100 correlates to the end of the track on Roboschool,
