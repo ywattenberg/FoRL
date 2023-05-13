@@ -3,7 +3,6 @@ import numpy as np
 from typing import Optional
 from gymnasium.envs.classic_control.mountain_car import MountainCarEnv
 from gymnasium import Env
-from ..base import EnvBinarySuccessMixin
 from ..utils import uniform_exclude_inner
 
 
@@ -41,9 +40,7 @@ class ModifiableMountainCarEnv(MountainCarEnv):
         if position == self.min_position and velocity < 0:
             velocity = 0
 
-        terminated = bool(
-            position >= self.goal_position and velocity >= self.goal_velocity
-        )
+        terminated = bool(position >= self.goal_position and velocity >= self.goal_velocity)
         reward = -1.0
 
         # New additions to support is_success()
@@ -73,13 +70,7 @@ class ModifiableMountainCarEnv(MountainCarEnv):
             {"is_success": self.success},
         )
 
-    def reset(
-        self,
-        *,
-        seed: Optional[int] = None,
-        options: Optional[dict] = None,
-        new: Optional[bool] = True
-    ):
+    def reset(self, *, seed: Optional[int] = None, options: Optional[dict] = None, new: Optional[bool] = True):
         # Additionally call reset of gym.Env to reset the seed
         self.nsteps = 0
         return super(ModifiableMountainCarEnv, self).reset(seed=seed, options=options)
@@ -135,19 +126,11 @@ class StrongForceMountainCar(ModifiableMountainCarEnv):
 
 
 class RandomStrongForceMountainCar(ModifiableMountainCarEnv):
-    def reset(
-        self,
-        *,
-        seed: Optional[int] = None,
-        options: Optional[dict] = None,
-        new: Optional[bool] = True
-    ):
+    def reset(self, *, seed: Optional[int] = None, options: Optional[dict] = None, new: Optional[bool] = True):
         # Additionally call reset of gym.Env to reset the seed
         Env.reset(self, seed=seed)
         if new:
-            self.force = self.np_random.uniform(
-                self.RANDOM_LOWER_FORCE, self.RANDOM_UPPER_FORCE
-            )
+            self.force = self.np_random.uniform(self.RANDOM_LOWER_FORCE, self.RANDOM_UPPER_FORCE)
         self.state = np.array([self.np_random.uniform(low=-0.6, high=-0.4), 0])
         return np.array(self.state, dtype=np.float32), {}
 
@@ -163,13 +146,7 @@ class RandomStrongForceMountainCar(ModifiableMountainCarEnv):
 
 
 class RandomWeakForceMountainCar(ModifiableMountainCarEnv):
-    def reset(
-        self,
-        *,
-        seed: Optional[int] = None,
-        options: Optional[dict] = None,
-        new: Optional[bool] = True
-    ):
+    def reset(self, *, seed: Optional[int] = None, options: Optional[dict] = None, new: Optional[bool] = True):
         # Additionally call reset of gym.Env to reset the seed
         Env.reset(self, seed=seed)
         if new:
@@ -227,19 +204,11 @@ class HeavyCarMountainCar(ModifiableMountainCarEnv):
 
 
 class RandomHeavyCarMountainCar(ModifiableMountainCarEnv):
-    def reset(
-        self,
-        *,
-        seed: Optional[int] = None,
-        options: Optional[dict] = None,
-        new: Optional[bool] = True
-    ):
+    def reset(self, *, seed: Optional[int] = None, options: Optional[dict] = None, new: Optional[bool] = True):
         # Additionally call reset of gym.Env to reset the seed
         Env.reset(self, seed=seed)
         if new:
-            self.mass = self.np_random.uniform(
-                self.RANDOM_LOWER_MASS, self.RANDOM_UPPER_MASS
-            )
+            self.mass = self.np_random.uniform(self.RANDOM_LOWER_MASS, self.RANDOM_UPPER_MASS)
         self.state = np.array([self.np_random.uniform(low=-0.6, high=-0.4), 0])
         return np.array(self.state, dtype=np.float32), {}
 
@@ -255,13 +224,7 @@ class RandomHeavyCarMountainCar(ModifiableMountainCarEnv):
 
 
 class RandomLightCarMountainCar(ModifiableMountainCarEnv):
-    def reset(
-        self,
-        *,
-        seed: Optional[int] = None,
-        options: Optional[dict] = None,
-        new: Optional[bool] = True
-    ):
+    def reset(self, *, seed: Optional[int] = None, options: Optional[dict] = None, new: Optional[bool] = True):
         # Additionally call reset of gym.Env to reset the seed
         Env.reset(self, seed=seed)
         if new:
@@ -287,23 +250,13 @@ class RandomLightCarMountainCar(ModifiableMountainCarEnv):
 
 
 class RandomNormalMountainCar(ModifiableMountainCarEnv):
-    def reset(
-        self,
-        *,
-        seed: Optional[int] = None,
-        options: Optional[dict] = None,
-        new: Optional[bool] = True
-    ):
+    def reset(self, *, seed: Optional[int] = None, options: Optional[dict] = None, new: Optional[bool] = True):
         # Additionally call reset of gym.Env to reset the seed
         Env.reset(self, seed=seed)
         self.nsteps = 0  # for is_success()
         if new:
-            self.force = self.np_random.uniform(
-                self.RANDOM_LOWER_FORCE, self.RANDOM_UPPER_FORCE
-            )
-            self.mass = self.np_random.uniform(
-                self.RANDOM_LOWER_MASS, self.RANDOM_UPPER_MASS
-            )
+            self.force = self.np_random.uniform(self.RANDOM_LOWER_FORCE, self.RANDOM_UPPER_FORCE)
+            self.mass = self.np_random.uniform(self.RANDOM_LOWER_MASS, self.RANDOM_UPPER_MASS)
         self.state = np.array([self.np_random.uniform(low=-0.6, high=-0.4), 0])
         return np.array(self.state, dtype=np.float32), {}
 
@@ -321,13 +274,7 @@ class RandomNormalMountainCar(ModifiableMountainCarEnv):
 
 class RandomExtremeMountainCar(ModifiableMountainCarEnv):
     # TODO(cpacker): Is there any reason to not have an __init__?
-    def reset(
-        self,
-        *,
-        seed: Optional[int] = None,
-        options: Optional[dict] = None,
-        new: Optional[bool] = True
-    ):
+    def reset(self, *, seed: Optional[int] = None, options: Optional[dict] = None, new: Optional[bool] = True):
         # Additionally call reset of gym.Env to reset the seed
         Env.reset(self, seed=seed)
         self.nsteps = 0  # for is_success()

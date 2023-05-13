@@ -3,11 +3,10 @@ import numpy as np
 from typing import Optional
 from gymnasium.envs.classic_control.cartpole import CartPoleEnv
 from gymnasium import Env
-from ..base import EnvBinarySuccessMixin
 from ..utils import uniform_exclude_inner
 
 
-class ModifiableCartPoleEnv(CartPoleEnv, EnvBinarySuccessMixin):
+class ModifiableCartPoleEnv(CartPoleEnv):
     RANDOM_LOWER_FORCE_MAG = 5.0
     RANDOM_UPPER_FORCE_MAG = 15.0
     EXTREME_LOWER_FORCE_MAG = 1.0

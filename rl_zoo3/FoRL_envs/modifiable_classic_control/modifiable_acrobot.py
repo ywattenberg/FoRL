@@ -3,7 +3,6 @@ import numpy as np
 from typing import Optional
 from gymnasium.envs.classic_control.acrobot import AcrobotEnv
 from gymnasium import Env
-from ..base import EnvBinarySuccessMixin
 from ..utils import uniform_exclude_inner
 
 

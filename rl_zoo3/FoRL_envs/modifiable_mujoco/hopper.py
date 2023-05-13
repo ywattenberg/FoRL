@@ -101,6 +101,7 @@ class ModifiableHopper(HopperEnv, MujocoTrackDistSuccessMixIn):
             default_camera_config=DEFAULT_CAMERA_CONFIG,
             **kwargs,
         )
+        self.total_mass = int(np.sum(self.model.body_mass))
 
     def set_env(self, mass_scaler=None, friction_scaler=None, power_scaler=None):
         if mass_scaler:
