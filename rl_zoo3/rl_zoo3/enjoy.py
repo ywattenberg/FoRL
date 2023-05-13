@@ -104,7 +104,7 @@ def enjoy() -> None:  # noqa: C901
             raise e
         elif args.no_hub:
             print(f"Pretrained model {env_name_train} not found, continue with next model")
-            return 
+            return
         else:
             print("Pretrained model not found, trying to download it from sb3 Huggingface hub: https://huggingface.co/sb3")
             # Auto-download
@@ -127,7 +127,6 @@ def enjoy() -> None:  # noqa: C901
                 args.load_checkpoint,
                 args.load_last_checkpoint,
             )
-
 
     # Off-policy algorithm only support one env for now
     off_policy_algos = ["qrdqn", "dqn", "ddpg", "sac", "her", "td3", "tqc"]
@@ -278,10 +277,10 @@ def enjoy() -> None:  # noqa: C901
     if args.verbose > 0 and len(episode_lengths) > 0:
         print(f"Mean episode length: {np.mean(episode_lengths):.2f} +/- {np.std(episode_lengths):.2f}")
 
-    f = open( args.eval_folder, "a")
-    f.write(f"{args.train_env}, {args.eval_env}, {args.algo}, {np.mean(successes)}, {np.std(successes)}\n")
+    f = open(args.eval_folder, "a")
+    f.write(f"{args.train_env}, {args.eval_env}, {args.algo}, {np.mean(successes)}, {np.std(successes)}, {len(successes)}\n")
     f.close()
-    
+
     env.close()
     # return np.mean(successes), np.std(successes)
 
