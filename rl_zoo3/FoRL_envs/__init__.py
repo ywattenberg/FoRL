@@ -40,6 +40,27 @@ register(
 )
 
 register(
+    id="FoRLContinuousMountainCar-v0",
+    entry_point="FoRL_envs.modifiable_classic_control.modifiable_continuous_mountain_car:ModifiableContinuousMountainCar",
+    max_episode_steps=200,
+    reward_threshold=-110.0,
+)
+
+register(
+    id="FoRLContinuousMountainCarRandomNormal-v0",
+    entry_point="FoRL_envs.modifiable_classic_control.modifiable_mountain_car:RandomNormalContinuousMountainCar",
+    max_episode_steps=200,
+    reward_threshold=-110.0,
+)
+
+register(
+    id="FoRLContinuousMountainCarRandomExtreme-v0",
+    entry_point="FoRL_envs.modifiable_classic_control.modifiable_mountain_car:RandomExtremeContinuousMountainCar",
+    max_episode_steps=200,
+    reward_threshold=-110.0,
+)
+
+register(
     id="FoRLMountainCarRandomExtreme-v0",
     entry_point="FoRL_envs.modifiable_classic_control.modifiable_mountain_car:RandomExtremeMountainCar",
     max_episode_steps=200,
