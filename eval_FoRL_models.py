@@ -23,14 +23,14 @@ for Model in Models:
     for env in Deterministic_envs:
         # python .\train.py --algo a2c --env FoRLMountainCarRandomNormal-v0 --device cuda --vec-env subproc --progress -conf ..\FoRL_conf\a2c.yml
         cmdRR = (
-            "python rl-zoo3\\enjoy.py --algo "
+            "python rl-zoo3/enjoy.py --algo "
             + Model
             + " --train_env "
             + get_random_name(env)
             + " --eval_env "
             + get_random_name(env)
             + " -f "
-            + "rl-zoo3\\rl-trained-agents"
+            + "rl-zoo3/rl-trained-agents"
             + " --device cuda --progress --no-render --no-hub"
         )
         res = subprocess.Popen(cmdRR.split(" "))

@@ -25,11 +25,11 @@ for Model in Models:
     for env in FoRL_envs + Deterministic_envs:
         # python .\train.py --algo a2c --env FoRLMountainCarRandomNormal-v0 --device cuda --vec-env subproc --progress -conf ..\FoRL_conf\a2c.yml
         cmd = (
-            "python rl-zoo3\\train.py --algo "
+            "python rl-zoo3/train.py --algo "
             + Model
             + " --env "
             + env
-            + " --device cuda --vec-env subproc --progress -conf FoRL_conf\\"
+            + " --device cuda --vec-env subproc --progress -conf FoRL_conf/"
             + Model
             + ".yml"
         )
