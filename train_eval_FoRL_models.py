@@ -27,7 +27,7 @@ def prog_print(msg):
     print("=================================")
 
 
-Models = ["ddpg"]  # , "ppo_lstm", "a2c", "dqn"]
+Models = ["ddpg"]  # , "ppo", ppo_lstm", "a2c", "a2c_lstm", "dqn"]
 
 
 def get_train_cmd(Model, env):
