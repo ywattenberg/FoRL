@@ -1,11 +1,11 @@
 #!/bin/bash
 
 #SBATCH --job=forl_train_eval_<ALGO>_<ENV>
-#SBATCH --time=0:10:00
+#SBATCH --time=0:20:00
 #SBATCH --output=/cluster/home/%u/forl/log/%j.out    # where to store the output (%j is the JOBID), subdirectory "log" must exist
 #SBATCH --error=/cluster/home/%u/forl/log/%j.err     # where to store error messages
-#SBATCH --cpus-per-task=2
-#SBATCH --mem-per-cpu=4G
+#SBATCH --cpus-per-task=1
+#SBATCH --mem-per-cpu=2G
 
 
 # Exit on errors
