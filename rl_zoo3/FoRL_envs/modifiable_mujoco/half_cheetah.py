@@ -11,12 +11,6 @@ from .utils import MujocoTrackDistSuccessMixIn
 class ModifiableHalfCheetah(HalfCheetahEnv, MujocoTrackDistSuccessMixIn):
     """
     ModifiableHalfCheetah builds upon `half_cheetah_v4` and allows the modification of the totalmass and the power of the actuators
-
-    Warning: the modification of the power is done by directly accessing the underlying mujoco simulation model,
-    this is not supported by mujoco.
-    If possible refrain from using this and instead modify the xml file defining the model.
-
-    Omitted the friction part of the original Env because as far as I can the `self.friction` is not used even by the original roboschool env
     """
 
     # These are scaling factors as opposed to the factors used the original environment
@@ -38,16 +32,17 @@ class ModifiableHalfCheetah(HalfCheetahEnv, MujocoTrackDistSuccessMixIn):
     def __init__(self, **kwargs):
         super(ModifiableHalfCheetah, self).__init__(**kwargs)
         self.total_mass = int(np.sum(self.model.body_mass))
+        self.friction = np.copy(self.model.geom_friction)
+        self.actuator_gear = np.copy(self.model.actuator_gear)
 
     def set_env(self, mass_scaler=None, friction_scaler=None, power_scaler=None):
         if mass_scaler:
             new_mass = int(self.total_mass * mass_scaler)
             mujoco.mj_setTotalmass(self.model, new_mass)
         if friction_scaler:
-            friction = np.copy(self.model.geom_friction)
-            self.model.geom_friction[:, 0] = friction[:, 0] * friction_scaler
+            self.model.geom_friction = np.copy(self.friction * friction_scaler)
         if power_scaler:
-            self.model.actuator_gear = np.copy(self.model.actuator_gear * power_scaler)
+            self.model.actuator_gear = np.copy(self.actuator_gear * power_scaler)
 
     def step(self, action):
         observation, reward, terminated, _, info = super().step(action)
@@ -56,17 +51,18 @@ class ModifiableHalfCheetah(HalfCheetahEnv, MujocoTrackDistSuccessMixIn):
 
 
 class RandomNormalHalfCheetah(ModifiableHalfCheetah):
-    def reset_model(self):
-        mass_scaler = self.np_random.uniform(
-            self.RANDOM_LOWER_MASS, self.RANDOM_UPPER_MASS
-        )
-        friction_scaler = self.np_random.uniform(
-            self.RANDOM_LOWER_POWER, self.RANDOM_UPPER_POWER
-        )
-        power_scaler = self.np_random.uniform(
-            self.RANDOM_LOWER_POWER, self.RANDOM_UPPER_POWER
-        )
-        self.set_env(mass_scaler, friction_scaler, power_scaler)
+    def reset_model(self, new=True):
+        if new:
+            mass_scaler = self.np_random.uniform(
+                self.RANDOM_LOWER_MASS, self.RANDOM_UPPER_MASS
+            )
+            friction_scaler = self.np_random.uniform(
+                self.RANDOM_LOWER_POWER, self.RANDOM_UPPER_POWER
+            )
+            power_scaler = self.np_random.uniform(
+                self.RANDOM_LOWER_POWER, self.RANDOM_UPPER_POWER
+            )
+            self.set_env(mass_scaler, friction_scaler, power_scaler)
         return HalfCheetahEnv.reset_model(self)
 
 

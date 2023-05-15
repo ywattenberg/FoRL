@@ -86,12 +86,18 @@ class ModifiableHopper(HopperEnv, MujocoTrackDistSuccessMixIn):
 
         self._reset_noise_scale = reset_noise_scale
 
-        self._exclude_current_positions_from_observation = exclude_current_positions_from_observation
+        self._exclude_current_positions_from_observation = (
+            exclude_current_positions_from_observation
+        )
 
         if exclude_current_positions_from_observation:
-            observation_space = Box(low=-np.inf, high=np.inf, shape=(11,), dtype=np.float64)
+            observation_space = Box(
+                low=-np.inf, high=np.inf, shape=(11,), dtype=np.float64
+            )
         else:
-            observation_space = Box(low=-np.inf, high=np.inf, shape=(12,), dtype=np.float64)
+            observation_space = Box(
+                low=-np.inf, high=np.inf, shape=(12,), dtype=np.float64
+            )
 
         MujocoEnv.__init__(
             self,
@@ -102,6 +108,8 @@ class ModifiableHopper(HopperEnv, MujocoTrackDistSuccessMixIn):
             **kwargs,
         )
         self.total_mass = int(np.sum(self.model.body_mass))
+        self.friction = np.copy(self.model.geom_friction)
+        self.actuator_gear = np.copy(self.model.actuator_gear)
 
     def set_env(self, mass_scaler=None, friction_scaler=None, power_scaler=None):
         if mass_scaler:
@@ -109,9 +117,9 @@ class ModifiableHopper(HopperEnv, MujocoTrackDistSuccessMixIn):
             mujoco.mj_setTotalmass(self.model, new_mass)
         if friction_scaler:
             friction = np.copy(self.model.geom_friction)
-            self.model.geom_friction[:, 0] = friction[:, 0] * friction_scaler
+            self.model.geom_friction = np.copy(friction_scaler * friction)
         if power_scaler:
-            self.model.actuator_gear = np.copy(self.model.actuator_gear * power_scaler)
+            self.model.actuator_gear = np.copy(self.actuator_gear * power_scaler)
 
     def step(self, action):
         observation, reward, terminated, _, info = super().step(action)
@@ -121,9 +129,15 @@ class ModifiableHopper(HopperEnv, MujocoTrackDistSuccessMixIn):
 
 class RandomNormalHopper(ModifiableHopper):
     def reset_model(self):
-        mass_scaler = self.np_random.uniform(self.RANDOM_LOWER_MASS, self.RANDOM_UPPER_MASS)
-        friction_scaler = self.np_random.uniform(self.RANDOM_LOWER_POWER, self.RANDOM_UPPER_POWER)
-        power_scaler = self.np_random.uniform(self.RANDOM_LOWER_POWER, self.RANDOM_UPPER_POWER)
+        mass_scaler = self.np_random.uniform(
+            self.RANDOM_LOWER_MASS, self.RANDOM_UPPER_MASS
+        )
+        friction_scaler = self.np_random.uniform(
+            self.RANDOM_LOWER_POWER, self.RANDOM_UPPER_POWER
+        )
+        power_scaler = self.np_random.uniform(
+            self.RANDOM_LOWER_POWER, self.RANDOM_UPPER_POWER
+        )
         self.set_env(mass_scaler, friction_scaler, power_scaler)
         return HopperEnv.reset_model(self)
 
