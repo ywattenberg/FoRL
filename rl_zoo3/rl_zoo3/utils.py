@@ -21,7 +21,9 @@ from stable_baselines3.common.env_util import make_vec_env
 from stable_baselines3.common.sb2_compat.rmsprop_tf_like import RMSpropTFLike  # noqa: F401
 from stable_baselines3.common.vec_env import DummyVecEnv, SubprocVecEnv, VecEnv, VecFrameStack, VecNormalize
 
-from rl_zoo3.FoRL_models import RecurrentA2C
+# ../rl_zoo3/FoRL_models/a2c_recurrent/a2c_recurrent.py
+from FoRL_models.a2c_recurrent.a2c_recurrent import RecurrentA2C
+
 
 # For custom activation fn
 from torch import nn as nn
