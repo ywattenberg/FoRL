@@ -34,6 +34,7 @@ echo "SLURM_JOB_ID:    ${SLURM_JOB_ID}"
 
 # Binary or script to execute
 # load modules
+module load gcc/8.2.0
 module load python/3.10.4
 
 $HOME/forl/FoRL_venv/bin/python $HOME/forl/FoRL/train_eval_one.py <ALGO> <ENV>
