@@ -193,3 +193,6 @@ keys/
 
 # Logs
 /FoRL_logs/
+
+# eval results
+eval_res.txt
