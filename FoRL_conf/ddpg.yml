@@ -149,6 +149,22 @@ Swimmer-v3:
   train_freq: 1
   gradient_steps: 1
 
+FoRLHopper-v0:
+  <<: *mujoco-defaults
+  n_timesteps: !!float 5e5
+
+FoRLHopperRandomNormal-v0:
+  <<: *mujoco-defaults
+  n_timesteps: !!float 5e5
+
+FoRLHalfCheetah-v0:
+  <<: *mujoco-defaults
+  n_timesteps: !!float 5e5
+
+FoRLHalfCheetahRandomNormal-v0:
+  <<: *mujoco-defaults
+  n_timesteps: !!float 5e5
+
 # === FoRL Envs ===
 FoRLCartPoleRandomNormal-v0:
   n_timesteps: !!float 5e5
