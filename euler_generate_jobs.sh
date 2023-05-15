@@ -8,6 +8,7 @@ for algo in $algos; do
         cp "templates/train_eval_template.sh" "gen/train_eval_${algo}_${env}.sh"
         sed -i "s/<ALGO>/${algo}/g" "gen/train_eval_${algo}_${env}.sh"
         sed -i "s/<ENV>/${env}/g" "gen/train_eval_${algo}_${env}.sh"
+        echo "generated gen/train_eval_${algo}_${env}.sh"
     done
 done
 
