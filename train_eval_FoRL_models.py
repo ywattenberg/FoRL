@@ -4,12 +4,12 @@ import time
 Model_path = "FoRL_logs"
 
 Deterministic_envs = [
-    # "FoRLCartPole-v0",
+    "FoRLCartPole-v0",
     # "FoRLMountainCar-v0",
     # "FoRLPendulum-v0",
     # "FoRLAcrobot-v0",
     # "FoRLHopper-v0",
-    "FoRLHalfCheetah-v0",
+    # "FoRLHalfCheetah-v0",
 ]
 
 
@@ -46,7 +46,7 @@ def get_train_cmd(Model, env):
         "cuda",
         "--progress",
         "-conf",
-        f"FoRL_conf\\{Model}.yml",
+        f"FoRL_conf//{Model}.yml",
     ]
 
 

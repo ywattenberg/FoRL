@@ -190,3 +190,6 @@ keys/
 .cache
 *.lprof
 *.prof
+
+# Logs
+/FoRL_logs/
