@@ -19,7 +19,7 @@ def prog_print(msg):
 
 def get_train_cmd(Model, env, Model_path):
     return [
-        "python",
+        python_path,
         "rl_zoo3/train.py",
         "--algo",
         Model,
@@ -39,7 +39,7 @@ def get_train_cmd(Model, env, Model_path):
 
 def get_eval_cmd(Model, train_env, test_env, Model_path, eval_folder):
     return [
-        "python",
+        python_path,
         "rl_zoo3/enjoy.py",
         "--algo",
         Model,
@@ -67,6 +67,9 @@ def main():
     env = sys.argv[2]
     Model_path = os.environ["TMPDIR"]
     eval_folder = Model + "_" + env + "_" + "eval_res.txt"
+    python_path = os.environ["PYTHONPATH"]
+
+    prog_print(f"START ==>  Model: {Model}, env: {env}, Model_path: {Model_path}, eval_folder: {eval_folder}, python_path: {python_path}")
 
     # python .\train.py --algo a2c --env FoRLMountainCarRandomNormal-v0 --device cuda --vec-env subproc --progress -conf ..\FoRL_conf\a2c.yml
     prog_print(f"Training deterministic env for {Model} in {env}")

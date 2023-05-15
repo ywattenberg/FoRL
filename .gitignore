@@ -196,3 +196,6 @@ keys/
 
 # eval results
 eval_res.txt
+
+# generate gob files
+/gen/
