@@ -1,0 +1,91 @@
+FoRLCartPoleRandomNormal-v0, FoRLCartPoleRandomNormal-v0, ppo, 1.0, 0.0
+FoRLCartPole-v0, FoRLCartPoleRandomNormal-v0, ppo, 0.996, 0.063118935352238
+FoRLCartPole-v0, FoRLCartPole-v0, ppo, 1.0, 0.0
+FoRLMountainCarRandomNormal-v0, FoRLMountainCarRandomNormal-v0, ppo, 0.7887323943661971, 0.4082077956673081
+FoRLMountainCar-v0, FoRLMountainCarRandomNormal-v0, ppo, 0.828169014084507, 0.37723347968440263
+FoRLMountainCar-v0, FoRLMountainCar-v0, ppo, 0.19144144144144143, 0.3934356566711571
+FoRLPendulum-v0, FoRLPendulumRandomNormal-v0, ppo, 0.792, 0.4058768286069063
+FoRLPendulum-v0, FoRLPendulum-v0, ppo, 0.768, 0.42210899066473345
+FoRLCartPoleRandomNormal-v0, FoRLCartPoleRandomNormal-v0, ppo_lstm, 1.0, 0.0
+FoRLCartPole-v0, FoRLCartPoleRandomNormal-v0, ppo_lstm, 1.0, 0.0
+FoRLCartPole-v0, FoRLCartPole-v0, ppo_lstm, 1.0, 0.0
+FoRLMountainCarRandomNormal-v0, FoRLMountainCarRandomNormal-v0, ppo_lstm, 0.7647058823529411, 0.42418250299576343
+FoRLMountainCar-v0, FoRLMountainCarRandomNormal-v0, ppo_lstm, 0.0, 0.0
+FoRLMountainCar-v0, FoRLMountainCar-v0, ppo_lstm, 0.0, 0.0
+FoRLPendulumRandomNormal-v0, FoRLPendulumRandomNormal-v0, ppo_lstm, 0.708, 0.45468230667137244
+FoRLPendulum-v0, FoRLPendulumRandomNormal-v0, ppo_lstm, 0.512, 0.4998559792580259
+FoRLPendulum-v0, FoRLPendulum-v0, ppo_lstm, 0.98, 0.13999999999999999
+FoRLCartPoleRandomNormal-v0, FoRLCartPoleRandomNormal-v0, a2c, 1.0, 0.0
+FoRLCartPole-v0, FoRLCartPoleRandomNormal-v0, a2c, 0.7073170731707317, 0.454994100150674
+FoRLCartPole-v0, FoRLCartPole-v0, a2c, 1.0, 0.0
+FoRLMountainCarRandomNormal-v0, FoRLMountainCarRandomNormal-v0, a2c, 0.8068006182380216, 0.39480803012194127
+FoRLMountainCar-v0, FoRLMountainCarRandomNormal-v0, a2c, 0.808641975308642, 0.393370221391477
+FoRLMountainCar-v0, FoRLMountainCar-v0, a2c, 0.4508816120906801, 0.49758153499621505
+FoRLPendulumRandomNormal-v0, FoRLPendulumRandomNormal-v0, a2c, 0.98, 0.13999999999999999
+FoRLPendulum-v0, FoRLPendulumRandomNormal-v0, a2c, 0.992, 0.08908422980528033
+FoRLPendulum-v0, FoRLPendulum-v0, a2c, 1.0, 0.0
+FoRLCartPoleRandomNormal-v0, FoRLCartPoleRandomNormal-v0, dqn, 0.6107142857142858, 0.48758829655640373
+FoRLCartPole-v0, FoRLCartPoleRandomNormal-v0, dqn, 0.0, 0.0
+FoRLCartPole-v0, FoRLCartPole-v0, dqn, 0.0, 0.0
+FoRLMountainCarRandomNormal-v0, FoRLMountainCarRandomNormal-v0, dqn, 0.7648026315789473, 0.4241221124969367
+FoRLMountainCar-v0, FoRLMountainCarRandomNormal-v0, dqn, 0.8220858895705522, 0.38244042639285153
+FoRLMountainCar-v0, FoRLMountainCar-v0, dqn, 0.8418803418803419, 0.36485316476053836
+FoRLCartPoleRandomNormal-v0, FoRLCartPoleRandomExtreme-v0, ppo, 0.73, 0.4439594576084623
+FoRLCartPole-v0, FoRLCartPoleRandomExtreme-v0, ppo, 0.4066666666666667, 0.49121165386103044
+FoRLMountainCarRandomNormal-v0, FoRLMountainCarRandomExtreme-v0, ppo, 0.4951923076923077, 0.49997688556039727
+FoRLMountainCar-v0, FoRLMountainCarRandomExtreme-v0, ppo, 0.48394495412844035, 0.49974216902525054
+FoRLPendulum-v0, FoRLPendulumRandomExtreme-v0, ppo, 0.444, 0.4968541033341679
+FoRLCartPoleRandomNormal-v0, FoRLCartPoleRandomExtreme-v0, ppo_lstm, 0.9841269841269841, 0.12498425196844144
+FoRLCartPole-v0, FoRLCartPoleRandomExtreme-v0, ppo_lstm, 0.9763779527559056, 0.1518685159211489
+FoRLMountainCarRandomNormal-v0, FoRLMountainCarRandomExtreme-v0, ppo_lstm, 0.45537757437070936, 0.4980048585415191
+FoRLMountainCar-v0, FoRLMountainCarRandomExtreme-v0, ppo_lstm, 0.0, 0.0
+FoRLPendulumRandomNormal-v0, FoRLPendulumRandomExtreme-v0, ppo_lstm, 0.516, 0.49974393443042403
+FoRLPendulum-v0, FoRLPendulumRandomExtreme-v0, ppo_lstm, 0.504, 0.4999839997439918
+FoRLCartPoleRandomNormal-v0, FoRLCartPoleRandomExtreme-v0, a2c, 0.5977011494252874, 0.4903615863839435
+FoRLCartPole-v0, FoRLCartPoleRandomExtreme-v0, a2c, 0.4463157894736842, 0.4971096514252828
+FoRLMountainCarRandomNormal-v0, FoRLMountainCarRandomExtreme-v0, a2c, 0.4882075471698113, 0.4998609187126433
+FoRLMountainCar-v0, FoRLMountainCarRandomExtreme-v0, a2c, 0.4882075471698113, 0.4998609187126433
+FoRLPendulumRandomNormal-v0, FoRLPendulumRandomExtreme-v0, a2c, 0.856, 0.35108973211986705
+FoRLPendulum-v0, FoRLPendulumRandomExtreme-v0, a2c, 0.804, 0.3969685126052191
+FoRLCartPoleRandomNormal-v0, FoRLCartPoleRandomExtreme-v0, dqn, 0.13245033112582782, 0.33897970575019143
+FoRLCartPole-v0, FoRLCartPoleRandomExtreme-v0, dqn, 0.0, 0.0
+FoRLMountainCarRandomNormal-v0, FoRLMountainCarRandomExtreme-v0, dqn, 0.48635235732009924, 0.4998137071442536
+FoRLMountainCar-v0, FoRLMountainCarRandomExtreme-v0, dqn, 0.47268408551068886, 0.4992532832296776
+FoRLAcrobotRandomNormal-v0, FoRLAcrobotRandomNormal-v0, ppo, 1.0, 0.0, 589
+FoRLAcrobot-v0, FoRLAcrobotRandomNormal-v0, ppo, 0.9966386554621849, 0.05787958103436156, 595
+FoRLAcrobotRandomNormal-v0, FoRLAcrobotRandomExtreme-v0, ppo, 0.9965753424657534, 0.058420281195999936, 584
+FoRLAcrobot-v0, FoRLAcrobot-v0, ppo, 1.0, 0.0, 603
+FoRLAcrobot-v0, FoRLAcrobotRandomExtreme-v0, ppo, 0.9929824561403509, 0.08347633160259872, 570
+FoRLAcrobotRandomNormal-v0, FoRLAcrobotRandomNormal-v0, ppo_lstm, 0.996415770609319, 0.05976104659689271, 558
+FoRLAcrobot-v0, FoRLAcrobotRandomNormal-v0, ppo_lstm, 0.0, 0.0, 100
+FoRLAcrobotRandomNormal-v0, FoRLAcrobotRandomExtreme-v0, ppo_lstm, 0.9865642994241842, 0.11513115358517331, 521
+FoRLAcrobot-v0, FoRLAcrobot-v0, ppo_lstm, 0.0, 0.0, 100
+FoRLAcrobot-v0, FoRLAcrobotRandomExtreme-v0, ppo_lstm, 0.0, 0.0, 100
+FoRLAcrobotRandomNormal-v0, FoRLAcrobotRandomNormal-v0, a2c, 0.9982517482517482, 0.041775535473246576, 572
+FoRLAcrobot-v0, FoRLAcrobotRandomNormal-v0, a2c, 0.9982905982905983, 0.04130955888408401, 585
+FoRLAcrobotRandomNormal-v0, FoRLAcrobotRandomExtreme-v0, a2c, 0.990990990990991, 0.09448728361893258, 555
+FoRLAcrobot-v0, FoRLAcrobot-v0, a2c, 1.0, 0.0, 594
+FoRLAcrobot-v0, FoRLAcrobotRandomExtreme-v0, a2c, 0.9964349376114082, 0.0596016167461693, 561
+FoRLAcrobotRandomNormal-v0, FoRLAcrobotRandomNormal-v0, dqn, 0.0, 0.0, 100
+FoRLAcrobot-v0, FoRLAcrobotRandomNormal-v0, dqn, 0.9565217391304348, 0.20393111999232305, 483
+FoRLAcrobotRandomNormal-v0, FoRLAcrobotRandomExtreme-v0, dqn, 0.019801980198019802, 0.13931927999475535, 101
+FoRLAcrobot-v0, FoRLAcrobot-v0, dqn, 0.9850187265917603, 0.12147771340993897, 534
+FoRLAcrobot-v0, FoRLAcrobotRandomExtreme-v0, dqn, 0.890625, 0.3121091305537215, 384
+
+FoRLHalfCheetah-v0, FoRLHalfCheetah-v0, ppo, 1.0, 0.0, 1
+FoRLHalfCheetahRandomNormal-v0, FoRLHalfCheetahRandomNormal-v0, ppo, 0.92, 0.2712931993250107, 50
+FoRLHalfCheetah-v0, FoRLHalfCheetahRandomNormal-v0, ppo, 0.98, 0.13999999999999999, 50
+FoRLHalfCheetahRandomNormal-v0, FoRLHalfCheetahRandomExtreme-v0, ppo, 0.5, 0.5, 50
+FoRLHalfCheetah-v0, FoRLHalfCheetah-v0, ppo, 1.0, 0.0, 50
+FoRLHalfCheetah-v0, FoRLHalfCheetahRandomExtreme-v0, ppo, 0.56, 0.4963869458396342, 50
+FoRLHalfCheetahRandomNormal-v0, FoRLHalfCheetahRandomNormal-v0, ppo_lstm, 1.0, 0.0, 50
+FoRLHalfCheetah-v0, FoRLHalfCheetahRandomNormal-v0, ppo_lstm, 0.96, 0.19595917942265428, 50
+FoRLHalfCheetahRandomNormal-v0, FoRLHalfCheetahRandomExtreme-v0, ppo_lstm, 0.8, 0.4, 50
+FoRLHalfCheetah-v0, FoRLHalfCheetah-v0, ppo_lstm, 1.0, 0.0, 50
+FoRLHalfCheetah-v0, FoRLHalfCheetahRandomExtreme-v0, ppo_lstm, 0.62, 0.4853864439804639, 50
+
+FoRLHalfCheetah-v0, FoRLHalfCheetah-v0, a2c, 0.9, 0.3, 50
+FoRLHalfCheetah-v0, FoRLHalfCheetahRandomNormal-v0, a2c, 0.74, 0.4386342439892262, 50
+FoRLHalfCheetahRandomNormal-v0, FoRLHalfCheetahRandomNormal-v0, a2c, 1.0, 0.0, 50
+FoRLHalfCheetah-v0, FoRLHalfCheetahRandomExtreme-v0, a2c, 0.52, 0.49959983987187184, 50
+FoRLHalfCheetahRandomNormal-v0, FoRLHalfCheetahRandomExtreme-v0, a2c, 0.7, 0.45825756949558405, 50
