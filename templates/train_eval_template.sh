@@ -22,10 +22,6 @@ trap "exit 1" HUP INT TERM
 trap 'rm -rf "${TMPDIR}"' EXIT
 export TMPDIR
 
-# Change the current directory to the location where you want to store temporary files, exit if changing didn't succeed.
-# Adapt this to your personal preference
-cd "${TMPDIR}" || exit 1
-
 # Send some noteworthy information to the output log
 echo "Running on node: $(hostname)"
 echo "In directory:    $(pwd)"
