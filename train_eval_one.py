@@ -62,6 +62,7 @@ def get_eval_cmd(Model, train_env, test_env, Model_path, eval_folder):
 
 
 def main():
+    print(sys.argv[0])
     Model = sys.argv[1]
     env = sys.argv[2]
     Model_path = os.environ["TMPDIR"]
