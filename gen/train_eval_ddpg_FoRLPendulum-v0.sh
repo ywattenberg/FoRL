@@ -4,7 +4,7 @@
 #SBATCH --time=0:20:00
 #SBATCH --output=/cluster/home/%u/forl/log/%j.out    # where to store the output (%j is the JOBID), subdirectory "log" must exist
 #SBATCH --error=/cluster/home/%u/forl/log/%j.err     # where to store error messages
-#SBATCH --cpus-per-task=1
+# # --cpus-per-task=1
 # # --mem-per-cpu=2G
 #SBATCH --tmp=8G
 
