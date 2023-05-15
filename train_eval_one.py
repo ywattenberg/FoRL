@@ -66,7 +66,7 @@ def main():
     Model = sys.argv[1]
     env = sys.argv[2]
     Model_path = os.environ["TMPDIR"]
-    eval_folder = Model + "_" + env + "_" + "eval_res.txt"
+    eval_folder = "../results/" + Model + "_" + env + "_" + "result.txt"
     python_path = os.environ["PYTHONPATH"]
 
     prog_print(f"START ==>  Model: {Model}, env: {env}, Model_path: {Model_path}, eval_folder: {eval_folder}, python_path: {python_path}")

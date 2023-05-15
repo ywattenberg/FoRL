@@ -5,7 +5,7 @@
 #SBATCH --output=/cluster/home/%u/forl/log/%j.out    # where to store the output (%j is the JOBID), subdirectory "log" must exist
 #SBATCH --error=/cluster/home/%u/forl/log/%j.err     # where to store error messages
 # # --cpus-per-task=1
-# # --mem-per-cpu=2G
+#SBATCH --mem-per-cpu=2G
 #SBATCH --tmp=8G
 
 
@@ -33,7 +33,11 @@ echo "SLURM_JOB_ID:    ${SLURM_JOB_ID}"
 module load gcc/8.2.0
 module load python/3.10.4
 
+# use the correct python
 export PYTHONPATH=$HOME/forl/FoRL_venv/bin/python
+
+mkdir -p $HOME/forl/log
+mkdir -p $HOME/forl/results
 
 $PYTHONPATH $HOME/forl/FoRL/train_eval_one.py <ALGO> <ENV>
 
