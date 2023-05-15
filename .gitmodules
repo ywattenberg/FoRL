@@ -1,3 +1,6 @@
 [submodule "rl-trained-agents"]
 	path = rl-trained-agents
 	url = https://github.com/DLR-RM/rl-trained-agents
+[submodule "stable-baselines3"]
+	path = stable-baselines3
+	url = https://github.com/DLR-RM/stable-baselines3.git
