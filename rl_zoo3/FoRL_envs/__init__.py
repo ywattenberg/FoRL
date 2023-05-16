@@ -120,7 +120,7 @@ register(
 )
 
 register(
-    id="FoRLHopperRandomExtrem-v0",
+    id="FoRLHopperRandomExtreme-v0",
     entry_point="FoRL_envs.modifiable_mujoco.hopper:RandomExtremeHopper",
     max_episode_steps=1000,
     reward_threshold=3800.0,
