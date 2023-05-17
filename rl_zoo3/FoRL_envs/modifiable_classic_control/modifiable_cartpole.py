@@ -22,6 +22,10 @@ class ModifiableCartPoleEnv(CartPoleEnv):
     EXTREME_LOWER_MASSPOLE = 0.01
     EXTREME_UPPER_MASSPOLE = 1.0
 
+    def __init__(self, epsilon=0, *args, **kwargs):
+        self.epsilon = epsilon
+        super(ModifiableCartPoleEnv, self).__init__(*args, **kwargs)
+
     def _followup(self):
         """Cascade values of new (variable) parameters"""
         self.total_mass = self.masspole + self.masscart
@@ -45,9 +49,13 @@ class ModifiableCartPoleEnv(CartPoleEnv):
     #         "id": self.spec.id,
     #     }
 
-    def step(self, *args, **kwargs):
+    def step(self, a):
         """Wrapper to increment new variable nsteps"""
         self.nsteps += 1
+        if self.np_random.uniform() < self.epsilon:
+            a = self.np_random.integers(self.action_space.n)
+        return super(ModifiableCartPoleEnv, self).step(a)
+
         state, reward, terminated, _, info = super().step(*args, **kwargs)
         info["is_success"] = self.is_success()
         return state, reward, terminated, False, info

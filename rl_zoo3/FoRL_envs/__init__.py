@@ -9,6 +9,7 @@ register(
     entry_point="FoRL_envs.modifiable_classic_control.modifiable_cartpole:ModifiableCartPoleEnv",
     max_episode_steps=200,
     reward_threshold=195.0,
+    kwargs={"epsilon": 1},
 )
 
 register(

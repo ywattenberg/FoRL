@@ -19,13 +19,17 @@ class ModifiablePendulumEnv(PendulumEnv):
     EXTREME_LOWER_LENGTH = 0.5
     EXTREME_UPPER_LENGTH = 1.5
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, epsilon=0, *args, **kwargs):
         super(ModifiablePendulumEnv, self).__init__(*args, **kwargs)
 
         self.mass = 1.0
         self.length = 1.0
+        self.epsilon = epsilon
 
     def step(self, u):
+        if self.np_random.uniform() < self.epsilon:
+            u = self.np_random.uniform(-self.max_torque, self.max_torque)
+
         th, thdot = self.state  # th := theta
         g = self.g
         dt = self.dt
@@ -35,7 +39,14 @@ class ModifiablePendulumEnv(PendulumEnv):
         angle_normalize = ((th + np.pi) % (2 * np.pi)) - np.pi
         costs = angle_normalize**2 + 0.1 * thdot**2 + 0.001 * (u**2)
 
-        newthdot = thdot + (-3 * g / (2 * self.length) * np.sin(th + np.pi) + 3.0 / (self.mass * self.length**2) * u) * dt
+        newthdot = (
+            thdot
+            + (
+                -3 * g / (2 * self.length) * np.sin(th + np.pi)
+                + 3.0 / (self.mass * self.length**2) * u
+            )
+            * dt
+        )
         newth = th + newthdot * dt
         newthdot = np.clip(newthdot, -self.max_speed, self.max_speed)
         normalized = ((newth + np.pi) % (2 * np.pi)) - np.pi
@@ -67,10 +78,17 @@ class ModifiablePendulumEnv(PendulumEnv):
 
         return self._get_obs(), -costs, False, False, {"is_success": self.is_success()}
 
-    def reset(self, *, seed: Optional[int] = None, options: Optional[dict] = None, new: Optional[bool] = True):
+    def reset(
+        self,
+        *,
+        seed: Optional[int] = None,
+        options: Optional[dict] = None,
+        new: Optional[bool] = True
+    ):
         # Extra state for is_success()
         self.nsteps = 0
         self.nsteps_vertical = 0
+
         return super(ModifiablePendulumEnv, self).reset(seed=seed, options=options)
 
     # @property
@@ -124,12 +142,24 @@ class HeavyPendulum(ModifiablePendulumEnv):
 class RandomHeavyPendulum(ModifiablePendulumEnv):
     def __init__(self, *args, **kwargs):
         super(RandomHeavyPendulum, self).__init__(*args, **kwargs)
-        self.mass = self.np_random.uniform(self.RANDOM_LOWER_MASS, self.RANDOM_UPPER_MASS)
+        self.mass = self.np_random.uniform(
+            self.RANDOM_LOWER_MASS, self.RANDOM_UPPER_MASS
+        )
 
-    def reset(self, *, seed: Optional[int] = None, options: Optional[dict] = None, new: Optional[bool] = True):
+    def reset(
+        self,
+        *,
+        seed: Optional[int] = None,
+        options: Optional[dict] = None,
+        new: Optional[bool] = True
+    ):
         if new:
-            self.mass = self.np_random.uniform(self.RANDOM_LOWER_MASS, self.RANDOM_UPPER_MASS)
-        return super(RandomHeavyPendulum, self).reset(seed=seed, options=options, new=new)
+            self.mass = self.np_random.uniform(
+                self.RANDOM_LOWER_MASS, self.RANDOM_UPPER_MASS
+            )
+        return super(RandomHeavyPendulum, self).reset(
+            seed=seed, options=options, new=new
+        )
 
     @property
     def parameters(self):
@@ -153,7 +183,13 @@ class RandomLightPendulum(ModifiablePendulumEnv):
             self.RANDOM_UPPER_MASS,
         )
 
-    def reset(self, *, seed: Optional[int] = None, options: Optional[dict] = None, new: Optional[bool] = True):
+    def reset(
+        self,
+        *,
+        seed: Optional[int] = None,
+        options: Optional[dict] = None,
+        new: Optional[bool] = True
+    ):
         if new:
             self.mass = uniform_exclude_inner(
                 self.np_random.uniform,
@@ -162,7 +198,9 @@ class RandomLightPendulum(ModifiablePendulumEnv):
                 self.RANDOM_LOWER_MASS,
                 self.RANDOM_UPPER_MASS,
             )
-        return super(RandomLightPendulum, self).reset(seed=seed, options=options, new=new)
+        return super(RandomLightPendulum, self).reset(
+            seed=seed, options=options, new=new
+        )
 
     @property
     def parameters(self):
@@ -210,12 +248,24 @@ class LongPendulum(ModifiablePendulumEnv):
 class RandomLongPendulum(ModifiablePendulumEnv):
     def __init__(self, *args, **kwargs):
         super(RandomLongPendulum, self).__init__(*args, **kwargs)
-        self.length = self.np_random.uniform(self.RANDOM_LOWER_LENGTH, self.RANDOM_UPPER_LENGTH)
+        self.length = self.np_random.uniform(
+            self.RANDOM_LOWER_LENGTH, self.RANDOM_UPPER_LENGTH
+        )
 
-    def reset(self, *, seed: Optional[int] = None, options: Optional[dict] = None, new: Optional[bool] = True):
+    def reset(
+        self,
+        *,
+        seed: Optional[int] = None,
+        options: Optional[dict] = None,
+        new: Optional[bool] = True
+    ):
         if new:
-            self.length = self.np_random.uniform(self.RANDOM_LOWER_LENGTH, self.RANDOM_UPPER_LENGTH)
-        return super(RandomLongPendulum, self).reset(seed=seed, options=options, new=new)
+            self.length = self.np_random.uniform(
+                self.RANDOM_LOWER_LENGTH, self.RANDOM_UPPER_LENGTH
+            )
+        return super(RandomLongPendulum, self).reset(
+            seed=seed, options=options, new=new
+        )
 
     @property
     def parameters(self):
@@ -239,7 +289,13 @@ class RandomShortPendulum(ModifiablePendulumEnv):
             self.RANDOM_UPPER_LENGTH,
         )
 
-    def reset(self, *, seed: Optional[int] = None, options: Optional[dict] = None, new: Optional[bool] = True):
+    def reset(
+        self,
+        *,
+        seed: Optional[int] = None,
+        options: Optional[dict] = None,
+        new: Optional[bool] = True
+    ):
         if new:
             self.length = uniform_exclude_inner(
                 self.np_random.uniform,
@@ -248,7 +304,9 @@ class RandomShortPendulum(ModifiablePendulumEnv):
                 self.RANDOM_LOWER_LENGTH,
                 self.RANDOM_UPPER_LENGTH,
             )
-        return super(RandomShortPendulum, self).reset(seed=seed, options=options, new=new)
+        return super(RandomShortPendulum, self).reset(
+            seed=seed, options=options, new=new
+        )
 
     @property
     def parameters(self):
@@ -264,14 +322,30 @@ class RandomShortPendulum(ModifiablePendulumEnv):
 class RandomNormalPendulum(ModifiablePendulumEnv):
     def __init__(self, *args, **kwargs):
         super(RandomNormalPendulum, self).__init__(*args, **kwargs)
-        self.mass = self.np_random.uniform(self.RANDOM_LOWER_MASS, self.RANDOM_UPPER_MASS)
-        self.length = self.np_random.uniform(self.RANDOM_LOWER_LENGTH, self.RANDOM_UPPER_LENGTH)
+        self.mass = self.np_random.uniform(
+            self.RANDOM_LOWER_MASS, self.RANDOM_UPPER_MASS
+        )
+        self.length = self.np_random.uniform(
+            self.RANDOM_LOWER_LENGTH, self.RANDOM_UPPER_LENGTH
+        )
 
-    def reset(self, *, seed: Optional[int] = None, options: Optional[dict] = None, new: Optional[bool] = True):
+    def reset(
+        self,
+        *,
+        seed: Optional[int] = None,
+        options: Optional[dict] = None,
+        new: Optional[bool] = True
+    ):
         if new:
-            self.mass = self.np_random.uniform(self.RANDOM_LOWER_MASS, self.RANDOM_UPPER_MASS)
-            self.length = self.np_random.uniform(self.RANDOM_LOWER_LENGTH, self.RANDOM_UPPER_LENGTH)
-        return super(RandomNormalPendulum, self).reset(seed=seed, options=options, new=new)
+            self.mass = self.np_random.uniform(
+                self.RANDOM_LOWER_MASS, self.RANDOM_UPPER_MASS
+            )
+            self.length = self.np_random.uniform(
+                self.RANDOM_LOWER_LENGTH, self.RANDOM_UPPER_LENGTH
+            )
+        return super(RandomNormalPendulum, self).reset(
+            seed=seed, options=options, new=new
+        )
 
     @property
     def parameters(self):
@@ -303,7 +377,13 @@ class RandomExtremePendulum(ModifiablePendulumEnv):
             self.RANDOM_UPPER_LENGTH,
         )
 
-    def reset(self, *, seed: Optional[int] = None, options: Optional[dict] = None, new: Optional[bool] = True):
+    def reset(
+        self,
+        *,
+        seed: Optional[int] = None,
+        options: Optional[dict] = None,
+        new: Optional[bool] = True
+    ):
         if new:
             self.mass = uniform_exclude_inner(
                 self.np_random.uniform,
@@ -319,7 +399,9 @@ class RandomExtremePendulum(ModifiablePendulumEnv):
                 self.RANDOM_LOWER_LENGTH,
                 self.RANDOM_UPPER_LENGTH,
             )
-        return super(RandomExtremePendulum, self).reset(seed=seed, options=options, new=new)
+        return super(RandomExtremePendulum, self).reset(
+            seed=seed, options=options, new=new
+        )
 
     @property
     def parameters(self):

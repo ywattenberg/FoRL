@@ -1,7 +1,9 @@
 import math
 import numpy as np
 from typing import Optional
-from gymnasium.envs.classic_control.continuous_mountain_car import Continuous_MountainCarEnv
+from gymnasium.envs.classic_control.continuous_mountain_car import (
+    Continuous_MountainCarEnv,
+)
 from gymnasium import Env
 from ..utils import uniform_exclude_inner
 from gymnasium.envs.classic_control import utils
@@ -21,14 +23,18 @@ class ModifiableContinuousMountainCarEnv(Continuous_MountainCarEnv):
     EXTREME_LOWER_MASS = 0.0005
     EXTREME_UPPER_MASS = 0.01
 
-    def __init__(self, *args, **kwargs):
+    def __init__(self, epsilon=0, *args, **kwargs):
         super(ModifiableContinuousMountainCarEnv, self).__init__(*args, **kwargs)
 
         self.power = 0.0015
         self.mass = 0.0025
         self.nsteps = 0
+        self.epsilon = epsilon
 
     def step(self, action: np.ndarray):
+        if self.np_random.uniform() < self.epsilon:
+            action[0] = self.np_random.uniform(self.min_action, self.max_action)
+
         position = self.state[0]
         velocity = self.state[1]
         force = min(max(action[0], self.min_action), self.max_action)
@@ -47,7 +53,9 @@ class ModifiableContinuousMountainCarEnv(Continuous_MountainCarEnv):
             velocity = 0
 
         # Convert a possible numpy bool to a Python bool.
-        terminated = bool(position >= self.goal_position and velocity >= self.goal_velocity)
+        terminated = bool(
+            position >= self.goal_position and velocity >= self.goal_velocity
+        )
 
         reward = 0
         if terminated:
@@ -67,7 +75,13 @@ class ModifiableContinuousMountainCarEnv(Continuous_MountainCarEnv):
             self.render()
         return self.state, reward, terminated, False, {"is_success": self.success}
 
-    def reset(self, *, seed: Optional[int] = None, options: Optional[dict] = None, new: Optional[bool] = True):
+    def reset(
+        self,
+        *,
+        seed: Optional[int] = None,
+        options: Optional[dict] = None,
+        new: Optional[bool] = True
+    ):
         Env.reset(self, seed=seed, options=options)
         # Note that if you use custom reset bounds, it may lead to out-of-bound
         # state/observations.
@@ -92,17 +106,33 @@ class ModifiableContinuousMountainCarEnv(Continuous_MountainCarEnv):
 
 
 class RandomNormalContinuousMountainCar(ModifiableContinuousMountainCarEnv):
-    def reset(self, *, seed: Optional[int] = None, options: Optional[dict] = None, new: Optional[bool] = True):
+    def reset(
+        self,
+        *,
+        seed: Optional[int] = None,
+        options: Optional[dict] = None,
+        new: Optional[bool] = True
+    ):
         # Additionally call reset of gym.Env to reset the seed
         s = super().reset(seed=seed, options=options)
         if new:
-            self.power = self.np_random.uniform(self.RANDOM_LOWER_POWER, self.RANDOM_UPPER_POWER)
-            self.mass = self.np_random.uniform(self.RANDOM_LOWER_MASS, self.RANDOM_UPPER_MASS)
+            self.power = self.np_random.uniform(
+                self.RANDOM_LOWER_POWER, self.RANDOM_UPPER_POWER
+            )
+            self.mass = self.np_random.uniform(
+                self.RANDOM_LOWER_MASS, self.RANDOM_UPPER_MASS
+            )
         return s
 
 
 class RandomExtremeContinuousMountainCar(ModifiableContinuousMountainCarEnv):
-    def reset(self, *, seed: Optional[int] = None, options: Optional[dict] = None, new: Optional[bool] = True):
+    def reset(
+        self,
+        *,
+        seed: Optional[int] = None,
+        options: Optional[dict] = None,
+        new: Optional[bool] = True
+    ):
         # Additionally call reset of gym.Env to reset the seed
         s = super().reset(seed=seed, options=options)
         if new:
