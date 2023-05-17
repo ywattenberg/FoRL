@@ -54,9 +54,7 @@ class ModifiableCartPoleEnv(CartPoleEnv):
         self.nsteps += 1
         if self.np_random.uniform() < self.epsilon:
             a = self.np_random.integers(self.action_space.n)
-        return super(ModifiableCartPoleEnv, self).step(a)
-
-        state, reward, terminated, _, info = super().step(*args, **kwargs)
+        state, reward, terminated, _, info = super().step(a)
         info["is_success"] = self.is_success()
         return state, reward, terminated, False, info
 

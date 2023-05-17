@@ -28,7 +28,7 @@ class ModifiablePendulumEnv(PendulumEnv):
 
     def step(self, u):
         if self.np_random.uniform() < self.epsilon:
-            u = self.np_random.uniform(-self.max_torque, self.max_torque)
+            u = [self.np_random.uniform(-self.max_torque, self.max_torque)]
 
         th, thdot = self.state  # th := theta
         g = self.g
