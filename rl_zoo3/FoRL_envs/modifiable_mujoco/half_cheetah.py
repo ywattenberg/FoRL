@@ -29,11 +29,12 @@ class ModifiableHalfCheetah(HalfCheetahEnv, MujocoTrackDistSuccessMixIn):
     EXTREME_LOWER_POWER = 0.5
     EXTREME_UPPER_POWER = 1.5
 
-    def __init__(self, **kwargs):
+    def __init__(self, epsilon=0.0, **kwargs):
         super(ModifiableHalfCheetah, self).__init__(**kwargs)
         self.total_mass = int(np.sum(self.model.body_mass))
         self.friction = np.copy(self.model.geom_friction)
         self.actuator_gear = np.copy(self.model.actuator_gear)
+        self.epsilon = epsilon
 
     def set_env(self, mass_scaler=None, friction_scaler=None, power_scaler=None):
         if mass_scaler:
@@ -45,6 +46,8 @@ class ModifiableHalfCheetah(HalfCheetahEnv, MujocoTrackDistSuccessMixIn):
             self.model.actuator_gear = np.copy(self.actuator_gear * power_scaler)
 
     def step(self, action):
+        if self.np_random.uniform() < self.epsilon:
+            action = self.action_space.sample()
         observation, reward, terminated, _, info = super().step(action)
         info["is_success"] = self.is_success()
         return observation, reward, terminated, False, info
