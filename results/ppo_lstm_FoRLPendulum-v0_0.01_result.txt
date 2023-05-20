@@ -1,0 +1,5 @@
+FoRLPendulum-v0, FoRLPendulum-v0, ppo_lstm, 0.982, 0.132951118836962, 500
+FoRLPendulum-v0, FoRLPendulumRandomNormal-v0, ppo_lstm, 0.878, 0.32728580781940425, 500
+FoRLPendulumRandomNormal-v0, FoRLPendulumRandomNormal-v0, ppo_lstm, 0.97, 0.1705872210923198, 500
+FoRLPendulum-v0, FoRLPendulumRandomExtreme-v0, ppo_lstm, 0.666, 0.47163969298607594, 500
+FoRLPendulumRandomNormal-v0, FoRLPendulumRandomExtreme-v0, ppo_lstm, 0.802, 0.39849215801568794, 500
