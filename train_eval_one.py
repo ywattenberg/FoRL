@@ -17,10 +17,10 @@ def prog_print(msg):
     print("=================================")
 
 
-def get_train_cmd(python_path, Model, env, Model_path):
+def get_train_cmd(python_path, Model, env, Model_path, eps):
     return [
         python_path,
-        "rl_zoo3/train.py",
+        "FoRL/rl_zoo3/train.py",
         "--algo",
         Model,
         "--env",
@@ -33,14 +33,16 @@ def get_train_cmd(python_path, Model, env, Model_path):
         "cuda",
         "--progress",
         "-conf",
-        f"FoRL_conf//{Model}.yml",
+        f"FoRL/FoRL_conf/{Model}.yml",
+        "--env-kwargs",
+        f"epsilon: {eps}",
     ]
 
 
 def get_eval_cmd(python_path, Model, train_env, test_env, Model_path, eval_folder):
     return [
         python_path,
-        "rl_zoo3/enjoy.py",
+        "FoRL/rl_zoo3/enjoy.py",
         "--algo",
         Model,
         "--train_env",
@@ -57,37 +59,35 @@ def get_eval_cmd(python_path, Model, train_env, test_env, Model_path, eval_folde
         "--no-render",
         "--no-hub",
         "-n",
-        "50000",
+        "100000",
     ]
 
 
-def main():
-    print(sys.argv[0])
-    Model = sys.argv[1]
-    env = sys.argv[2]
+def main(args):
+    Model, env, eps = args
     Model_path = os.environ["TMPDIR"]
-    eval_folder = "../results/" + Model + "_" + env + "_" + "result.txt"
+    eval_folder = "FoRL/results/" + Model + "_" + env + "_" + str(eps) + '_'+ "result.txt"
     python_path = os.environ["PYTHONPATH"]
 
     prog_print(f"START ==>  Model: {Model}, env: {env}, Model_path: {Model_path}, eval_folder: {eval_folder}, python_path: {python_path}")
-
+    sys.stdout.flush()
     # python .\train.py --algo a2c --env FoRLMountainCarRandomNormal-v0 --device cuda --vec-env subproc --progress -conf ..\FoRL_conf\a2c.yml
     prog_print(f"Training deterministic env for {Model} in {env}")
-    res = subprocess.Popen(get_train_cmd(python_path, Model, env, Model_path))
+    res = subprocess.Popen(get_train_cmd(python_path, Model, env, Model_path, eps))
     res.wait()
-
+    sys.stdout.flush()
     prog_print(f"Training random env for {Model} in {env}")
-    res = subprocess.Popen(get_train_cmd(python_path, Model, get_random_name(env), Model_path))
+    res = subprocess.Popen(get_train_cmd(python_path, Model, get_random_name(env), Model_path, eps))
     res.wait()
-
+    sys.stdout.flush()
     prog_print(f"Eval DD for {Model} in {env}")
     res = subprocess.Popen(get_eval_cmd(python_path, Model, env, env, Model_path, eval_folder))
     res.wait()
-
+    sys.stdout.flush()
     prog_print(f"Eval DR for {Model} in {env}")
     res = subprocess.Popen(get_eval_cmd(python_path, Model, env, get_random_name(env), Model_path, eval_folder))
     res.wait()
-
+    sys.stdout.flush()
     prog_print(f"Eval RR for {Model} in {env}")
     res = subprocess.Popen(
         get_eval_cmd(python_path, Model, get_random_name(env), get_random_name(env), Model_path, eval_folder)
@@ -101,11 +101,23 @@ def main():
     prog_print(f"Eval RE for {Model} in {env}")
     res = subprocess.Popen(
         get_eval_cmd(python_path, Model, get_random_name(env), get_extreme_name(env), Model_path, eval_folder)
-    )
+        )
     res.wait()
-
+    
+    with open('FoRL/to_run.txt', 'r') as f:
+        lines = f.readlines()
+    print(lines[0].startswith(f"{Model} {env} {eps}"))
+    with open('FoRL/to_run.txt', 'w') as f:
+        for line in lines:
+            if line.strip("\n") != f"{Model} {env} {eps}":
+                print(line)
+                f.write(line)
     prog_print(f"DONE for {Model} in {env}")
 
 
 if __name__ == "__main__":
-    main()
+    print(sys.argv[0])
+    Model = sys.argv[1]
+    env = sys.argv[2]
+    eps = sys.argv[3]
+    main([Model, env, eps]) 

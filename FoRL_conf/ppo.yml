@@ -1,7 +1,7 @@
 # === FoRL Environment Configurations ===
 FoRLPendulumRandomNormal-v0:
   n_envs: 4
-  n_timesteps: !!float 5e5
+  n_timesteps: !!float 1e6
   policy: "MlpPolicy"
   n_steps: 1024
   gae_lambda: 0.95
@@ -16,7 +16,7 @@ FoRLPendulumRandomNormal-v0:
 # Tuned
 FoRLCartPoleRandomNormal-v0:
   n_envs: 8
-  n_timesteps: !!float 5e5
+  n_timesteps: !!float 1e6
   policy: "MlpPolicy"
   n_steps: 32
   batch_size: 256
@@ -30,7 +30,7 @@ FoRLCartPoleRandomNormal-v0:
 FoRLMountainCarRandomNormal-v0:
   normalize: true
   n_envs: 16
-  n_timesteps: !!float 5e5
+  n_timesteps: !!float 1e6
   policy: "MlpPolicy"
   n_steps: 16
   gae_lambda: 0.98
@@ -41,7 +41,7 @@ FoRLMountainCarRandomNormal-v0:
 FoRLAcrobotRandomNormal-v0:
   normalize: true
   n_envs: 16
-  n_timesteps: !!float 5e5
+  n_timesteps: !!float 1e6
   policy: "MlpPolicy"
   n_steps: 256
   gae_lambda: 0.94
@@ -51,7 +51,7 @@ FoRLAcrobotRandomNormal-v0:
 
 FoRLPendulum-v0:
   n_envs: 4
-  n_timesteps: !!float 5e5
+  n_timesteps: !!float 1e6
   policy: "MlpPolicy"
   n_steps: 1024
   gae_lambda: 0.95
@@ -66,7 +66,7 @@ FoRLPendulum-v0:
 # Tuned
 FoRLCartPole-v0:
   n_envs: 8
-  n_timesteps: !!float 5e5
+  n_timesteps: !!float 1e6
   policy: "MlpPolicy"
   n_steps: 32
   batch_size: 256
@@ -91,7 +91,7 @@ FoRLMountainCar-v0:
 FoRLAcrobot-v0:
   normalize: true
   n_envs: 16
-  n_timesteps: !!float 5e5
+ n_timesteps: !!float 1e6
   policy: "MlpPolicy"
   n_steps: 256
   gae_lambda: 0.94
@@ -101,7 +101,7 @@ FoRLAcrobot-v0:
 
 Ant-v3: &mujoco-defaults
   normalize: true
-  n_timesteps: !!float 5e5
+ n_timesteps: !!float 1e6
   policy: "MlpPolicy"
 
 FoRLHalfCheetahRandomNormal-v0:

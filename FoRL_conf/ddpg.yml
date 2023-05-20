@@ -6,7 +6,7 @@ MountainCarContinuous-v0:
   noise_std: 0.5
 
 Pendulum-v1:
-  n_timesteps: 20000
+  n_timesteps: !!float 1e6
   policy: "MlpPolicy"
   gamma: 0.98
   buffer_size: 200000
@@ -151,23 +151,23 @@ Swimmer-v3:
 
 FoRLHopper-v0:
   <<: *mujoco-defaults
-  n_timesteps: !!float 5e5
+  n_timesteps: !!float 1e6
 
 FoRLHopperRandomNormal-v0:
   <<: *mujoco-defaults
-  n_timesteps: !!float 5e5
+  n_timesteps: !!float 1e6
 
 FoRLHalfCheetah-v0:
   <<: *mujoco-defaults
-  n_timesteps: !!float 5e5
+  n_timesteps: !!float 1e6
 
 FoRLHalfCheetahRandomNormal-v0:
   <<: *mujoco-defaults
-  n_timesteps: !!float 5e5
+  n_timesteps: !!float 1e6
 
 # === FoRL Envs ===
 FoRLCartPoleRandomNormal-v0:
-  n_timesteps: !!float 5e5
+  n_timesteps: !!float 1e6
   policy: "MlpPolicy"
   gamma: 0.98
   buffer_size: 200000
@@ -180,7 +180,7 @@ FoRLCartPoleRandomNormal-v0:
   policy_kwargs: "dict(net_arch=[400, 300])"
 
 FoRLMountainCarRandomNormal-v0:
-  n_timesteps: !!float 5e5
+  n_timesteps: !!float 1e6
   policy: "MlpPolicy"
   gamma: 0.98
   buffer_size: 200000
@@ -193,7 +193,7 @@ FoRLMountainCarRandomNormal-v0:
   policy_kwargs: "dict(net_arch=[400, 300])"
 
 FoRLAcrobotRandomNormal-v0:
-  n_timesteps: !!float 5e5
+  n_timesteps: !!float 1e6
   policy: "MlpPolicy"
   gamma: 0.98
   buffer_size: 200000
@@ -206,7 +206,7 @@ FoRLAcrobotRandomNormal-v0:
   policy_kwargs: "dict(net_arch=[400, 300])"
 
 FoRLPendulumRandomNormal-v0:
-  n_timesteps: !!float 5e5
+  n_timesteps: !!float 1e6
   policy: "MlpPolicy"
   gamma: 0.98
   buffer_size: 200000
@@ -219,7 +219,7 @@ FoRLPendulumRandomNormal-v0:
   policy_kwargs: "dict(net_arch=[400, 300])"
 
 FoRLPendulum-v0:
-  n_timesteps: !!float 5e5
+  n_timesteps: !!float 1e6
   policy: "MlpPolicy"
   gamma: 0.98
   buffer_size: 200000
@@ -232,7 +232,7 @@ FoRLPendulum-v0:
   policy_kwargs: "dict(net_arch=[400, 300])"
 
 FoRLCartPole-v0:
-  n_timesteps: !!float 5e5
+  n_timesteps: !!float 1e6
   policy: "MlpPolicy"
   gamma: 0.98
   buffer_size: 200000
@@ -245,7 +245,7 @@ FoRLCartPole-v0:
   policy_kwargs: "dict(net_arch=[400, 300])"
 
 FoRLMountainCar-v0:
-  n_timesteps: !!float 5e5
+  n_timesteps: !!float 1e6
   policy: "MlpPolicy"
   gamma: 0.98
   buffer_size: 200000
@@ -258,7 +258,7 @@ FoRLMountainCar-v0:
   policy_kwargs: "dict(net_arch=[400, 300])"
 
 FoRLAcrobot-v0:
-  n_timesteps: !!float 5e5
+  n_timesteps: !!float 1e6
   policy: "MlpPolicy"
   gamma: 0.98
   buffer_size: 200000

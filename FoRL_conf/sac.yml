@@ -38,63 +38,63 @@ Swimmer-v3:
 Pendulum-v1:
   # callback:
   #   - rl_zoo3.callbacks.ParallelTrainCallback
-  n_timesteps: !!float 5e5
+  n_timesteps: !!float 1e6
   policy: 'MlpPolicy'
   learning_rate: !!float 1e-3
 
 FoRLCartPole-v0:
   # callback:
   #   - rl_zoo3.callbacks.ParallelTrainCallback
-  n_timesteps: !!float 5e5
+  n_timesteps: !!float 1e6
   policy: 'MlpPolicy'
   learning_rate: !!float 1e-3
 
 FoRLMountainCar-v0:
   # callback:
   #   - rl_zoo3.callbacks.ParallelTrainCallback
-  n_timesteps: !!float 5e5
+  n_timesteps: !!float 1e6
   policy: 'MlpPolicy'
   learning_rate: !!float 1e-3
 
 FoRLPendulum-v0:
   # callback:
   #   - rl_zoo3.callbacks.ParallelTrainCallback
-  n_timesteps: !!float 5e5
+  n_timesteps: !!float 1e6
   policy: 'MlpPolicy'
   learning_rate: !!float 1e-3
 
 FoRLAcrobot-v0:
   # callback:
   #   - rl_zoo3.callbacks.ParallelTrainCallback
-  n_timesteps: !!float 5e5
+  n_timesteps: !!float 1e6
   policy: 'MlpPolicy'
   learning_rate: !!float 1e-3
 
 FoRLCartPoleRandomNormal-v0:
   # callback:
   #   - rl_zoo3.callbacks.ParallelTrainCallback
-  n_timesteps: !!float 5e5
+  n_timesteps: !!float 1e6
   policy: 'MlpPolicy'
   learning_rate: !!float 1e-3
 
 FoRLMountainCarRandomNormal-v0:
   # callback:
   #   - rl_zoo3.callbacks.ParallelTrainCallback
-  n_timesteps: !!float 5e5
+  n_timesteps: !!float 1e6
   policy: 'MlpPolicy'
   learning_rate: !!float 1e-3
 
 FoRLPendulumRandomNormal-v0:
   # callback:
   #   - rl_zoo3.callbacks.ParallelTrainCallback
-  n_timesteps: !!float 5e5
+  n_timesteps: !!float 1e6
   policy: 'MlpPolicy'
   learning_rate: !!float 1e-3
 
 FoRLAcrobotRandomNormal-v0:
   # callback:
   #   - rl_zoo3.callbacks.ParallelTrainCallback
-  n_timesteps: !!float 5e5
+  n_timesteps: !!float 1e6
   policy: 'MlpPolicy'
   learning_rate: !!float 1e-3
 

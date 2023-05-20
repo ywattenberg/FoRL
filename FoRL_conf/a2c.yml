@@ -1,20 +1,20 @@
 CartPole-v1:
   n_envs: 8
-  n_timesteps: !!float 5e5
+  n_timesteps: !!float 1e6
   policy: "MlpPolicy"
   ent_coef: 0.0
 
 MountainCar-v0:
   normalize: true
   n_envs: 16
-  n_timesteps: !!float 5e5
+  n_timesteps: !!float 1e6
   policy: "MlpPolicy"
   ent_coef: .0
 
 Acrobot-v1:
   normalize: true
   n_envs: 16
-  n_timesteps: !!float 5e5
+  n_timesteps: !!float 1e6
   policy: "MlpPolicy"
   ent_coef: .0
 
@@ -22,7 +22,7 @@ Acrobot-v1:
 Pendulum-v1:
   normalize: True
   n_envs: 8
-  n_timesteps: !!float 5e5
+  n_timesteps: !!float 1e6
   policy: "MlpPolicy"
   ent_coef: 0.0
   max_grad_norm: 0.5
@@ -66,28 +66,28 @@ Swimmer-v3:
 # === FoRL Envs ===
 FoRLCartPole-v0:
   n_envs: 8
-  n_timesteps: !!float 5e5
+  n_timesteps: !!float 1e6
   policy: "MlpPolicy"
   ent_coef: 0.0
 
 FoRLMountainCar-v0:
   normalize: true
   n_envs: 16
-  n_timesteps: !!float 5e5
+  n_timesteps: !!float 1e6
   policy: "MlpPolicy"
   ent_coef: .0
 
 FoRLAcrobot-v0:
   normalize: true
   n_envs: 16
-  n_timesteps: !!float 5e5
+  n_timesteps: !!float 1e6
   policy: "MlpPolicy"
   ent_coef: .0
 
 FoRLPendulum-v0:
   normalize: True
   n_envs: 8
-  n_timesteps: !!float 5e5
+  n_timesteps: !!float 1e6
   policy: "MlpPolicy"
   ent_coef: 0.0
   max_grad_norm: 0.5
@@ -103,28 +103,28 @@ FoRLPendulum-v0:
 
 FoRLCartPoleRandomNormal-v0:
   n_envs: 8
-  n_timesteps: !!float 5e5
+  n_timesteps: !!float 1e6
   policy: "MlpPolicy"
   ent_coef: 0.0
 
 FoRLMountainCarRandomNormal-v0:
   normalize: true
   n_envs: 16
-  n_timesteps: !!float 5e5
+  n_timesteps: !!float 1e6
   policy: "MlpPolicy"
   ent_coef: .0
 
 FoRLAcrobotRandomNormal-v0:
   normalize: true
   n_envs: 16
-  n_timesteps: !!float 5e5
+  n_timesteps: !!float 1e6
   policy: "MlpPolicy"
   ent_coef: .0
 
 FoRLPendulumRandomNormal-v0:
   normalize: True
   n_envs: 8
-  n_timesteps: !!float 5e5
+  n_timesteps: !!float 1e6
   policy: "MlpPolicy"
   ent_coef: 0.0
   max_grad_norm: 0.5
