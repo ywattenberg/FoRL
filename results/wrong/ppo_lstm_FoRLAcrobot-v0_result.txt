@@ -1,0 +1,3 @@
+FoRLAcrobot-v0, FoRLAcrobot-v0, ppo_lstm, 1.0, 0.0, 1284
+FoRLAcrobot-v0, FoRLAcrobot-v0, ppo_lstm, 0.9992447129909365, 0.027472104953887026, 1324
+FoRLAcrobot-v0, FoRLAcrobotRandomNormal-v0, ppo_lstm, 0.9982456140350877, 0.041848633129391445, 1140

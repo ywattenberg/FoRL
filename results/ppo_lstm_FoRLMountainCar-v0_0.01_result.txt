@@ -1,0 +1,5 @@
+FoRLMountainCar-v0, FoRLMountainCar-v0, ppo_lstm, 0.0, 0.0, 500
+FoRLMountainCar-v0, FoRLMountainCarRandomNormal-v0, ppo_lstm, 0.0, 0.0, 500
+FoRLMountainCarRandomNormal-v0, FoRLMountainCarRandomNormal-v0, ppo_lstm, 0.5745798319327731, 0.4944065621215795, 952
+FoRLMountainCar-v0, FoRLMountainCarRandomExtreme-v0, ppo_lstm, 0.0, 0.0, 500
+FoRLMountainCarRandomNormal-v0, FoRLMountainCarRandomExtreme-v0, ppo_lstm, 0.4630715123094959, 0.4986344219936007, 853

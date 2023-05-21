@@ -1,0 +1,7 @@
+FoRLAcrobot-v0, FoRLAcrobot-v0, dqn, 1.0, 0.0, 1441
+FoRLAcrobot-v0, FoRLAcrobotRandomNormal-v0, dqn, 1.0, 0.0, 1280
+FoRLAcrobot-v0, FoRLAcrobot-v0, dqn, 1.0, 0.0, 1440
+FoRLAcrobot-v0, FoRLAcrobotRandomNormal-v0, dqn, 1.0, 0.0, 1260
+FoRLAcrobotRandomNormal-v0, FoRLAcrobotRandomNormal-v0, dqn, 1.0, 0.0, 1328
+FoRLAcrobot-v0, FoRLAcrobotRandomExtreme-v0, dqn, 0.9843587069864442, 0.12408320984895531, 959
+FoRLAcrobotRandomNormal-v0, FoRLAcrobotRandomExtreme-v0, dqn, 0.992964824120603, 0.0835803935127308, 995

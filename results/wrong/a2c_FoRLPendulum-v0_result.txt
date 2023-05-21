@@ -1,0 +1,10 @@
+FoRLPendulum-v0, FoRLPendulum-v0, a2c, 0.998, 0.044676615807377355, 500
+FoRLPendulum-v0, FoRLPendulumRandomNormal-v0, a2c, 0.934, 0.24828209762284514, 500
+FoRLPendulumRandomNormal-v0, FoRLPendulumRandomNormal-v0, a2c, 0.962, 0.19119623427254, 500
+FoRLPendulum-v0, FoRLPendulumRandomExtreme-v0, a2c, 0.68, 0.466476151587624, 500
+FoRLPendulumRandomNormal-v0, FoRLPendulumRandomExtreme-v0, a2c, 0.72, 0.44899888641287294, 500
+FoRLPendulum-v0, FoRLPendulum-v0, a2c, 1.0, 0.0, 500
+FoRLPendulum-v0, FoRLPendulumRandomNormal-v0, a2c, 1.0, 0.0, 500
+FoRLPendulumRandomNormal-v0, FoRLPendulumRandomNormal-v0, a2c, 0.732, 0.4429175995600084, 500
+FoRLPendulum-v0, FoRLPendulumRandomExtreme-v0, a2c, 0.794, 0.4044304637388237, 500
+FoRLPendulumRandomNormal-v0, FoRLPendulumRandomExtreme-v0, a2c, 0.686, 0.46411636471902173, 500

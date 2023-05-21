@@ -1,0 +1,5 @@
+FoRLAcrobot-v0, FoRLAcrobot-v0, a2c_lstm, 0.0, 0.0, 200
+FoRLAcrobot-v0, FoRLAcrobotRandomNormal-v0, a2c_lstm, 0.0, 0.0, 200
+FoRLAcrobot-v0, FoRLAcrobot-v0, a2c_lstm, 0.0, 0.0, 200
+FoRLAcrobot-v0, FoRLAcrobotRandomNormal-v0, a2c_lstm, 0.0, 0.0, 200
+FoRLAcrobotRandomNormal-v0, FoRLAcrobotRandomNormal-v0, a2c_lstm, 0.0, 0.0, 200

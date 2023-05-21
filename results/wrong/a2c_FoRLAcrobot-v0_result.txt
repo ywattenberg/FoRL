@@ -1,0 +1,10 @@
+FoRLAcrobot-v0, FoRLAcrobot-v0, a2c, 1.0, 0.0, 1179
+FoRLAcrobot-v0, FoRLAcrobotRandomNormal-v0, a2c, 0.9973890339425587, 0.05103086236473123, 1149
+FoRLAcrobotRandomNormal-v0, FoRLAcrobotRandomNormal-v0, a2c, 0.9991251093613298, 0.029565608484192128, 1143
+FoRLAcrobot-v0, FoRLAcrobotRandomExtreme-v0, a2c, 1.0, 0.0, 1157
+FoRLAcrobotRandomNormal-v0, FoRLAcrobotRandomExtreme-v0, a2c, 0.996524761077324, 0.058848633264556395, 1151
+FoRLAcrobot-v0, FoRLAcrobot-v0, a2c, 0.9991638795986622, 0.028903655547564563, 1196
+FoRLAcrobot-v0, FoRLAcrobotRandomNormal-v0, a2c, 0.9982713915298185, 0.041540587176138, 1157
+FoRLAcrobotRandomNormal-v0, FoRLAcrobotRandomNormal-v0, a2c, 0.9982517482517482, 0.041775535473246576, 1144
+FoRLAcrobot-v0, FoRLAcrobotRandomExtreme-v0, a2c, 0.9956369982547993, 0.06590876998527641, 1146
+FoRLAcrobotRandomNormal-v0, FoRLAcrobotRandomExtreme-v0, a2c, 0.9919499105545617, 0.08936042471563532, 1118
