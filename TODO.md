@@ -8,6 +8,7 @@
 
 ## Models:
 - Maybe check impl. of A2C lstms?
+- L2 Norm?
 
 ## Hyperparameter Optimization:
 - Grid search via (rl-zoo) see (docs)[https://rl-baselines3-zoo.readthedocs.io/en/master/guide/tuning.html]
