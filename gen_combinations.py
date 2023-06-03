@@ -18,12 +18,12 @@ Models = [
     ]
 
 eps = [
-    #0.0
+    0.0
     # 0.1,
     # 0.5,
-    1,
-    5,
-    10
+    #1,
+    #5,
+    #10
 ]
 
 parser = argparse.ArgumentParser()
