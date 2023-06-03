@@ -527,9 +527,9 @@ def sample_ppo_lstm(trial: optuna.Trial) -> Dict[str, Any]:
     n_epochs = trial.suggest_categorical("n_epochs", [1, 5, 10, 20])
     gae_lambda = trial.suggest_categorical("gae_lambda", [0.8, 0.9, 0.92, 0.95, 0.98, 0.99, 1.0])
     net_arch = trial.suggest_categorical("net_arch", ["small", "medium"]) #Todo
-    ortho_init = trial.suggest_categorical("ortho_init": [True, False])
+    ortho_init = trial.suggest_categorical("ortho_init", [True, False])
     activation_fn = trial.suggest_categorical("activation_fn", ["tanh", "relu"])
-    policy = trial.suggest_categorical("policy": ['MlpLstmPolicy', 'CnnLstmPolicy'])
+    policy = trial.suggest_categorical("policy", ['MlpLstmPolicy', 'CnnLstmPolicy'])
     vf_coef = trial.suggest_uniform("vf_coef", 0, 1)
     lstm_hidden_size = trial.suggest_categorical("lstm_hidden_size", [32, 64, 128])
 
