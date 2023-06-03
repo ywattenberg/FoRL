@@ -41,7 +41,13 @@ def get_eval_cmd(python_path, Model, env, Model_path, eps):
         "50000",
         "--optimize",
         "--n-trials",
-        "1000"
+        "100",
+        "--n-jobs",
+        "2",
+        "--study-name",
+        f"{Model}_{env}",
+        f"--storage",
+        f"sqlite:///{Model_path}results.db"
     ]
 
 def main(args):
@@ -52,24 +58,20 @@ def main(args):
     prog_print(f"START ==>  Model: {Model}, env: {env}, Model_path: {Model_path}, python_path: {python_path}")
     sys.stdout.flush()
     # python .\train.py --algo a2c --env FoRLMountainCarRandomNormal-v0 --device cuda --vec-env subproc --progress -conf ..\FoRL_conf\a2c.yml
-    prog_print(f"Optimize deterministic env for {Model} in {env}")
+    prog_print(f"Optimize {Model} in {env}")
     res = subprocess.Popen(get_eval_cmd(python_path, Model, env, Model_path, eps))
-    res.wait()
-    sys.stdout.flush()
-    prog_print(f"Optimize random env for {Model} in {env}")
-    res = subprocess.Popen(get_eval_cmd(python_path, Model, get_random_name(env), Model_path, eps))
     res.wait()
     sys.stdout.flush()
     
     with open('FoRL/to_run.txt', 'r') as f:
         lines = f.readlines()
-    print(lines[0].startswith(f"{Model} {env} {eps}"))
+    # print(lines[0].startswith(f"{Model} {env} {eps}"))
     with open('FoRL/to_run.txt', 'w') as f:
         for line in lines:
             if line.strip("\n") != f"{Model} {env} {eps}":
-                print(line)
                 f.write(line)
     prog_print(f"DONE for {Model} in {env}")
+    sys.stdout.flush()
 
 
 if __name__ == "__main__":
