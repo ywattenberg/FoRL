@@ -45,7 +45,7 @@ def get_eval_cmd(python_path, Model, env, Model_path, eps):
         "--n-jobs",
         "2",
         "--study-name",
-        f"{Model}_{env}",
+        f"{Model}_{env}_{eps}",
         f"--storage",
         f"sqlite:///{Model_path}results.db"
     ]

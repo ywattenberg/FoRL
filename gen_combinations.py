@@ -1,25 +1,29 @@
 import argparse
 import subprocess
+# Pendulum, CartPole, Mountaincar, Acrobot, Hopper, HalfCheetah
 envs = [
+    "FoRLPendulum-v0",
     "FoRLCartPole-v0",
     "FoRLMountainCar-v0",
     "FoRLAcrobot-v0",
+    "FoRLHopper-v0",
+    "FoRLHalfCheetah-v0"
 ]
 
 def get_random_name(deterministic_name):
     return deterministic_name[:-3] + "RandomNormal-v0"
 
-Models = [
-    "ppo",
+Models = [    
+    "a2c"
     ]
 
 eps = [
-    0.0
+    #0.0
     # 0.1,
     # 0.5,
-    # 1,
-    # 5,
-    # 10
+    1,
+    5,
+    10
 ]
 
 parser = argparse.ArgumentParser()
