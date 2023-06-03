@@ -1,9 +1,11 @@
 import argparse
 import subprocess
 envs = [
-    "FoRLCartPole-v0",
     "FoRLMountainCar-v0",
+    "FoRLPendulum-v0",
     "FoRLAcrobot-v0",
+    "FoRLHopper-v0",
+    "FoRLHalfCheetah-v0",
 ]
 
 def get_random_name(deterministic_name):
@@ -25,7 +27,7 @@ eps = [
 parser = argparse.ArgumentParser()
 parser.add_argument('--schedule', action='store_true')
 args = parser.parse_args()
-with open('FoRL/to_run.txt', 'w') as f:
+with open('to_run.txt', 'w') as f:
     for model in Models:
         for env in envs:
             for ep in eps:
