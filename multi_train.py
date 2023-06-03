@@ -1,5 +1,5 @@
 from multiprocessing import Pool
-from train_eval_one import main
+from optimize_one import main
 
 if __name__ == '__main__':
     path = "FoRL/to_run.txt"
@@ -7,8 +7,11 @@ if __name__ == '__main__':
         lines = f.readlines()
     runs = []
     for line in lines:
-        runs.append(line.strip().split(' '))
-    with Pool(processes=12) as pool:
-        pool.map(main, runs)
+        with Pool(processes=10) as pool:
+            pool.map(main, [line.strip().split(' ')]*10)
+    #    runs.append(line.strip().split(' '))
+    # with Pool(processes=1) as pool:
+    #     pool.map(main, runs)
+
 
 
