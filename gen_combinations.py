@@ -13,8 +13,8 @@ envs = [
 def get_random_name(deterministic_name):
     return deterministic_name[:-3] + "RandomNormal-v0"
 
-Models = [    
-    "a2c"
+Models = [
+    "ppo_lstm",
     ]
 
 eps = [

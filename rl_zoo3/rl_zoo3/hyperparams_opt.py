@@ -517,7 +517,7 @@ def sample_ars_params(trial: optuna.Trial) -> Dict[str, Any]:
         # "policy_kwargs": dict(net_arch=net_arch),
     }
 
-def sample_ppo_lstm(trial: optuna.Trial) -> Dict[str, Any]:
+def sample_ppo_lstm_params(trial: optuna.Trial) -> Dict[str, Any]:
     batch_size = trial.suggest_categorical("batch_size", [8, 16, 32, 64, 128, 256, 512])
     n_steps = trial.suggest_categorical("n_steps", [8, 16, 32, 64, 128, 256, 512, 1024, 2048])
     gamma = trial.suggest_categorical("gamma", [0.9, 0.95, 0.98, 0.99, 0.995, 0.999, 0.9999])
@@ -529,7 +529,7 @@ def sample_ppo_lstm(trial: optuna.Trial) -> Dict[str, Any]:
     net_arch = trial.suggest_categorical("net_arch", ["small", "medium"]) #Todo
     ortho_init = trial.suggest_categorical("ortho_init", [True, False])
     activation_fn = trial.suggest_categorical("activation_fn", ["tanh", "relu"])
-    policy = trial.suggest_categorical("policy", ['MlpLstmPolicy', 'CnnLstmPolicy'])
+    policy = 'MlpLstmPolicy'
     vf_coef = trial.suggest_uniform("vf_coef", 0, 1)
     lstm_hidden_size = trial.suggest_categorical("lstm_hidden_size", [32, 64, 128])
 
@@ -619,6 +619,7 @@ HYPERPARAMS_SAMPLER = {
     "sac": sample_sac_params,
     "tqc": sample_tqc_params,
     "ppo": sample_ppo_params,
+    "ppo_lstm": sample_ppo_lstm_params,
     "td3": sample_td3_params,
     "trpo": sample_trpo_params,
 }
