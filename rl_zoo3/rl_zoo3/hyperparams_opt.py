@@ -563,6 +563,53 @@ def sample_ppo_lstm(trial: optuna.Trial) -> Dict[str, Any]:
         ),
     }
 
+
+def sample_a2c_lstm(trial: optuna.Trial) -> Dict[str, Any]:
+    batch_size = trial.suggest_categorical("batch_size", [8, 16, 32, 64, 128, 256, 512])
+    n_steps = trial.suggest_categorical("n_steps", [8, 16, 32, 64, 128, 256, 512, 1024, 2048])
+    gamma = trial.suggest_categorical("gamma", [0.9, 0.95, 0.98, 0.99, 0.995, 0.999, 0.9999])
+    learning_rate = trial.suggest_float("learning_rate", 1e-5, 1, log=True)
+    ent_coef = trial.suggest_float("ent_coef", 0.00000001, 0.1, log=True)
+    clip_range = trial.suggest_categorical("clip_range", [0.1, 0.2, 0.3, 0.4])
+    n_epochs = trial.suggest_categorical("n_epochs", [1, 5, 10, 20])
+    gae_lambda = trial.suggest_categorical("gae_lambda", [0.8, 0.9, 0.92, 0.95, 0.98, 0.99, 1.0])
+    net_arch = trial.suggest_categorical("net_arch", ["small", "medium"]) #Todo
+    ortho_init = trial.suggest_categorical("ortho_init", [True, False])
+    activation_fn = trial.suggest_categorical("activation_fn", ["tanh", "relu"])
+    policy = trial.suggest_categorical("policy", ['MlpLstmPolicy', 'CnnLstmPolicy'])
+    vf_coef = trial.suggest_uniform("vf_coef", 0, 1)
+    lstm_hidden_size = trial.suggest_categorical("lstm_hidden_size", [32, 64, 128])
+
+
+    if batch_size > n_steps:
+        batch_size = n_steps
+
+    net_arch = {
+        "small": dict(pi=[64], vf=[64]),
+        "medium": dict(pi=[256], vf=[256]),
+    }[net_arch]
+
+    activation_fn = {"tanh": nn.Tanh, "relu": nn.ReLU, "elu": nn.ELU, "leaky_relu": nn.LeakyReLU}[activation_fn]
+
+    return {
+        "n_steps": n_steps,
+        "batch_size": batch_size,
+        "gamma": gamma,
+        "learning_rate": learning_rate,
+        "ent_coef": ent_coef,
+        "clip_range": clip_range,
+        "n_epochs": n_epochs,
+        "gae_lambda": gae_lambda,
+        "vf_coef": vf_coef,
+        "policy": policy,
+        "policy_kwargs": dict(
+            net_arch=net_arch,
+            activation_fn=activation_fn,
+            ortho_init=ortho_init,
+            lstm_hidden_size=lstm_hidden_size
+        ),
+    }
+
 HYPERPARAMS_SAMPLER = {
     "a2c": sample_a2c_params,
     "ars": sample_ars_params,
