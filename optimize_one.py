@@ -44,6 +44,8 @@ def get_eval_cmd(python_path, Model, env, Model_path, eps):
         "10",
         "--n-jobs",
         "2",
+        "--n-evaluations",
+        "20",
         "--study-name",
         f"{Model}_{env}",
         f"--storage",

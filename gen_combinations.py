@@ -1,9 +1,6 @@
 import argparse
 import subprocess
 envs = [
-    "FoRLMountainCar-v0",
-    "FoRLPendulum-v0",
-    "FoRLAcrobot-v0",
     "FoRLHopper-v0",
     "FoRLHalfCheetah-v0",
 ]
@@ -12,7 +9,7 @@ def get_random_name(deterministic_name):
     return deterministic_name[:-3] + "RandomNormal-v0"
 
 Models = [
-    "ppo",
+    "ppo_lstm",
     ]
 
 eps = [
