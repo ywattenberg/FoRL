@@ -50,6 +50,8 @@ def get_eval_cmd(python_path, Model, env, Model_path, eps):
         f"sqlite:///{Model_path}results.db",
         "--n-evaluations",
         "20",
+        "--eval-episodes",
+        "10"
     ]
 
 def main(args):
