@@ -1,6 +1,11 @@
 import argparse
 import subprocess
+# Pendulum, CartPole, Mountaincar, Acrobot, Hopper, HalfCheetah
 envs = [
+    "FoRLCartPole-v0",
+    "FoRLMountainCar-v0",
+    "FoRLPendulum-v0",
+    "FoRLAcrobot-v0",
     "FoRLHopper-v0",
     "FoRLHalfCheetah-v0",
 ]
@@ -16,9 +21,9 @@ eps = [
     0.0
     # 0.1,
     # 0.5,
-    # 1,
-    # 5,
-    # 10
+    #1,
+    #5,
+    #10
 ]
 
 parser = argparse.ArgumentParser()

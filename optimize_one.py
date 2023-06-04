@@ -21,7 +21,7 @@ def get_eval_cmd(python_path, Model, env, Model_path, eps):
 
     return [
         python_path,
-        "FoRL/rl_zoo3/train.py",
+        os.path.join(os.environ["HOME"], "FoRL/rl_zoo3/train.py"),
         "--algo",
         Model,
         "--env",
@@ -34,7 +34,7 @@ def get_eval_cmd(python_path, Model, env, Model_path, eps):
         "cuda",
         "--progress",
         "-conf",
-        f"FoRL/FoRL_conf/{Model}.yml",
+        os.path.join(os.environ["HOME"], f"FoRL/FoRL_conf/{Model}.yml"),
         "--env-kwargs",
         f"epsilon: {eps}",
         "--n-timesteps",
@@ -47,14 +47,18 @@ def get_eval_cmd(python_path, Model, env, Model_path, eps):
         "--n-evaluations",
         "20",
         "--study-name",
-        f"{Model}_{env}",
+        f"{Model}_{env}_{eps}",
         f"--storage",
-        f"sqlite:///{Model_path}results.db"
+        f"sqlite:///{Model_path}results.db",
+        "--n-evaluations",
+        "20",
+        "--eval-episodes",
+        "10"
     ]
 
 def main(args):
     Model, env, eps = args
-    Model_path = "FoRL/results/optimized/"
+    Model_path = os.path.join(os.environ["HOME"], "FoRL/results/optimized/")
     python_path = os.environ["PYTHONPATH"]
 
     prog_print(f"START ==>  Model: {Model}, env: {env}, Model_path: {Model_path}, python_path: {python_path}")
@@ -65,13 +69,14 @@ def main(args):
     res.wait()
     sys.stdout.flush()
     
-    with open('FoRL/to_run.txt', 'r') as f:
+    with open(os.path.join(os.environ["HOME"], "FoRL/to_run.txt"), 'r') as f:
         lines = f.readlines()
     # print(lines[0].startswith(f"{Model} {env} {eps}"))
-    with open('FoRL/to_run.txt', 'w') as f:
-        for line in lines:
-            if line.strip("\n") != f"{Model} {env} {eps}":
-                f.write(line)
+    if res.returncode == 0:
+        with open(os.path.join(os.environ["HOME"], "FoRL/to_run.txt"), 'w') as f:
+            for line in lines:
+                if line.strip("\n") != f"{Model} {env} {eps}":
+                    f.write(line)
     prog_print(f"DONE for {Model} in {env}")
     sys.stdout.flush()
 
