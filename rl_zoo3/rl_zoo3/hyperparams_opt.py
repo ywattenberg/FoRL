@@ -576,7 +576,6 @@ def sample_a2c_lstm(trial: optuna.Trial) -> Dict[str, Any]:
     net_arch = trial.suggest_categorical("net_arch", ["small", "medium"]) #Todo
     ortho_init = trial.suggest_categorical("ortho_init", [True, False])
     activation_fn = trial.suggest_categorical("activation_fn", ["tanh", "relu"])
-    policy = trial.suggest_categorical("policy", ['MlpLstmPolicy', 'CnnLstmPolicy'])
     vf_coef = trial.suggest_uniform("vf_coef", 0, 1)
     lstm_hidden_size = trial.suggest_categorical("lstm_hidden_size", [32, 64, 128])
 
@@ -601,7 +600,7 @@ def sample_a2c_lstm(trial: optuna.Trial) -> Dict[str, Any]:
         "n_epochs": n_epochs,
         "gae_lambda": gae_lambda,
         "vf_coef": vf_coef,
-        "policy": policy,
+        "policy": "MlpLstmPolicy",
         "policy_kwargs": dict(
             net_arch=net_arch,
             activation_fn=activation_fn,
@@ -612,6 +611,7 @@ def sample_a2c_lstm(trial: optuna.Trial) -> Dict[str, Any]:
 
 HYPERPARAMS_SAMPLER = {
     "a2c": sample_a2c_params,
+    "a2c_lstm": sample_a2c_lstm,
     "ars": sample_ars_params,
     "ddpg": sample_ddpg_params,
     "dqn": sample_dqn_params,
