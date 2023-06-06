@@ -8,29 +8,12 @@
 
 ## Models:
 - Maybe check impl. of A2C lstms?
-- L2 Norm?
-
-## Hyperparameter Optimization:
-- Grid search via (rl-zoo) see (docs)[https://rl-baselines3-zoo.readthedocs.io/en/master/guide/tuning.html]
-- Optimize for random and discrete env
-- How many trials and training-steps? Default:(1000, 50000)
-- Have to enable gSDE for continous ENVS
-
-ppo
-a2c
-ddpg
-dqn
-(+lstms)
-
-CartPole
-Acrobot
-Mountaincar
-Pendulum
-HalfCheetah
-Hopper
-
-## Optimization of eps value
-
-
 
 ## What else?
+- Evaluation Focus RE (RR)
+- Check if random parameter range make sense
+- redefine sucess at 80%?
+- 
+
+
+
