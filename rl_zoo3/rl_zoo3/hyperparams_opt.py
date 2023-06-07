@@ -583,8 +583,8 @@ def sample_a2c_lstm(trial: optuna.Trial) -> Dict[str, Any]:
     lstm_hidden_size = trial.suggest_categorical("lstm_hidden_size", [32, 64, 128])
 
 
-    if batch_size > n_steps:
-        batch_size = n_steps
+    # if batch_size > n_steps:
+    #     batch_size = n_steps
 
     net_arch = {
         "small": dict(pi=[64], vf=[64]),

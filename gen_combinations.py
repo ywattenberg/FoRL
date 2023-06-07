@@ -2,7 +2,7 @@ import argparse
 import subprocess
 # Pendulum, CartPole, Mountaincar, Acrobot, Hopper, HalfCheetah
 envs = [
-    "FoRLCartPole-v0",
+    # "FoRLCartPole-v0",
     "FoRLMountainCar-v0",
     "FoRLPendulum-v0",
     "FoRLAcrobot-v0",
@@ -14,7 +14,7 @@ def get_random_name(deterministic_name):
     return deterministic_name[:-3] + "RandomNormal-v0"
 
 Models = [
-    "ppo_lstm",
+    "a2c_lstm",
     ]
 
 eps = [

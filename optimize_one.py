@@ -38,22 +38,20 @@ def get_eval_cmd(python_path, Model, env, Model_path, eps):
         "--env-kwargs",
         f"epsilon: {eps}",
         "--n-timesteps",
-        "100000",
+        "100_000",
         "--optimize",
         "--n-trials",
         "10",
         "--n-jobs",
         "2",
-        "--n-evaluations",
-        "20",
         "--study-name",
         f"{Model}_{env}_{eps}",
         f"--storage",
         f"sqlite:///{Model_path}results.db",
         "--n-evaluations",
-        "20",
+        "50",
         "--eval-episodes",
-        "10"
+        "20"
     ]
 
 def main(args):
@@ -72,6 +70,9 @@ def main(args):
     with open(os.path.join(os.environ["HOME"], "FoRL/to_run.txt"), 'r') as f:
         lines = f.readlines()
     # print(lines[0].startswith(f"{Model} {env} {eps}"))
+    prog_print(f"DONE for {Model} in {env}")
+    sys.stdout.flush()
+
     if res.returncode == 0:
         with open(os.path.join(os.environ["HOME"], "FoRL/to_run.txt"), 'w') as f:
             for line in lines:
