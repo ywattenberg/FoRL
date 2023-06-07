@@ -2,12 +2,12 @@ import argparse
 import subprocess
 # Pendulum, CartPole, Mountaincar, Acrobot, Hopper, HalfCheetah
 envs = [
-    # "FoRLCartPole-v0",
-    "FoRLMountainCar-v0",
-    "FoRLPendulum-v0",
-    "FoRLAcrobot-v0",
-    "FoRLHopper-v0",
-    "FoRLHalfCheetah-v0",
+    "FoRLCartPole-v0",
+    #"FoRLMountainCar-v0",
+    #"FoRLPendulum-v0",
+    #"FoRLAcrobot-v0",
+    #"FoRLHopper-v0",
+    #"FoRLHalfCheetah-v0",
 ]
 
 def get_random_name(deterministic_name):

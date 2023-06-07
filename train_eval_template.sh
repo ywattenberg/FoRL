@@ -1,14 +1,14 @@
 #!/bin/bash
 
 #SBATCH --job=forl_train_eval
-#SBATCH --time=24:00:00
+#SBATCH --time=8:00:00
 #SBATCH --output=/cluster/home/%u/FoRL/log/%j.out    # where to store the output (%j is the JOBID), subdirectory "log" must exist
 #SBATCH --error=/cluster/home/%u/FoRL/log/%j.err     # where to store error messages
 #SBATCH --cpus-per-task=14
 #SBATCH --mem-per-cpu=4G
 #SBATCH --tmp=8G
 #SBATCH --gpus=rtx_3090:1
-#SBATCH --mail-type=ALL
+#SBATCH --mail-type=BEGIN,END,FAIL
 
 # Exit on errors
 set -o errexit
