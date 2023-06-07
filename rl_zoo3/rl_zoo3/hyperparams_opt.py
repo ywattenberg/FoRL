@@ -565,18 +565,21 @@ def sample_ppo_lstm_params(trial: optuna.Trial) -> Dict[str, Any]:
 
 
 def sample_a2c_lstm(trial: optuna.Trial) -> Dict[str, Any]:
-    batch_size = trial.suggest_categorical("batch_size", [8, 16, 32, 64, 128, 256, 512])
-    n_steps = trial.suggest_categorical("n_steps", [8, 16, 32, 64, 128, 256, 512, 1024, 2048])
     gamma = trial.suggest_categorical("gamma", [0.9, 0.95, 0.98, 0.99, 0.995, 0.999, 0.9999])
-    learning_rate = trial.suggest_float("learning_rate", 1e-5, 1, log=True)
-    ent_coef = trial.suggest_float("ent_coef", 0.00000001, 0.1, log=True)
-    clip_range = trial.suggest_categorical("clip_range", [0.1, 0.2, 0.3, 0.4])
-    n_epochs = trial.suggest_categorical("n_epochs", [1, 5, 10, 20])
+    normalize_advantage = trial.suggest_categorical("normalize_advantage", [False, True])
+    max_grad_norm = trial.suggest_categorical("max_grad_norm", [0.3, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 2, 5])
+    use_rms_prop = trial.suggest_categorical("use_rms_prop", [False, True])
     gae_lambda = trial.suggest_categorical("gae_lambda", [0.8, 0.9, 0.92, 0.95, 0.98, 0.99, 1.0])
-    net_arch = trial.suggest_categorical("net_arch", ["small", "medium"]) #Todo
-    ortho_init = trial.suggest_categorical("ortho_init", [True, False])
-    activation_fn = trial.suggest_categorical("activation_fn", ["tanh", "relu"])
+    n_steps = trial.suggest_categorical("n_steps", [8, 16, 32, 64, 128, 256, 512, 1024, 2048])
+    learning_rate = trial.suggest_float("learning_rate", 1e-6, 1, log=True)
+    ent_coef = trial.suggest_float("ent_coef", 0.00000001, 0.1, log=True)
     vf_coef = trial.suggest_uniform("vf_coef", 0, 1)
+    ortho_init = trial.suggest_categorical("ortho_init", [True, False])
+    net_arch = trial.suggest_categorical("net_arch", ["small", "medium"]) #Todo
+    activation_fn = trial.suggest_categorical("activation_fn", ["tanh", "relu"])
+    
+    #not used?
+    n_epochs = trial.suggest_categorical("n_epochs", [1, 5, 10, 20])
     lstm_hidden_size = trial.suggest_categorical("lstm_hidden_size", [32, 64, 128])
 
 
@@ -592,14 +595,15 @@ def sample_a2c_lstm(trial: optuna.Trial) -> Dict[str, Any]:
 
     return {
         "n_steps": n_steps,
-        "batch_size": batch_size,
         "gamma": gamma,
+        "gae_lambda": gae_lambda,
         "learning_rate": learning_rate,
         "ent_coef": ent_coef,
-        "clip_range": clip_range,
-        "n_epochs": n_epochs,
-        "gae_lambda": gae_lambda,
+        "normalize_advantage": normalize_advantage,
+        "max_grad_norm": max_grad_norm,
+        "use_rms_prop": use_rms_prop,
         "vf_coef": vf_coef,
+        "n_epochs": n_epochs,
         "policy": "MlpLstmPolicy",
         "policy_kwargs": dict(
             net_arch=net_arch,
