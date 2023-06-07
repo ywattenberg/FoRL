@@ -15,5 +15,12 @@
 - redefine sucess at 80%?
 - 
 
-
+|   |  MountainCar | MC Random | CartPole  | CP Random  | Pendulum  | P Random|  Acrobot | A Random | Hopper  | H Random  | Cheetah  |  C Random  |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|
+|  A2C |   |   |   |   |   |   |   |   |   |   |   |   |
+|  A2C_LSTM |   |   |   |   |   |   |   |   |   |   |   |   |
+|  PPO |   |   |   |   |   |   |   |   |   |   |   |   |
+|  PPO_LSTM |   |   |   |   |   |   |   |   |   |   |   |   |
+|  DDPG |   |   |   |   |   |   |   |   |   |   |   |   |
+| DQN  |   |   |   |   |   |   |   |   |   |   |   |   |
 
