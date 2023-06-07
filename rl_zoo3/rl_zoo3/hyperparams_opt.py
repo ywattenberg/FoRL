@@ -577,14 +577,15 @@ def sample_a2c_lstm(trial: optuna.Trial) -> Dict[str, Any]:
     ortho_init = trial.suggest_categorical("ortho_init", [True, False])
     net_arch = trial.suggest_categorical("net_arch", ["small", "medium"]) #Todo
     activation_fn = trial.suggest_categorical("activation_fn", ["tanh", "relu"])
+    batch_size = trial.suggest_categorical("batch_size", [8, 16, 32, 64, 128, 256, 512])
     
     #not used?
     n_epochs = trial.suggest_categorical("n_epochs", [1, 5, 10, 20])
     lstm_hidden_size = trial.suggest_categorical("lstm_hidden_size", [32, 64, 128])
 
 
-    # if batch_size > n_steps:
-    #     batch_size = n_steps
+    if batch_size > n_steps:
+        batch_size = n_steps
 
     net_arch = {
         "small": dict(pi=[64], vf=[64]),
@@ -604,6 +605,7 @@ def sample_a2c_lstm(trial: optuna.Trial) -> Dict[str, Any]:
         "use_rms_prop": use_rms_prop,
         "vf_coef": vf_coef,
         "n_epochs": n_epochs,
+        "batch_size": batch_size,
         "policy": "MlpLstmPolicy",
         "policy_kwargs": dict(
             net_arch=net_arch,

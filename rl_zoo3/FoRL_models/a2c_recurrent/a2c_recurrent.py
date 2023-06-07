@@ -334,7 +334,7 @@ class RecurrentA2C(OnPolicyAlgorithm):
         self._update_learning_rate(self.policy.optimizer)
 
         # This will only loop once (get all data in one go)
-        for rollout_data in self.rollout_buffer.get(batch_size=None):
+        for rollout_data in self.rollout_buffer.get(batch_size=self.batch_size):
             actions = rollout_data.actions
             if isinstance(self.action_space, spaces.Discrete):
                 # Convert discrete action from float to long
