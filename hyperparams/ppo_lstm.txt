@@ -17,7 +17,7 @@ Params = [activation_fn: relu, batch_size: 8, clip_range: 0.1, ent_coef: 4.02544
 FoRLHopperRandomNormal [1127.9380682]
 Params = [activation_fn: relu, batch_size: 8, clip_range: 0.1, ent_coef: 3.879137672882435e-05, gae_lambda: 0.99, gamma: 0.99, learning_rate: 0.0007490176380334273, lstm_hidden_size: 64, n_epochs: 1, n_steps: 64, net_arch: medium, ortho_init: False, vf_coef: 0.4828255624667753]
 
-FoRLCheetah [2483.7947747999997]
+FoRLCheetah [2483.7947747999997] (Maybe only 90 runs finished not sure)
 Params = [activation_fn: relu, batch_size: 128, clip_range: 0.3, ent_coef: 0.002721356160492956, gae_lambda: 0.8, gamma: 0.995, learning_rate: 0.017492116515087953, lstm_hidden_size: 128, n_epochs: 5, n_steps: 1024, net_arch: small, ortho_init: False, vf_coef: 0.06866512924615172]
 
 FoRLCheetahRandomNormal
