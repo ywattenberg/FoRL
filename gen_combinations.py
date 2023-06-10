@@ -4,22 +4,14 @@ envs = [
     "FoRLCartPole-v0",
     "FoRLMountainCar-v0",
     "FoRLPendulum-v0",
-    "FoRLAcrobot-v0",
-    "FoRLHopper-v0",
-    "FoRLHalfCheetah-v0",
 ]
 
 Models = [
     "ppo_lstm",
-    "ppo",
     ]
 
 eps = [
-    0.1,
-    0.5,
-    1,
-    5,
-    10
+    0.0
 ]
 
 parser = argparse.ArgumentParser()
