@@ -2,8 +2,12 @@ FoRLMountainCar
 FoRLMountainCarRandomNormal
 FoRLPendulum
 FoRLPendulumRandomNormal
-FoRLCartPole
-FoRLCartPoleRandomNormal
+
+FoRLCartPole [200]
+Params = [activation_fn: tanh, batch_size: 32, clip_range: 0.4, ent_coef: 0.00888046830484088, gae_lambda: 0.98, gamma: 0.98, learning_rate: 0.0150617726368121, lstm_hidden_size: 128, n_epochs: 1, n_steps: 256, net_arch: small, ortho_init: False, vf_coef: 0.4963259388922263]
+
+FoRLCartPoleRandomNormal [200]
+Params = [activation_fn: relu, batch_size: 256, clip_range: 0.2, ent_coef: 1.8274401362715943e-08, gae_lambda: 1.0, gamma: 0.995, learning_rate: 8.109018531944365e-05, lstm_hidden_size: 128, n_epochs: 20, n_steps: 256, net_arch: small, ortho_init: False, vf_coef: 0.281046729908223]
 
 FoRLAcrobot [-70.6]
 Params = [activation_fn: tanh, batch_size: 8, clip_range: 0.1, ent_coef: 7.173331514009146e-07, gae_lambda: 0.95, gamma: 0.999, learning_rate: 1.0445646135836291e-05, lstm_hidden_size: 32, n_epochs: 10, n_steps: 128, net_arch: small, ortho_init: False, vf_coef: 0.6987697503311365]
