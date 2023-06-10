@@ -1,7 +1,6 @@
 import argparse
 import subprocess
 envs = [
-    "FoRLCartPole-v0",
     "FoRLMountainCar-v0",
     "FoRLPendulum-v0",
 ]
