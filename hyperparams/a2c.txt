@@ -16,8 +16,7 @@ FoRLAcrobotRandomNormal -77.76
 Params = [activation_fn: tanh, ent_coef: 0.0731454571666543, gae_lambda: 0.9, gamma: 0.995, learning_rate: 0.0012728070862257092, lr_schedule: linear, max_grad_norm: 0.3, n_steps: 256, net_arch: small, normalize_advantage: False, ortho_init: False, use_rms_prop: True, vf_coef: 0.1335521413528168]
 FoRLHopper 1635.17629426
 Params = [activation_fn: relu, ent_coef: 0.0012864599456188115, gae_lambda: 0.92, gamma: 0.99, learning_rate: 0.0002077761579708021, lr_schedule: linear, max_grad_norm: 2, n_steps: 16, net_arch: medium, normalize_advantage: False, ortho_init: False, use_rms_prop: True, vf_coef: 0.39318426235124604]
-FoRLHopperRandomNormal
-1084.7342968
+FoRLHopperRandomNormal 1084.7342968
 Params = [activation_fn: tanh, ent_coef: 0.000835201539493523, gae_lambda: 0.95, gamma: 0.99, learning_rate: 0.0025272290519501367, lr_schedule: constant, max_grad_norm: 0.9, n_steps: 8, net_arch: small, normalize_advantage: False, ortho_init: False, use_rms_prop: True, vf_coef: 0.013173660280475768]
 FoRLCheetah 3400.24726792
 Params = [activation_fn: relu, ent_coef: 0.003344105960054444, gae_lambda: 0.8, gamma: 0.995, learning_rate: 0.0010595855386866969, lr_schedule: linear, max_grad_norm: 0.9, n_steps: 16, net_arch: medium, normalize_advantage: True, ortho_init: True, use_rms_prop: True, vf_coef: 0.922079200188717]
