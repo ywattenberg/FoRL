@@ -1,14 +1,23 @@
-FoRLMountainCar
+FoRLMountainCar [-107.2]
+Params = [activation_fn: tanh, batch_size: 128, ent_coef: 9.60899131400011e-07, gae_lambda: 1.0, gamma: 0.99, learning_rate: 0.0001262842256563031, lstm_hidden_size: 32, max_grad_norm: 0.5, n_epochs: 20, n_steps: 64, net_arch: medium, normalize_advantage: True, ortho_init: True, use_rms_prop: True, vf_coef: 0.1690364408077769]
 
 FoRLMountainCarRandomNormal [-58.25]
 Params = [activation_fn: relu, batch_size: 32, ent_coef: 1.3749477075654014e-07, gae_lambda: 1.0, gamma: 0.995, learning_rate: 0.0001812260074988626, lstm_hidden_size: 32, max_grad_norm: 0.6, n_epochs: 20, n_steps: 32, net_arch: medium, normalize_advantage: False, ortho_init: False, use_rms_prop: False, vf_coef: 0.9315076435496945]
 
-FoRLPendulum
-FoRLPendulumRandomNormal
+FoRLPendulum [-232.19637244999998]
+Params = [activation_fn: relu, batch_size: 256, ent_coef: 1.065412605403673e-07, gae_lambda: 0.9, gamma: 0.95, learning_rate: 0.0027292944968380574, lstm_hidden_size: 32, max_grad_norm: 0.7, n_epochs: 20, n_steps: 256, net_arch: medium, normalize_advantage: False, ortho_init: False, use_rms_prop: False, vf_coef: 0.7092262531421956]
+
+FoRLPendulumRandomNormal [-207.07811544999998]
+Params = [activation_fn: relu, batch_size: 128, ent_coef: 0.042006885607447, gae_lambda: 1.0, gamma: 0.98, learning_rate: 0.0019700758301572727, lstm_hidden_size: 32, max_grad_norm: 0.8, n_epochs: 10, n_steps: 64, net_arch: medium, normalize_advantage: True, ortho_init: False, use_rms_prop: True, vf_coef: 0.4899675934902775]
+
 FoRLCartPole
 FoRLCartPoleRandomNormal
-FoRLAcrobot
-FoRLAcrobotRandomNormal
+FoRLAcrobot [-76.55]
+Params = [activation_fn: relu, batch_size: 16, ent_coef: 0.05576115079763048, gae_lambda: 1.0, gamma: 0.995, learning_rate: 0.0002602526754781013, lstm_hidden_size: 64, max_grad_norm: 0.5, n_epochs: 5, n_steps: 8, net_arch: small, normalize_advantage: True, ortho_init: True, use_rms_prop: True, vf_coef: 0.09198586769188537]
+
+FoRLAcrobotRandomNormal [-77.65]
+Params = [activation_fn: tanh, batch_size: 128, ent_coef: 0.010709953714318564, gae_lambda: 1.0, gamma: 0.98, learning_rate: 0.00016421170255044476, lstm_hidden_size: 128, max_grad_norm: 1, n_epochs: 20, n_steps: 16, net_arch: medium, normalize_advantage: False, ortho_init: True, use_rms_prop: False, vf_coef: 0.2773124970767824]
+
 FoRLHopper
 FoRLHopperRandomNormal
 FoRLCheetah
