@@ -1,8 +1,7 @@
 import argparse
 import subprocess
 envs = [
-    "FoRLMountainCar-v0",
-    "FoRLPendulum-v0",
+    "FoRLHalfCheetah-v0",
 ]
 
 Models = [
