@@ -1,0 +1,7 @@
+FoRLCartPole-v0, FoRLCartPole-v0, dqn, 1.0, 0.0, 500
+FoRLCartPole-v0, FoRLCartPoleRandomNormal-v0, dqn, 0.9120458891013384, 0.28322815056891415, 523
+FoRLCartPole-v0, FoRLCartPole-v0, dqn, 0.0, 0.0, 1111
+FoRLCartPole-v0, FoRLCartPoleRandomNormal-v0, dqn, 0.0, 0.0, 1438
+FoRLCartPoleRandomNormal-v0, FoRLCartPoleRandomNormal-v0, dqn, 0.0, 0.0, 1441
+FoRLCartPole-v0, FoRLCartPoleRandomExtreme-v0, dqn, 0.0, 0.0, 2070
+FoRLCartPoleRandomNormal-v0, FoRLCartPoleRandomExtreme-v0, dqn, 0.0, 0.0, 2671

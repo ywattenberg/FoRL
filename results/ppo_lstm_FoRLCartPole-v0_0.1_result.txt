@@ -1,0 +1,3 @@
+FoRLCartPole-v0, FoRLCartPole-v0, ppo_lstm, 1.0, 0.0, 500
+FoRLCartPole-v0, FoRLCartPoleRandomNormal-v0, ppo_lstm, 0.9900596421471173, 0.09920457216600116, 503
+FoRLCartPoleRandomNormal-v0, FoRLCartPoleRandomNormal-v0, ppo_lstm, 0.9625246548323472, 0.18992352058715145, 507

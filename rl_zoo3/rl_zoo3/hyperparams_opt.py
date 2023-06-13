@@ -34,7 +34,7 @@ def sample_ppo_params(trial: optuna.Trial) -> Dict[str, Any]:
     # Uncomment for gSDE (continuous action)
     # sde_sample_freq = trial.suggest_categorical("sde_sample_freq", [-1, 8, 16, 32, 64, 128, 256])
     # Orthogonal initialization
-    ortho_init = False
+    ortho_init = True
     # ortho_init = trial.suggest_categorical('ortho_init', [False, True])
     # activation_fn = trial.suggest_categorical('activation_fn', ['tanh', 'relu', 'elu', 'leaky_relu'])
     activation_fn = trial.suggest_categorical("activation_fn", ["tanh", "relu"])
@@ -517,9 +517,107 @@ def sample_ars_params(trial: optuna.Trial) -> Dict[str, Any]:
         # "policy_kwargs": dict(net_arch=net_arch),
     }
 
+def sample_ppo_lstm_params(trial: optuna.Trial) -> Dict[str, Any]:
+    batch_size = trial.suggest_categorical("batch_size", [8, 16, 32, 64, 128, 256, 512])
+    n_steps = trial.suggest_categorical("n_steps", [8, 16, 32, 64, 128, 256, 512, 1024, 2048])
+    gamma = trial.suggest_categorical("gamma", [0.9, 0.95, 0.98, 0.99, 0.995, 0.999, 0.9999])
+    learning_rate = trial.suggest_float("learning_rate", 1e-5, 1, log=True)
+    ent_coef = trial.suggest_float("ent_coef", 0.00000001, 0.1, log=True)
+    clip_range = trial.suggest_categorical("clip_range", [0.1, 0.2, 0.3, 0.4])
+    n_epochs = trial.suggest_categorical("n_epochs", [1, 5, 10, 20])
+    gae_lambda = trial.suggest_categorical("gae_lambda", [0.8, 0.9, 0.92, 0.95, 0.98, 0.99, 1.0])
+    net_arch = trial.suggest_categorical("net_arch", ["small", "medium"]) #Todo
+    ortho_init = trial.suggest_categorical("ortho_init", [True, False])
+    activation_fn = trial.suggest_categorical("activation_fn", ["tanh", "relu"])
+    policy = 'MlpLstmPolicy'
+    vf_coef = trial.suggest_uniform("vf_coef", 0, 1)
+    lstm_hidden_size = trial.suggest_categorical("lstm_hidden_size", [32, 64, 128])
+
+
+    if batch_size > n_steps:
+        batch_size = n_steps
+
+    net_arch = {
+        "small": dict(pi=[64], vf=[64]),
+        "medium": dict(pi=[256], vf=[256]),
+    }[net_arch]
+
+    activation_fn = {"tanh": nn.Tanh, "relu": nn.ReLU, "elu": nn.ELU, "leaky_relu": nn.LeakyReLU}[activation_fn]
+
+    return {
+        "n_steps": n_steps,
+        "batch_size": batch_size,
+        "gamma": gamma,
+        "learning_rate": learning_rate,
+        "ent_coef": ent_coef,
+        "clip_range": clip_range,
+        "n_epochs": n_epochs,
+        "gae_lambda": gae_lambda,
+        "vf_coef": vf_coef,
+        "policy": policy,
+        "policy_kwargs": dict(
+            net_arch=net_arch,
+            activation_fn=activation_fn,
+            ortho_init=ortho_init,
+            lstm_hidden_size=lstm_hidden_size
+        ),
+    }
+
+
+def sample_a2c_lstm(trial: optuna.Trial) -> Dict[str, Any]:
+    gamma = trial.suggest_categorical("gamma", [0.9, 0.95, 0.98, 0.99, 0.995, 0.999, 0.9999])
+    normalize_advantage = trial.suggest_categorical("normalize_advantage", [False, True])
+    max_grad_norm = trial.suggest_categorical("max_grad_norm", [0.3, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 2, 5])
+    use_rms_prop = trial.suggest_categorical("use_rms_prop", [False, True])
+    gae_lambda = trial.suggest_categorical("gae_lambda", [0.8, 0.9, 0.92, 0.95, 0.98, 0.99, 1.0])
+    n_steps = trial.suggest_categorical("n_steps", [8, 16, 32, 64, 128, 256, 512, 1024, 2048])
+    learning_rate = trial.suggest_float("learning_rate", 1e-6, 1, log=True)
+    ent_coef = trial.suggest_float("ent_coef", 0.00000001, 0.1, log=True)
+    vf_coef = trial.suggest_uniform("vf_coef", 0, 1)
+    ortho_init = trial.suggest_categorical("ortho_init", [True, False])
+    net_arch = trial.suggest_categorical("net_arch", ["small", "medium"]) #Todo
+    activation_fn = trial.suggest_categorical("activation_fn", ["tanh", "relu"])
+    batch_size = trial.suggest_categorical("batch_size", [8, 16, 32, 64, 128, 256, 512])
+    
+    #not used?
+    n_epochs = trial.suggest_categorical("n_epochs", [1, 5, 10, 20])
+    lstm_hidden_size = trial.suggest_categorical("lstm_hidden_size", [32, 64, 128])
+
+
+    if batch_size > n_steps:
+        batch_size = n_steps
+
+    net_arch = {
+        "small": dict(pi=[64], vf=[64]),
+        "medium": dict(pi=[256], vf=[256]),
+    }[net_arch]
+
+    activation_fn = {"tanh": nn.Tanh, "relu": nn.ReLU, "elu": nn.ELU, "leaky_relu": nn.LeakyReLU}[activation_fn]
+
+    return {
+        "n_steps": n_steps,
+        "gamma": gamma,
+        "gae_lambda": gae_lambda,
+        "learning_rate": learning_rate,
+        "ent_coef": ent_coef,
+        "normalize_advantage": normalize_advantage,
+        "max_grad_norm": max_grad_norm,
+        "use_rms_prop": use_rms_prop,
+        "vf_coef": vf_coef,
+        "n_epochs": n_epochs,
+        "batch_size": batch_size,
+        "policy": "MlpLstmPolicy",
+        "policy_kwargs": dict(
+            net_arch=net_arch,
+            activation_fn=activation_fn,
+            ortho_init=ortho_init,
+            lstm_hidden_size=lstm_hidden_size
+        ),
+    }
 
 HYPERPARAMS_SAMPLER = {
     "a2c": sample_a2c_params,
+    "a2c_lstm": sample_a2c_lstm,
     "ars": sample_ars_params,
     "ddpg": sample_ddpg_params,
     "dqn": sample_dqn_params,
@@ -527,6 +625,7 @@ HYPERPARAMS_SAMPLER = {
     "sac": sample_sac_params,
     "tqc": sample_tqc_params,
     "ppo": sample_ppo_params,
+    "ppo_lstm": sample_ppo_lstm_params,
     "td3": sample_td3_params,
     "trpo": sample_trpo_params,
 }

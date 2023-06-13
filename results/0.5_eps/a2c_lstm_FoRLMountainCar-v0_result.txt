@@ -1,0 +1,10 @@
+FoRLMountainCar-v0, FoRLMountainCar-v0, a2c_lstm, 0.0, 0.0, 250
+FoRLMountainCar-v0, FoRLMountainCarRandomNormal-v0, a2c_lstm, 0.0, 0.0, 250
+FoRLMountainCarRandomNormal-v0, FoRLMountainCarRandomNormal-v0, a2c_lstm, 0.6125244618395304, 0.48717373234578654, 511
+FoRLMountainCar-v0, FoRLMountainCarRandomExtreme-v0, a2c_lstm, 0.0, 0.0, 250
+FoRLMountainCarRandomNormal-v0, FoRLMountainCarRandomExtreme-v0, a2c_lstm, 0.45215311004784686, 0.49770540997854, 418
+FoRLMountainCar-v0, FoRLMountainCar-v0, a2c_lstm, 0.0, 0.0, 500
+FoRLMountainCar-v0, FoRLMountainCarRandomNormal-v0, a2c_lstm, 0.0, 0.0, 500
+FoRLMountainCarRandomNormal-v0, FoRLMountainCarRandomNormal-v0, a2c_lstm, 0.596579476861167, 0.4905837386718228, 994
+FoRLMountainCar-v0, FoRLMountainCarRandomExtreme-v0, a2c_lstm, 0.0, 0.0, 500
+FoRLMountainCarRandomNormal-v0, FoRLMountainCarRandomExtreme-v0, a2c_lstm, 0.4483173076923077, 0.49732172616509374, 832

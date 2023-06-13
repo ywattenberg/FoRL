@@ -1,0 +1,3 @@
+FoRLPendulum-v0, FoRLPendulum-v0, a2c_lstm, 0.0, 0.0, 500
+FoRLPendulum-v0, FoRLPendulumRandomNormal-v0, a2c_lstm, 0.0, 0.0, 500
+FoRLPendulumRandomNormal-v0, FoRLPendulumRandomNormal-v0, a2c_lstm, 0.702, 0.45737949232557423, 500

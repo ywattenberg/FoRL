@@ -45,6 +45,10 @@ class RecurrentA2C(OnPolicyAlgorithm):
         Equivalent to classic advantage when set to 1.
     :param ent_coef: Entropy coefficient for the loss calculation
     :param vf_coef: Value function coefficient for the loss calculation
+    :param target_kl: Limit the KL divergence between updates,
+        because the clipping is not enough to prevent large update
+        see issue #213 (cf https://github.com/hill-a/stable-baselines/issues/213)
+        By default, there is no limit on the kl div.
     :param max_grad_norm: The maximum value for the gradient clipping
     :param rms_prop_eps: RMSProp epsilon. It stabilizes square root computation in denominator
         of RMSProp update
@@ -78,8 +82,7 @@ class RecurrentA2C(OnPolicyAlgorithm):
         env: Union[GymEnv, str],
         learning_rate: Union[float, Schedule] = 7e-4,
         n_steps: int = 5,
-        batch_size: Optional[int] = 128,
-        n_epochs: int = 10,
+        batch_size: Optional[int] = None,
         gamma: float = 0.99,
         gae_lambda: float = 1.0,
         ent_coef: float = 0.0,
@@ -128,7 +131,6 @@ class RecurrentA2C(OnPolicyAlgorithm):
         )
 
         self.batch_size = batch_size
-        self.n_epochs = n_epochs
         self.clip_range = clip_range
         self.clip_range_vf = clip_range_vf
         self._last_lstm_states = None
@@ -334,11 +336,14 @@ class RecurrentA2C(OnPolicyAlgorithm):
         self._update_learning_rate(self.policy.optimizer)
 
         # This will only loop once (get all data in one go)
-        for rollout_data in self.rollout_buffer.get(batch_size=None):
+        for rollout_data in self.rollout_buffer.get(batch_size=self.batch_size):
             actions = rollout_data.actions
             if isinstance(self.action_space, spaces.Discrete):
                 # Convert discrete action from float to long
                 actions = actions.long().flatten()
+
+            if self.use_sde:
+                    self.policy.reset_noise(self.batch_size)
 
             values, log_prob, entropy = self.policy.evaluate_actions(
                 rollout_data.observations, 
@@ -347,24 +352,26 @@ class RecurrentA2C(OnPolicyAlgorithm):
                 rollout_data.episode_starts,
             )
             values = values.flatten()
+            
+            mask = rollout_data.mask > 1e-8
 
             # Normalize advantage (not present in the original implementation)
             advantages = rollout_data.advantages
             if self.normalize_advantage:
-                advantages = (advantages - advantages.mean()) / (advantages.std() + 1e-8)
+                advantages = (advantages - advantages[mask].mean()) / (advantages[mask].std() + 1e-8)
 
             # Policy gradient loss
-            policy_loss = -(advantages * log_prob).mean()
+            policy_loss = -(advantages * log_prob)[mask].mean()
 
             # Value loss using the TD(gae_lambda) target
-            value_loss = F.mse_loss(rollout_data.returns, values)
+            value_loss = th.mean(((rollout_data.returns - values) ** 2)[mask])
 
             # Entropy loss favor exploration
             if entropy is None:
                 # Approximate entropy when no analytical form
-                entropy_loss = -th.mean(-log_prob)
+                entropy_loss = -th.mean(-log_prob[mask])
             else:
-                entropy_loss = -th.mean(entropy)
+                entropy_loss = -th.mean(entropy[mask])
 
             loss = policy_loss + self.ent_coef * entropy_loss + self.vf_coef * value_loss
 
