@@ -1,9 +1,20 @@
-FoRLMountainCar
-FoRLMountainCarRandomNormal
-FoRLPendulum
-FoRLPendulumRandomNormal
-FoRLCartPole
-FoRLCartPoleRandomNormal
+FoRLMountainCar [-101.7]
+Params = [activation_fn: relu, batch_size: 16, clip_range: 0.2, ent_coef: 7.492213247850684e-05, gae_lambda: 0.95, gamma: 0.9999, learning_rate: 1.8006626812856746e-05, lstm_hidden_size: 32, n_epochs: 20, n_steps: 128, net_arch: medium, ortho_init: False, vf_coef: 0.381713951181864]
+
+FoRLMountainCarRandomNormal [-49.3]
+Params = [activation_fn: tanh, batch_size: 32, clip_range: 0.2, ent_coef: 1.1187648272244032e-08, gae_lambda: 0.98, gamma: 0.99, learning_rate: 8.409805609392812e-05, lstm_hidden_size: 32, n_epochs: 10, n_steps: 16, net_arch: medium, ortho_init: False, vf_coef: 0.48530966053846325]
+
+FoRLPendulum [-118.82422145000001]
+Params = [activation_fn: tanh, batch_size: 128, clip_range: 0.1, ent_coef: 5.3405162728266685e-08, gae_lambda: 0.8, gamma: 0.995, learning_rate: 0.00028170954430205704, lstm_hidden_size: 32, n_epochs: 10, n_steps: 512, net_arch: medium, ortho_init: False, vf_coef: 0.10897592063396326]
+
+FoRLPendulumRandomNormal [-146.05505705]
+Params = [activation_fn: tanh, batch_size: 32, clip_range: 0.2, ent_coef: 2.276560731453451e-06, gae_lambda: 0.8, gamma: 0.98, learning_rate: 0.0014629364842425644, lstm_hidden_size: 32, n_epochs: 10, n_steps: 256, net_arch: medium, ortho_init: False, vf_coef: 0.7205181084902741]
+
+FoRLCartPole [200]
+Params = [activation_fn: tanh, batch_size: 32, clip_range: 0.4, ent_coef: 0.00888046830484088, gae_lambda: 0.98, gamma: 0.98, learning_rate: 0.0150617726368121, lstm_hidden_size: 128, n_epochs: 1, n_steps: 256, net_arch: small, ortho_init: False, vf_coef: 0.4963259388922263]
+
+FoRLCartPoleRandomNormal [200]
+Params = [activation_fn: relu, batch_size: 256, clip_range: 0.2, ent_coef: 1.8274401362715943e-08, gae_lambda: 1.0, gamma: 0.995, learning_rate: 8.109018531944365e-05, lstm_hidden_size: 128, n_epochs: 20, n_steps: 256, net_arch: small, ortho_init: False, vf_coef: 0.281046729908223]
 
 FoRLAcrobot [-70.6]
 Params = [activation_fn: tanh, batch_size: 8, clip_range: 0.1, ent_coef: 7.173331514009146e-07, gae_lambda: 0.95, gamma: 0.999, learning_rate: 1.0445646135836291e-05, lstm_hidden_size: 32, n_epochs: 10, n_steps: 128, net_arch: small, ortho_init: False, vf_coef: 0.6987697503311365]

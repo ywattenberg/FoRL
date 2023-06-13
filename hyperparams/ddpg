@@ -1,12 +1,12 @@
-FoRLMountainCar
-FoRLMountainCarRandomNormal
-FoRLPendulum
-FoRLPendulumRandomNormal
-FoRLCartPole
-FoRLCartPoleRandomNormal
-FoRLAcrobot
-FoRLAcrobotRandomNormal
-FoRLHopper
-FoRLHopperRandomNormal
-FoRLCheetah
-FoRLCheetahRandomNormal
+FoRLPendulum [-111.2367352]
+Params = [batch_size: 128, buffer_size: 100000, gamma: 0.999, learning_rate: 0.00033687847757567593, net_arch: big, noise_std: 0.4233418793579944, noise_type: None, tau: 0.02, train_freq: 128]
+FoRLPendulumRandomNormal [-118.99]
+Params = [batch_size: 256, buffer_size: 100000, gamma: 0.9999, learning_rate: 0.0022639514647602825, net_arch: medium, noise_std: 0.14066059074730347, noise_type: None, tau: 0.02, train_freq: 128]
+FoRLHopper [1044.4693563]
+Params = [batch_size: 128, buffer_size: 100000, gamma: 0.999, learning_rate: 0.0007321463574972058, net_arch: small, noise_std: 0.8770847648557417, noise_type: None, tau: 0.005, train_freq: 4]
+FoRLHopperRandomNormal [1008.6238455800001]
+Params = [batch_size: 1024, buffer_size: 1000000, gamma: 0.9999, learning_rate: 8.544528766204316e-05, net_arch: medium, noise_std: 0.8703922600114818, noise_type: ornstein-uhlenbeck, tau: 0.02, train_freq: 512]
+FoRLCheetah 5491.198362380001
+Params = [batch_size: 100, buffer_size: 1000000, gamma: 0.99, learning_rate: 0.0014644378357406005, net_arch: medium, noise_std: 0.22195861713740578, noise_type: normal, tau: 0.05, train_freq: 4]
+FoRLCheetahRandomNormal 4965.55881464
+Params = [batch_size: 128, buffer_size: 100000, gamma: 0.99, learning_rate: 0.0007807680830532737, net_arch: medium, noise_std: 0.533084903573579, noise_type: normal, tau: 0.08, train_freq: 32]
