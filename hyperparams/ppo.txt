@@ -1,17 +1,22 @@
-FoRLMountainCar
-FoRLMountainCarRandomNormal
-FoRLPendulum
-FoRLPendulumRandomNormal
-FoRLCartPole
-FoRLCartPoleRandomNormal
-
+FoRLMountainCar[-106.72]
+Params = [activation_fn: tanh, ent_coef: 2.4668191625037606e-07, gae_lambda: 1.0, gamma: 0.99, learning_rate: 7.208585642745669e-05, lr_schedule: linear, max_grad_norm: 0.6, n_steps: 8, net_arch: medium, normalize_advantage: True, ortho_init: True, use_rms_prop: True, vf_coef: 0.6780248524458619]
+FoRLMountainCarRandomNormal[-57.8]
+Params = [activation_fn: tanh, ent_coef: 1.5515893974798233e-06, gae_lambda: 0.8, gamma: 0.995, learning_rate: 0.0002554232220658526, lr_schedule: constant, max_grad_norm: 0.8, n_steps: 32, net_arch: medium, normalize_advantage: True, ortho_init: False, use_rms_prop: False, vf_coef: 0.5850292846769275]
+FoRLPendulum[-127.87]
+Params = [activation_fn: tanh, ent_coef: 1.5515893974798233e-06, gae_lambda: 0.8, gamma: 0.995, learning_rate: 0.0002554232220658526, lr_schedule: constant, max_grad_norm: 0.8, n_steps: 32, net_arch: medium, normalize_advantage: True, ortho_init: False, use_rms_prop: False, vf_coef: 0.5850292846769275]
+FoRLPendulumRandomNormal[-131.94257804]
+Params = [activation_fn: tanh, ent_coef: 0.002437595510900004, gae_lambda: 0.95, gamma: 0.95, learning_rate: 0.00506420892135845, lr_schedule: linear, max_grad_norm: 1, n_steps: 8, net_arch: medium, normalize_advantage: False, ortho_init: False, use_rms_prop: True, vf_coef: 0.9488118062280486]
+FoRLCartPole [200]
+params = [activation_fn relu,ent_coef 1.7239580046432405e-06,gae_lambda 0.95,gamma 0.98,learning_rate 0.005918600158950124,lr_schedule constant]
+FoRLCartPoleRandomNormal[200]
+params =[activation_fn relu, batch_size 64,clip_range 0.3,ent_coef 0.02423254616391066,gae_lambda 0.95,gamma 0.99]
 FoRLAcrobot[-75]
 Params = [activation_fn: tanh, batch_size: 64, clip_range: 0.3, ent_coef: 0.00016930688364621217, gae_lambda: 0.98, gamma: 0.995, learning_rate: 5.5684893772543325e-05, max_grad_norm: 5, n_epochs: 1, n_steps: 8, net_arch: medium, vf_coef: 0.22073312130330036]
-
 FoRLAcrobotRandomNormal [-66.8]
 Params = [activation_fn: tanh, batch_size: 512, clip_range: 0.1, ent_coef: 3.4284458184811186e-06, gae_lambda: 0.99, gamma: 0.999, learning_rate: 0.00013801440563123696, max_grad_norm: 1, n_epochs: 5, n_steps: 32, net_arch: small, vf_coef: 0.8481238716011333]
-
-FoRLHopper
-FoRLHopperRandomNormal
+FoRLHopper[1972.1194942000002]
+Params = [activation_fn: tanh, batch_size: 16, clip_range: 0.3, ent_coef: 4.988952156901348e-05, gae_lambda: 0.98, gamma: 0.99, learning_rate: 0.002859844345169492, max_grad_norm: 1, n_epochs: 1, n_steps: 2048, net_arch: medium, vf_coef: 0.014649566360985728]
+FoRLHopperRandomNormal[1030.23566828]
+Params = [activation_fn: tanh, batch_size: 64, clip_range: 0.4, ent_coef: 0.00104933369613062, gae_lambda: 0.9, gamma: 0.9999, learning_rate: 0.0009786440119315658, max_grad_norm: 0.8, n_epochs: 5, n_steps: 2048, net_arch: small, vf_coef: 0.31275774868661155]
 FoRLCheetah
 FoRLCheetahRandomNormal
