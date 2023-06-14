@@ -18,7 +18,11 @@ Params = [activation_fn: relu, batch_size: 16, ent_coef: 0.05576115079763048, ga
 FoRLAcrobotRandomNormal [-77.65]
 Params = [activation_fn: tanh, batch_size: 128, ent_coef: 0.010709953714318564, gae_lambda: 1.0, gamma: 0.98, learning_rate: 0.00016421170255044476, lstm_hidden_size: 128, max_grad_norm: 1, n_epochs: 20, n_steps: 16, net_arch: medium, normalize_advantage: False, ortho_init: True, use_rms_prop: False, vf_coef: 0.2773124970767824]
 
-FoRLHopper
-FoRLHopperRandomNormal
+FoRLHopper [2156.4375848499994]
+Params = [activation_fn: relu, batch_size: 16, ent_coef: 2.179102204681693e-05, gae_lambda: 0.99, gamma: 0.99, learning_rate: 0.00034862490125466233, lstm_hidden_size: 32, max_grad_norm: 0.6, n_epochs: 20, n_steps: 32, net_arch: medium, normalize_advantage: False, ortho_init: True, use_rms_prop: True, vf_coef: 0.8881285029371464]
+
+FoRLHopperRandomNormal [1025.8105409]
+Params = [activation_fn: tanh, batch_size: 16, ent_coef: 0.0016407473791522425, gae_lambda: 0.95, gamma: 0.99, learning_rate: 3.4189508452483236e-05, lstm_hidden_size: 64, max_grad_norm: 0.9, n_epochs: 20, n_steps: 512, net_arch: medium, normalize_advantage: False, ortho_init: False, use_rms_prop: False, vf_coef: 0.2503507216072197]
+
 FoRLCheetah
 FoRLCheetahRandomNormal
