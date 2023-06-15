@@ -12,7 +12,6 @@ FoRLPendulumRandomNormal-v0:
   max_grad_norm: 1
   n_steps: 8
   normalize_advantage: False
-  ortho_init: False
   vf_coef: 0.9488118062280486
   policy_kwargs: "dict(activation_fn=nn.Tanh, ortho_init=True, net_arch=dict(pi=[256, 256], vf=[256, 256]))"
 
