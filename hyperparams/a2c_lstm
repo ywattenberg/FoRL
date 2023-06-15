@@ -27,4 +27,5 @@ Params = [activation_fn: tanh, batch_size: 16, ent_coef: 0.0016407473791522425, 
 FoRLCheetah [3214.7211863499997]
 Params = [activation_fn: tanh, batch_size: 32, ent_coef: 1.2441915570297498e-06, gae_lambda: 0.9, gamma: 0.9, learning_rate: 0.0012051218450573197, lstm_hidden_size: 128, max_grad_norm: 0.6, n_epochs: 5, n_steps: 32, net_arch: small, normalize_advantage: True, ortho_init: False, use_rms_prop: True, vf_coef: 0.3322492833757963]
 
-FoRLCheetahRandomNormal
+FoRLCheetahRandomNormal [685.6711278999999]
+Params = [activation_fn: relu, batch_size: 512, ent_coef: 1.2876583810409626e-05, gae_lambda: 0.95, gamma: 0.9, learning_rate: 0.00042080997479683626, lstm_hidden_size: 128, max_grad_norm: 1, n_epochs: 5, n_steps: 16, net_arch: medium, normalize_advantage: False, ortho_init: False, use_rms_prop: False, vf_coef: 0.27851965401435086]
