@@ -10,8 +10,12 @@ Params = [activation_fn: relu, batch_size: 256, ent_coef: 1.065412605403673e-07,
 FoRLPendulumRandomNormal [-207.07811544999998]
 Params = [activation_fn: relu, batch_size: 128, ent_coef: 0.042006885607447, gae_lambda: 1.0, gamma: 0.98, learning_rate: 0.0019700758301572727, lstm_hidden_size: 32, max_grad_norm: 0.8, n_epochs: 10, n_steps: 64, net_arch: medium, normalize_advantage: True, ortho_init: False, use_rms_prop: True, vf_coef: 0.4899675934902775]
 
-FoRLCartPole
-FoRLCartPoleRandomNormal
+FoRLCartPole [200]
+Params = [activation_fn: tanh, batch_size: 512, ent_coef: 4.72432416929145e-06, gae_lambda: 1.0, gamma: 0.95, learning_rate: 0.00017067446060763667, lstm_hidden_size: 128, max_grad_norm: 0.5, n_epochs: 1, n_steps: 16, net_arch: medium, normalize_advantage: False, ortho_init: False, use_rms_prop: True, vf_coef: 0.9053225793414692]
+
+FoRLCartPoleRandomNormal [200]
+Params = [activation_fn: tanh, batch_size: 256, ent_coef: 0.011006650860998194, gae_lambda: 0.92, gamma: 0.95, learning_rate: 4.568662339748526e-05, lstm_hidden_size: 64, max_grad_norm: 1, n_epochs: 1, n_steps: 64, net_arch: medium, normalize_advantage: True, ortho_init: True, use_rms_prop: True, vf_coef: 0.37802640434249046]
+
 FoRLAcrobot [-76.55]
 Params = [activation_fn: relu, batch_size: 16, ent_coef: 0.05576115079763048, gae_lambda: 1.0, gamma: 0.995, learning_rate: 0.0002602526754781013, lstm_hidden_size: 64, max_grad_norm: 0.5, n_epochs: 5, n_steps: 8, net_arch: small, normalize_advantage: True, ortho_init: True, use_rms_prop: True, vf_coef: 0.09198586769188537]
 
