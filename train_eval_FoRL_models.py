@@ -4,13 +4,22 @@ import time
 Model_path = "FoRL_logs"
 
 Deterministic_envs = [
-    # "FoRLCartPole-v0",
-    # "FoRLMountainCar-v0",
-    # "FoRLPendulum-v0",
-    # "FoRLAcrobot-v0",
+    "FoRLCartPole-v0",
+    "FoRLMountainCar-v0",
+    "FoRLPendulum-v0",
+    "FoRLAcrobot-v0",
     "FoRLHopper-v0",
-    # "FoRLHalfCheetah-v0",
+    "FoRLHalfCheetah-v0",
 ]
+
+Models = [
+    # "ppo",
+    # "ddpg",
+    # "dqn",
+    "ppo_lstm",
+]
+
+eps = [0.0, 0.04, 0.07, 0.1]
 
 
 def get_random_name(deterministic_name):
@@ -27,16 +36,9 @@ def prog_print(msg):
     print("=================================")
 
 
-Models = [
-    "ddpg",
-    "ppo_lstm",
-    "a2c",
-]  # "dqn"]
-
-
-def get_train_cmd(Model, env):
+def get_train_cmd(python_path, Model, env, Model_path, eps):
     return [
-        "python",
+        python_path,
         "rl_zoo3/train.py",
         "--algo",
         Model,
@@ -51,10 +53,12 @@ def get_train_cmd(Model, env):
         "--progress",
         "-conf",
         f"FoRL_conf/{Model}.yml",
+        "--env-kwargs",
+        f"epsilon: {eps}",
     ]
 
 
-def get_eval_cmd(Model, train_env, test_env):
+def get_eval_cmd(python_path, Model, train_env, test_env, Model_path, eval_folder):
     return [
         "python",
         "rl_zoo3/enjoy.py",
@@ -67,48 +71,92 @@ def get_eval_cmd(Model, train_env, test_env):
         "-f",
         Model_path,
         "--eval_folder",
-        "eval_res.txt",
+        eval_folder,
         "--device",
         "cuda",
         "--progress",
         "--no-render",
         "--no-hub",
         "-n",
-        "50000",
+        "100000",
     ]
 
 
 for Model in Models:
-    for env in Deterministic_envs:
-        # python .\train.py --algo a2c --env FoRLMountainCarRandomNormal-v0 --device cuda --vec-env subproc --progress -conf ..\FoRL_conf\a2c.yml
-        prog_print(f"Training deterministic env for {Model} in {env}")
-        res = subprocess.Popen(get_train_cmd(Model, env))
-        res.wait()
+    for ep in eps:
+        for env in Deterministic_envs:
+            python_path = "C:\\Users\\Yannick\\anaconda3\\envs\\FoRL2\\python.exe"
+            # python .\train.py --algo a2c --env FoRLMountainCarRandomNormal-v0 --device cuda --vec-env subproc --progress -conf ..\FoRL_conf\a2c.yml
+            prog_print(
+                f"Training deterministic env for {Model} in {env}, epsilon: {ep}"
+            )
+            res = subprocess.Popen(
+                get_train_cmd(python_path, Model, env, "FoRL_logs", ep)
+            )
+            res.wait()
 
-        prog_print(f"Training random env for {Model} in {env}")
-        res = subprocess.Popen(get_train_cmd(Model, get_random_name(env)))
-        res.wait()
+            prog_print(f"Training random env for {Model} in {env}, epsilon: {ep}")
+            res = subprocess.Popen(
+                get_train_cmd(python_path, Model, get_random_name(env), "FoRL_logs", ep)
+            )
+            res.wait()
 
-        prog_print(f"Eval DD for {Model} in {env}")
-        res = subprocess.Popen(get_eval_cmd(Model, env, env))
-        res.wait()
+            # prog_print(f"Eval DD for {Model} in {env}")
+            # res = subprocess.Popen(
+            #     get_eval_cmd(
+            #         python_path, Model, env, env, "FoRL_logs", "eval_" + str(ep)
+            #     )
+            # )
+            # res.wait()
 
-        prog_print(f"Eval DR for {Model} in {env}")
-        res = subprocess.Popen(get_eval_cmd(Model, env, get_random_name(env)))
-        res.wait()
+            # prog_print(f"Eval DR for {Model} in {env}")
+            # res = subprocess.Popen(
+            #     get_eval_cmd(
+            #         python_path,
+            #         Model,
+            #         env,
+            #         get_random_name(env),
+            #         "FoRL_logs",
+            #         "eval_" + str(ep),
+            #     )
+            # )
+            # res.wait()
 
-        prog_print(f"Eval RR for {Model} in {env}")
-        res = subprocess.Popen(
-            get_eval_cmd(Model, get_random_name(env), get_random_name(env))
-        )
-        res.wait()
+            # prog_print(f"Eval RR for {Model} in {env}")
+            # res = subprocess.Popen(
+            #     get_eval_cmd(
+            #         python_path,
+            #         Model,
+            #         get_random_name(env),
+            #         get_random_name(env),
+            #         "FoRL_logs",
+            #         "eval_" + str(ep),
+            #     )
+            # )
+            # res.wait()
 
-        prog_print(f"Eval DE for {Model} in {env}")
-        res = subprocess.Popen(get_eval_cmd(Model, env, get_extreme_name(env)))
-        res.wait()
+            # prog_print(f"Eval DE for {Model} in {env}")
+            # res = subprocess.Popen(
+            #     get_eval_cmd(
+            #         python_path,
+            #         Model,
+            #         env,
+            #         get_extreme_name(env),
+            #         "FoRL_logs",
+            #         "eval_" + str(ep),
+            #     )
+            # )
+            # res.wait()
 
-        prog_print(f"Eval RE for {Model} in {env}")
-        res = subprocess.Popen(
-            get_eval_cmd(Model, get_random_name(env), get_extreme_name(env))
-        )
-        res.wait()
+            # prog_print(f"Eval RE for {Model} in {env}")
+            # res = subprocess.Popen(
+            #     get_eval_cmd(
+            #         python_path,
+            #         Model,
+            #         get_random_name(env),
+            #         get_extreme_name(env),
+            #         "FoRL_logs",
+            #         "eval_" + str(ep),
+            #     )
+            # )
+            # res.wait()
