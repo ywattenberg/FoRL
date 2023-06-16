@@ -1,6 +1,6 @@
 # === FoRL Environment ===
 FoRLCartPole-v0:
-  n_timesteps: !!float 1e6
+  n_timesteps: !!float 5e5
   policy: "MlpPolicy"
   gradient_steps: 128
   policy_kwargs: "dict(net_arch=[256, 256])"
@@ -16,7 +16,7 @@ FoRLCartPole-v0:
 
 # Tuned
 FoRLMountainCar-v0:
-  n_timesteps: !!float 1e6
+  n_timesteps: !!float 5e5
   policy: "MlpPolicy"
   gradient_steps: 8
   policy_kwargs: "dict(net_arch=[256, 256])"
@@ -31,7 +31,7 @@ FoRLMountainCar-v0:
   train_freq: 8
 
 FoRLAcrobot-v0:
-  n_timesteps: !!float 1e6
+  n_timesteps: !!float 5e5
   policy: "MlpPolicy"
   gradient_steps: 128
   policy_kwargs: "dict(net_arch=[256, 256])"
@@ -48,7 +48,7 @@ FoRLAcrobot-v0:
 # Untuned
 
 FoRLCartPoleRandomNormal-v0:
-  n_timesteps: !!float 1e6
+  n_timesteps: !!float 5e5
   policy: "MlpPolicy"
   learning_starts: 1000
   target_update_interval: 10
@@ -64,7 +64,7 @@ FoRLCartPoleRandomNormal-v0:
 
 # Tuned
 FoRLMountainCarRandomNormal-v0:
-  n_timesteps: !!float 1e6
+  n_timesteps: !!float 5e5
   policy: "MlpPolicy"
   gradient_steps: 8
   policy_kwargs: "dict(net_arch=[256, 256])"
@@ -79,7 +79,7 @@ FoRLMountainCarRandomNormal-v0:
   train_freq: 16
 
 FoRLAcrobotRandomNormal-v0:
-  n_timesteps: !!float 1e6
+  n_timesteps: !!float 5e5
   policy: "MlpPolicy"
   gradient_steps: 128
   policy_kwargs: "dict(net_arch=[256, 256])"

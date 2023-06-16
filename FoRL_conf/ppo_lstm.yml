@@ -2,7 +2,7 @@
 FoRLPendulumRandomNormal-v0:
   normalize: True
   n_envs: 4
-  n_timesteps: !!float 1e6
+  n_timesteps: !!float 5e5
   policy: "MlpLstmPolicy"
   use_sde: True
   sde_sample_freq: 4
@@ -21,7 +21,7 @@ FoRLPendulumRandomNormal-v0:
 FoRLCartPoleRandomNormal-v0:
   normalize: True
   n_envs: 8
-  n_timesteps: !!float 1e6
+  n_timesteps: !!float 5e5
   policy: "MlpLstmPolicy"
   n_steps: 32
   batch_size: 256
@@ -39,7 +39,7 @@ FoRLCartPoleRandomNormal-v0:
 FoRLMountainCarRandomNormal-v0:
   normalize: true
   n_envs: 16
-  n_timesteps: !!float 1e6
+  n_timesteps: !!float 5e5
   policy: "MlpLstmPolicy"
   ent_coef: 0.0
   batch_size: 32
@@ -56,7 +56,7 @@ FoRLMountainCarRandomNormal-v0:
 FoRLAcrobotRandomNormal-v0:
   normalize: true
   n_envs: 16
-  n_timesteps: !!float 1e6
+  n_timesteps: !!float 5e5
   policy: "MlpLstmPolicy"
   batch_size: 512
   clip_range: 0.2
@@ -73,7 +73,7 @@ FoRLAcrobotRandomNormal-v0:
 FoRLPendulum-v0:
   normalize: True
   n_envs: 4
-  n_timesteps: !!float 1e6
+  n_timesteps: !!float 5e5
   policy: "MlpLstmPolicy"
   use_sde: True
   sde_sample_freq: 4
@@ -92,7 +92,7 @@ FoRLPendulum-v0:
 FoRLCartPole-v0:
   normalize: True
   n_envs: 8
-  n_timesteps: !!float 1e6
+  n_timesteps: !!float 5e5
   policy: "MlpLstmPolicy"
   batch_size: 32
   clip_range: 0.4
@@ -109,7 +109,7 @@ FoRLCartPole-v0:
 FoRLMountainCar-v0:
   normalize: True
   n_envs: 8
-  n_timesteps: !!float 1e6
+  n_timesteps: !!float 5e5
   policy: "MlpLstmPolicy"
   batch_size: 16
   clip_range: 0.2
@@ -125,7 +125,7 @@ FoRLMountainCar-v0:
 FoRLAcrobot-v0:
   normalize: true
   n_envs: 16
-  n_timesteps: !!float 1e6
+  n_timesteps: !!float 5e5
   policy: "MlpLstmPolicy"
   batch_size: 8
   clip_range: 0.1
@@ -140,7 +140,7 @@ FoRLAcrobot-v0:
 
 Ant-v3: &mujoco-defaults
   normalize: true
-  n_timesteps: !!float 1e6
+  n_timesteps: !!float 5e5
   policy: "MlpLstmPolicy"
 
 FoRLHalfCheetahRandomNormal-v0:
