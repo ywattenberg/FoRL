@@ -20,7 +20,7 @@ def prog_print(msg):
 def get_train_cmd(python_path, Model, env, Model_path, eps):
     return [
         python_path,
-        "FoRL/rl_zoo3/train.py",
+        os.path.join(os.environ["HOME"], "FoRL/rl_zoo3/train.py"),
         "--algo",
         Model,
         "--env",
@@ -33,16 +33,18 @@ def get_train_cmd(python_path, Model, env, Model_path, eps):
         "cuda",
         "--progress",
         "-conf",
-        f"FoRL/FoRL_conf/{Model}.yml",
+        os.path.join(os.environ["HOME"], f"FoRL/FoRL_conf/{Model}.yml"),
         "--env-kwargs",
         f"epsilon: {eps}",
+        "--n-timesteps",
+        "500_000",
     ]
 
 
 def get_eval_cmd(python_path, Model, train_env, test_env, Model_path, eval_folder):
     return [
         python_path,
-        "FoRL/rl_zoo3/enjoy.py",
+        os.path.join(os.environ["HOME"], "FoRL/rl_zoo3/enjoy.py"),
         "--algo",
         Model,
         "--train_env",
@@ -65,8 +67,8 @@ def get_eval_cmd(python_path, Model, train_env, test_env, Model_path, eval_folde
 
 def main(args):
     Model, env, eps = args
-    Model_path = os.environ["TMPDIR"]
-    eval_folder = "FoRL/results/" + Model + "_" + env + "_" + str(eps) + '_'+ "result.txt"
+    Model_path = os.path.join(os.environ["HOME"], f"FoRL/results/models/{str(eps)}")
+    eval_folder = os.path.join(os.environ["HOME"], "FoRL/results/" + Model + "_" + env + "_" + str(eps) + '_'+ "result.txt")
     python_path = os.environ["PYTHONPATH"]
 
     prog_print(f"START ==>  Model: {Model}, env: {env}, Model_path: {Model_path}, eval_folder: {eval_folder}, python_path: {python_path}")
@@ -104,10 +106,10 @@ def main(args):
         )
     res.wait()
     
-    with open('FoRL/to_run.txt', 'r') as f:
+    with open(os.path.join(os.environ["HOME"], "FoRL/to_run.txt"), 'r') as f:
         lines = f.readlines()
     print(lines[0].startswith(f"{Model} {env} {eps}"))
-    with open('FoRL/to_run.txt', 'w') as f:
+    with open(os.path.join(os.environ["HOME"], "FoRL/to_run.txt"), 'w') as f:
         for line in lines:
             if line.strip("\n") != f"{Model} {env} {eps}":
                 print(line)
