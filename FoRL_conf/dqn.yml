@@ -2,140 +2,93 @@
 FoRLCartPole-v0:
   n_timesteps: !!float 1e6
   policy: "MlpPolicy"
-  learning_rate: !!float 2.3e-3
-  batch_size: 64
-  buffer_size: 100000
-  learning_starts: 1000
-  gamma: 0.99
-  target_update_interval: 10
-  train_freq: 256
   gradient_steps: 128
-  exploration_fraction: 0.16
-  exploration_final_eps: 0.04
   policy_kwargs: "dict(net_arch=[256, 256])"
+  batch_size: 512
+  buffer_size: 10000
+  exploration_final_eps: 0.04265272476750257
+  exploration_fraction: 0.45414303220524527
+  gamma: 0.95
+  learning_rate: 0.00014744911072431035
+  learning_starts: 5000
+  target_update_interval: 1000
+  train_freq: 1
 
 # Tuned
 FoRLMountainCar-v0:
   n_timesteps: !!float 1e6
   policy: "MlpPolicy"
-  learning_rate: !!float 4e-3
-  batch_size: 128
-  buffer_size: 10000
-  learning_starts: 1000
-  gamma: 0.98
-  target_update_interval: 600
-  train_freq: 16
   gradient_steps: 8
-  exploration_fraction: 0.2
-  exploration_final_eps: 0.07
   policy_kwargs: "dict(net_arch=[256, 256])"
+  batch_size: 128
+  buffer_size: 100000
+  exploration_final_eps: 0.029019331490635424
+  exploration_fraction: 0.14126953555518243
+  gamma: 0.98
+  learning_rate: 0.0005186067740302266
+  learning_starts: 20000
+  target_update_interval: 5000
+  train_freq: 8
 
 FoRLAcrobot-v0:
   n_timesteps: !!float 1e6
   policy: "MlpPolicy"
-  learning_rate: !!float 2.3e-3
-  batch_size: 64
-  buffer_size: 100000
-  learning_starts: 1000
-  gamma: 0.99
-  target_update_interval: 10
-  train_freq: 256
   gradient_steps: 128
-  exploration_fraction: 0.16
-  exploration_final_eps: 0.04
   policy_kwargs: "dict(net_arch=[256, 256])"
-
-FoRLPendulum-v0:
-  n_timesteps: !!float 1e6
-  policy: "MlpPolicy"
-  learning_rate: !!float 2.3e-3
-  batch_size: 64
-  buffer_size: 100000
-  learning_starts: 1000
-  gamma: 0.99
-  target_update_interval: 10
-  train_freq: 256
-  gradient_steps: 128
-  exploration_fraction: 0.16
-  exploration_final_eps: 0.04
-  policy_kwargs: "dict(net_arch=[256, 256])"
+  batch_size: 512
+  buffer_size: 10000
+  exploration_final_eps: 0.10777629948632497
+  exploration_fraction: 0.0947712000992754
+  gamma: 0.995
+  learning_rate: 0.00014884447867315285
+  learning_starts: 10000
+  target_update_interval: 1
+  train_freq: 128
 
 # Untuned
 
 FoRLCartPoleRandomNormal-v0:
   n_timesteps: !!float 1e6
   policy: "MlpPolicy"
-  learning_rate: !!float 2.3e-3
-  batch_size: 64
-  buffer_size: 100000
   learning_starts: 1000
-  gamma: 0.99
   target_update_interval: 10
   train_freq: 256
   gradient_steps: 128
-  exploration_fraction: 0.16
-  exploration_final_eps: 0.04
   policy_kwargs: "dict(net_arch=[256, 256])"
+  batch_size: 16
+  buffer_size: 100000
+  exploration_final_eps: 0.12837058194986153
+  exploration_fraction: 0.10134600663516967
+  gamma: 0.995
+  learning_rate: 0.001162809925775024
 
 # Tuned
 FoRLMountainCarRandomNormal-v0:
   n_timesteps: !!float 1e6
   policy: "MlpPolicy"
-  learning_rate: !!float 4e-3
-  batch_size: 128
-  buffer_size: 10000
-  learning_starts: 1000
-  gamma: 0.98
-  target_update_interval: 600
-  train_freq: 16
   gradient_steps: 8
-  exploration_fraction: 0.2
-  exploration_final_eps: 0.07
   policy_kwargs: "dict(net_arch=[256, 256])"
+  batch_size: 512
+  buffer_size: 1000000
+  exploration_final_eps: 0.012031728355958157
+  exploration_fraction: 0.1451386132530625
+  gamma: 0.9999
+  learning_rate: 9.417459273905217e-05
+  learning_starts: 5000
+  target_update_interval: 1000
+  train_freq: 16
 
 FoRLAcrobotRandomNormal-v0:
   n_timesteps: !!float 1e6
   policy: "MlpPolicy"
-  learning_rate: !!float 2.3e-3
-  batch_size: 64
-  buffer_size: 100000
-  learning_starts: 1000
-  gamma: 0.99
-  target_update_interval: 10
-  train_freq: 256
   gradient_steps: 128
-  exploration_fraction: 0.16
-  exploration_final_eps: 0.04
   policy_kwargs: "dict(net_arch=[256, 256])"
-
-FoRLPendulumRandomNormal-v0:
-  n_timesteps: !!float 1e6
-  policy: "MlpPolicy"
-  learning_rate: !!float 2.3e-3
   batch_size: 64
-  buffer_size: 100000
-  learning_starts: 1000
-  gamma: 0.99
-  target_update_interval: 10
-  train_freq: 256
-  gradient_steps: 128
-  exploration_fraction: 0.16
-  exploration_final_eps: 0.04
-  policy_kwargs: "dict(net_arch=[256, 256])"
-
-HalfCheetah-v4: &mujoco-defaults
-  normalize: true
-  n_timesteps: !!float 1e6
-  policy: "MlpPolicy"
-
-FoRLHalfCheetahRandomNormal-v0:
-  <<: *mujoco-defaults
-
-FoRLHalfCheetah-v0:
-  <<: *mujoco-defaults
-
-FoRLHopper-v0:
-  <<: *mujoco-defaults
-
-FoRLHopperRandomNormal-v0:
-  <<: *mujoco-defaults
+  buffer_size: 50000
+  exploration_final_eps: 0.1708621184312964
+  exploration_fraction: 0.030348621486941174
+  gamma: 0.995
+  learning_rate: 0.0004975992141149505
+  learning_starts: 0
+  target_update_interval: 1
+  train_freq: 1
