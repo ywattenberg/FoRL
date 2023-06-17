@@ -2,161 +2,179 @@
 FoRLPendulumRandomNormal-v0:
   normalize: True
   n_envs: 4
-  n_timesteps: !!float 1e6
+  n_timesteps: !!float 5e5
   policy: "MlpLstmPolicy"
-  n_steps: 1024
-  gae_lambda: 0.95
-  gamma: 0.9
-  n_epochs: 10
-  ent_coef: 0.0
-  learning_rate: !!float 1e-3
-  clip_range: 0.2
   use_sde: True
   sde_sample_freq: 4
-  policy_kwargs: "dict(
-    ortho_init=False,
-    activation_fn=nn.ReLU,
-    lstm_hidden_size=64,
-    enable_critic_lstm=True,
-    net_arch=dict(pi=[64], vf=[64])
-    )"
+  batch_size: 32
+  clip_range: 0.2
+  ent_coef: 2.276560731453451e-06
+  gae_lambda: 0.8
+  gamma: 0.98
+  learning_rate: 0.0014629364842425644
+  n_steps: 256
+  vf_coef: 0.7205181084902741
+  policy_kwargs: "dict(activation_fn=nn.Tanh,  lstm_hidden_size=32,  net_arch=dict(pi=[256], vf=[256]),  ortho_init=False, enable_critic_lstm=True)"
 
 # Tuned
 FoRLCartPoleRandomNormal-v0:
   normalize: True
   n_envs: 8
-  n_timesteps: !!float 1e6
+  n_timesteps: !!float 5e5
   policy: "MlpLstmPolicy"
-  n_steps: 32
   batch_size: 256
-  gae_lambda: 0.8
-  gamma: 0.98
-  n_epochs: 20
-  ent_coef: 0.0
-  learning_rate: lin_0.001
-  clip_range: lin_0.2
-  policy_kwargs: "dict(
-    ortho_init=False,
-    activation_fn=nn.ReLU,
-    lstm_hidden_size=64,
-    enable_critic_lstm=True,
-    net_arch=dict(pi=[64], vf=[64])
-    )"
+  clip_range: 0.2
+  ent_coef: 1.8274401362715943e-08
+  gae_lambda: 1.0
+  gamma: 0.995
+  learning_rate: 8.109018531944365e-05
+  n_steps: 256
+  vf_coef: 0.281046729908223
+  policy_kwargs: "dict(activation_fn=nn.ReLU,  lstm_hidden_size=128,  net_arch=dict(pi=[64], vf=[64]),  ortho_init=False, enable_critic_lstm=True)"
 
 # TO BE TUNED
 FoRLMountainCarRandomNormal-v0:
   normalize: true
   n_envs: 16
-  n_timesteps: !!float 1e6
+  n_timesteps: !!float 5e5
   policy: "MlpLstmPolicy"
-  n_steps: 16
+  batch_size: 32
+  clip_range: 0.2
+  ent_coef: 1.1187648272244032e-08
   gae_lambda: 0.98
   gamma: 0.99
-  n_epochs: 4
-  ent_coef: 0.0
+  learning_rate: 8.409805609392812e-05
+  n_steps: 16
+  vf_coef: 0.48530966053846325
+  policy_kwargs: "dict(activation_fn=nn.Tanh,  lstm_hidden_size=32,  net_arch=dict(pi=[256], vf=[256]),  ortho_init=False, enable_critic_lstm=True)"
 
 FoRLAcrobotRandomNormal-v0:
   normalize: true
   n_envs: 16
-  n_timesteps: !!float 1e6
+  n_timesteps: !!float 5e5
   policy: "MlpLstmPolicy"
-  n_steps: 256
-  gae_lambda: 0.94
-  gamma: 0.99
-  n_epochs: 4
-  ent_coef: 0.0
+  batch_size: 512
+  clip_range: 0.2
+  ent_coef: 3.9896075886804965e-08
+  gae_lambda: 1.0
+  gamma: 0.999
+  learning_rate: 6.094461962496015e-05
+  n_steps: 32
+  vf_coef: 0.9756889352080599
+  policy_kwargs: "dict(activation_fn=nn.ReLU,  lstm_hidden_size=32,  net_arch=dict(pi=[256], vf=[256]),  ortho_init=False, enable_critic_lstm=True)"
 
 #
 FoRLPendulum-v0:
   normalize: True
   n_envs: 4
-  n_timesteps: !!float 1e6
+  n_timesteps: !!float 5e5
   policy: "MlpLstmPolicy"
-  n_steps: 1024
-  gae_lambda: 0.95
-  gamma: 0.9
-  n_epochs: 10
-  ent_coef: 0.0
-  learning_rate: !!float 1e-3
-  clip_range: 0.2
   use_sde: True
   sde_sample_freq: 4
-  policy_kwargs: "dict(
-    ortho_init=False,
-    activation_fn=nn.ReLU,
-    lstm_hidden_size=64,
-    enable_critic_lstm=True,
-    net_arch=dict(pi=[64], vf=[64])
-    )"
-
+  batch_size: 128
+  clip_range: 0.1
+  ent_coef: 5.3405162728266685e-08
+  gae_lambda: 0.8
+  gamma: 0.995
+  learning_rate: 0.00028170954430205704
+  n_steps: 512
+  vf_coef: 0.10897592063396326
+  policy_kwargs: "dict(activation_fn=nn.Tanh,  lstm_hidden_size=32,  net_arch=dict(pi=[256], vf=[256]),  ortho_init=False, enable_critic_lstm=True)"
 # Tuned
 FoRLCartPole-v0:
   normalize: True
   n_envs: 8
-  n_timesteps: !!float 1e6
+  n_timesteps: !!float 5e5
   policy: "MlpLstmPolicy"
-  n_steps: 32
-  batch_size: 256
-  gae_lambda: 0.8
+  batch_size: 32
+  clip_range: 0.4
+  ent_coef: 0.00888046830484088
+  gae_lambda: 0.98
   gamma: 0.98
-  n_epochs: 20
-  ent_coef: 0.0
-  learning_rate: lin_0.001
-  clip_range: lin_0.2
-  policy_kwargs: "dict(
-    ortho_init=False,
-    activation_fn=nn.ReLU,
-    lstm_hidden_size=64,
-    enable_critic_lstm=True,
-    net_arch=dict(pi=[64], vf=[64])
-    )"
-
+  learning_rate: 0.0150617726368121
+  n_steps: 256
+  vf_coef: 0.4963259388922263
+  policy_kwargs: "dict(activation_fn=nn.Tanh,  lstm_hidden_size=128,  net_arch=dict(pi=[64], vf=[64]),  ortho_init=False, enable_critic_lstm=True)"
 # TO BE TUNED
 FoRLMountainCar-v0:
   normalize: True
   n_envs: 8
-  n_timesteps: !!float 1e6
+  n_timesteps: !!float 5e5
   policy: "MlpLstmPolicy"
-  n_steps: 32
-  batch_size: 256
-  gae_lambda: 0.8
-  gamma: 0.98
-  n_epochs: 20
-  ent_coef: 0.0
-  learning_rate: lin_0.001
-  clip_range: lin_0.2
-  policy_kwargs: "dict(
-    ortho_init=False,
-    activation_fn=nn.ReLU,
-    lstm_hidden_size=64,
-    enable_critic_lstm=True,
-    net_arch=dict(pi=[64], vf=[64])
-    )"
+  batch_size: 16
+  clip_range: 0.2
+  ent_coef: 7.492213247850684e-05
+  gae_lambda: 0.95
+  gamma: 0.9999
+  learning_rate: 1.8006626812856746e-05
+  n_steps: 128
+  vf_coef: 0.381713951181864
+  policy_kwargs: "dict(activation_fn=nn.ReLU,  lstm_hidden_size=32,  net_arch=dict(pi=[256], vf=[256]),  ortho_init=False, enable_critic_lstm=True)"
 
 FoRLAcrobot-v0:
   normalize: true
   n_envs: 16
-  n_timesteps: !!float 1e6
+  n_timesteps: !!float 5e5
   policy: "MlpLstmPolicy"
-  n_steps: 256
-  gae_lambda: 0.94
-  gamma: 0.99
-  n_epochs: 4
-  ent_coef: 0.0
+  batch_size: 8
+  clip_range: 0.1
+  ent_coef: 7.173331514009146e-07
+  gae_lambda: 0.95
+  gamma: 0.999
+  learning_rate: 1.0445646135836291e-05
+  n_steps: 128
+  vf_coef: 0.6987697503311365
+  policy_kwargs: "dict(activation_fn=nn.Tanh,  lstm_hidden_size=32,  net_arch=dict(pi=[64], vf=[64]),  ortho_init=False, enable_critic_lstm=True)"
 
 Ant-v3: &mujoco-defaults
   normalize: true
-  n_timesteps: !!float 1e6
+  n_timesteps: !!float 5e5
   policy: "MlpLstmPolicy"
 
 FoRLHalfCheetahRandomNormal-v0:
   <<: *mujoco-defaults
+  batch_size: 32
+  clip_range: 0.1
+  ent_coef: 8.767137390352832e-05
+  gae_lambda: 0.8
+  gamma: 0.995
+  learning_rate: 0.0009926188694633989
+  n_steps: 64
+  vf_coef: 0.1911695171744101
+  policy_kwargs: "dict(activation_fn=nn.Tanh,  lstm_hidden_size=64,  net_arch=dict(pi=[64], vf=[64]),  ortho_init=True, enable_critic_lstm=True)"
 
 FoRLHalfCheetah-v0:
   <<: *mujoco-defaults
+  batch_size: 512
+  clip_range: 0.2
+  ent_coef: 3.6913339925018324e-08
+  gae_lambda: 0.8
+  gamma: 0.995
+  learning_rate: 0.016460834702791548
+  n_steps: 128
+  vf_coef: 0.7729097794890254
+  policy_kwargs: "dict(activation_fn=nn.Tanh,  lstm_hidden_size=128,  net_arch=dict(pi=[64], vf=[64]),  ortho_init=True, enable_critic_lstm=True)"
 
 FoRLHopper-v0:
   <<: *mujoco-defaults
+  batch_size: 8
+  clip_range: 0.1
+  ent_coef: 4.0254461197372997e-07
+  gae_lambda: 0.8
+  gamma: 0.995
+  learning_rate: 0.0062043314211805934
+  n_steps: 64
+  vf_coef: 0.6354114975474999
+  policy_kwargs: "dict(activation_fn=nn.ReLU,  lstm_hidden_size=32,  net_arch=dict(pi=[64], vf=[64]),  ortho_init=False, enable_critic_lstm=True)"
 
 FoRLHopperRandomNormal-v0:
   <<: *mujoco-defaults
+  batch_size: 8
+  clip_range: 0.1
+  ent_coef: 3.879137672882435e-05
+  gae_lambda: 0.99
+  gamma: 0.99
+  learning_rate: 0.0007490176380334273
+  n_steps: 64
+  vf_coef: 0.4828255624667753
+  policy_kwargs: "dict(activation_fn=nn.ReLU,  lstm_hidden_size=64,  net_arch=dict(pi=[256], vf=[256]),  ortho_init=False, enable_critic_lstm=True)"

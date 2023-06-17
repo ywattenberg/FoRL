@@ -167,6 +167,9 @@ cluster_sbatch.sh
 cluster_sbatch_mpi.sh
 cluster_torchy.sh
 logs/
+log/
+results/
+to_run.txt
 rl-trained_agents/
 .pytype/
 htmlcov/
