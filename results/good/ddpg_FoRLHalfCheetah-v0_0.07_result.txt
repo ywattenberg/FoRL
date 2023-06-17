@@ -1,0 +1,5 @@
+FoRLHalfCheetah-v0, FoRLHalfCheetah-v0, ddpg, 1.0, 0.0, 100
+FoRLHalfCheetah-v0, FoRLHalfCheetahRandomNormal-v0, ddpg, 1.0, 0.0, 100
+FoRLHalfCheetahRandomNormal-v0, FoRLHalfCheetahRandomNormal-v0, ddpg, 1.0, 0.0, 100
+FoRLHalfCheetah-v0, FoRLHalfCheetahRandomExtreme-v0, ddpg, 0.96, 0.19595917942265426, 100
+FoRLHalfCheetahRandomNormal-v0, FoRLHalfCheetahRandomExtreme-v0, ddpg, 0.97, 0.17058722109231983, 100

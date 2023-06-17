@@ -1,0 +1,3 @@
+FoRLHalfCheetah-v0, FoRLHalfCheetah-v0, ddpg, 1.0, 0.0, 100
+FoRLHalfCheetahRandomNormal-v0, FoRLHalfCheetahRandomNormal-v0, ddpg, 1.0, 0.0, 100
+FoRLHalfCheetahRandomNormal-v0, FoRLHalfCheetahRandomExtreme-v0, ddpg, 1.0, 0.0, 100

@@ -1,0 +1,5 @@
+FoRLPendulum-v0, FoRLPendulum-v0, ddpg, 1.0, 0.0, 500
+FoRLPendulum-v0, FoRLPendulumRandomNormal-v0, ddpg, 0.996, 0.063118935352238, 500
+FoRLPendulumRandomNormal-v0, FoRLPendulumRandomNormal-v0, ddpg, 0.924, 0.26499811320083017, 500
+FoRLPendulum-v0, FoRLPendulumRandomExtreme-v0, ddpg, 0.846, 0.3609487498246808, 500
+FoRLPendulumRandomNormal-v0, FoRLPendulumRandomExtreme-v0, ddpg, 0.678, 0.4672429774753174, 500

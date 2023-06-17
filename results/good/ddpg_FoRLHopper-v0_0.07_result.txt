@@ -1,0 +1,5 @@
+FoRLHopper-v0, FoRLHopper-v0, ddpg, 0.0, 0.0, 100
+FoRLHopper-v0, FoRLHopperRandomNormal-v0, ddpg, 0.0, 0.0, 142
+FoRLHopperRandomNormal-v0, FoRLHopperRandomNormal-v0, ddpg, 0.0, 0.0, 276
+FoRLHopper-v0, FoRLHopperRandomExtreme-v0, ddpg, 0.0, 0.0, 176
+FoRLHopperRandomNormal-v0, FoRLHopperRandomExtreme-v0, ddpg, 0.0, 0.0, 576
